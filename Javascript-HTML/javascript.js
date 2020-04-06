@@ -18,3 +18,5 @@ console.log(result,Fullname);
 
 const index = Fullname.indexOf('a');
 console.log(index);
+
+
