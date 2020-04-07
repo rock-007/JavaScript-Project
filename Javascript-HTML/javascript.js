@@ -28,3 +28,31 @@ console.log (result2);
 
 let result3 = Fullname.replace ('a','b');
 console.log (result3);
+let ninjas = ['s','umair', 'ozair'];
+console.log(ninjas);
+console.log(ninjas[1]);
+
+ninjas[1] = 'ken'
+console.log(ninjas[1]);
+let ages = [10,20,30];
+console.log(ages[2]);
+console.log(ninjas.length);
+
+let resutss = ninjas.join(',');
+console.log(resutss);
+
+let resutsss = ninjas.indexOf('ozair');
+console.log(resutsss);
+let resultssss = ninjas.concat(['ken1', 'ken2']);
+console.log(resultssss);
+
+let resultsssss = ninjas.push('van');
+console.log(ninjas);
+let resultssssss = ninjas.pop();
+console.log(ninjas);
+console.log(resultssssss);
+
+
+let vage;
+// ` ` thhat is used below is the the one just before hte digit on on keyboard
+console.log(vage, vage+3, `the vage is ${vage}`);
