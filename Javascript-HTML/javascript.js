@@ -229,6 +229,15 @@ console.log(score221, typeof score221);
 let score2221 = Boolean('0');
 console.log(score2221, typeof score2221);
 
+// for loop no ; at the end-- codebloc ={}
+// initialization first time only (will tellhow many times we run the loop), condition(if condition try then codebloc run{}),  final expression execute everytime aat the end of code block
+
+
+for(let i = 0; i < 5; i++) {
+
+
+}
+
 
 
 
