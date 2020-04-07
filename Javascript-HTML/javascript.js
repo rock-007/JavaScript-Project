@@ -23,7 +23,7 @@ let result1 = Fullname.slice(4,5);
 console.log (result1);
 
 let result2 = Fullname.substr(4,5);
-console.log (result2);
+console.log (result2);   
 
 
 let result3 = Fullname.replace ('a','b');
