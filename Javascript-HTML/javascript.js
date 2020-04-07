@@ -1,4 +1,4 @@
-alert("hello");
+//alert("hello");
 let age =3;
 console.log(age);
 
@@ -28,36 +28,9 @@ console.log (result2);
 
 let result3 = Fullname.replace ('a','b');
 console.log (result3);
-<<<<<<< HEAD
-let ninjas = ['s','umair', 'ozair'];
-console.log(ninjas);
-console.log(ninjas[1]);
-
-ninjas[1] = 'ken'
-console.log(ninjas[1]);
-let ages = [10,20,30];
-console.log(ages[2]);
-console.log(ninjas.length);
-
-let resutss = ninjas.join(',');
-console.log(resutss);
-
-let resutsss = ninjas.indexOf('ozair');
-console.log(resutsss);
-let resultssss = ninjas.concat(['ken1', 'ken2']);
-console.log(resultssss);
-
-let resultsssss = ninjas.push('van');
-console.log(ninjas);
-let resultssssss = ninjas.pop();
-console.log(ninjas);
-console.log(resultssssss);
 
 
-let vage;
-// ` ` thhat is used below is the the one just before hte digit on on keyboard
-console.log(vage, vage+3, `the vage is ${vage}`);
-=======
+
 
 let radius = 10;
     const pi = 3.14;
@@ -119,10 +92,10 @@ let html = `
 `;
 console.log(html);
 
-let ninjas = ['shaun', 'umair','ali'];
+let ninjass = ['shaun', 'umair','ali'];
 
-console.log(ninjas);
-console.log(ninjas[1]);
+console.log(ninjass);
+console.log(ninjass[1]);
 
 let ages1 = [20,25,30,25];
 console.log(ages1[2]);
@@ -133,9 +106,131 @@ console.log(random);
 
 
 
+let ninjas = ['s','umair', 'ozair'];
+console.log(ninjas);
+console.log(ninjas[1]);
+
+ninjas[1] = 'ken'
+console.log(ninjas[1]);
+let ages = [10,20,30];
+console.log(ages[2]);
+console.log(ninjas.length);
+
+let resutss = ninjas.join(',');
+console.log(resutss);
+
+let resutsss = ninjas.indexOf('ozair');
+console.log(resutsss);
+let resultssss = ninjas.concat(['ken1', 'ken2']);
+console.log(resultssss);
+
+let resultsssss = ninjas.push('van');
+console.log(ninjas);
+let resultssssss = ninjas.pop();
+console.log(ninjas);
+console.log(resultssssss);
+
+
+let vage;
+// ` ` thhat is used below is the the one just before hte digit on on keyboard
+console.log(vage, vage+3, `the vage is ${vage}`);
+
+let vagee=null;
+// ` ` thhat is used below is the the one just before hte digit on on keyboard
+console.log(vagee, vagee+3, `the vagee is ${vagee}`);
+
+//bollian first is bollian and second is string
+console.log(true, false);
+console.log("true", "false");
+
+let email1 = 'umair.techo@hotmail.com';
+let resultt1 = email1.includes('!');
+console.log(resultt1);
+let resultt2 = email1.includes('@');
+console.log(resultt2);
+
+let name123 = ['umair123', 'ozair123', 'zubair'];
+let resultt23 = name123.includes('zubair');
+console.log(resultt23);
+
+
+let age321 = 25;
+//check if the age is equal to 25 or 26
+console.log(age321 == 25);
+console.log(age321 == 26);
+
+console.log(age321 != 25);
+console.log(age321 != 26);
+
+console.log(age321 > 25);
+console.log(age321 > 26);
+
+console.log(age321 < 25);
+console.log(age321 < 26);
+
+console.log(age321 <= 25);
+console.log(age321 <= 26);
+console.log(age321 >= 25);
+console.log(age321 >= 26);
+
+
+
+
+let name453 = 'shaun';
+
+console.log(name453 == 'shaun');
+console.log(name453 == 'Shaun');
+
+// lower case letter is greater thasn upper case letter 
+console.log(name453 > 'Shaun');
+// letter coming first are lower rthen letter coming after 
+console.log(name453 > 'crystal');
+
+
+let agex1 =25;
+
+
+// loose comparision  string is converted into number before evaluate
+
+console.log (agex1 == 25);
+console.log (agex1 == '25');
+console.log (agex1 != 25);
+// its not string anymore so falsue
+console.log (agex1 != '25');
+
+
+//strictly comparision == instaed of =, atrick value and trype both compared strictly
+
+console.log (agex1 === 25);
+console.log (agex1 === '25');
+console.log (agex1 !== 25);
+// its string here below as we using strick comparision
+console.log (agex1 !== '25');
+
+
+//type conversion 
+let score1 = '100';
+
+score = Number(score1);
+console.log(score +1);
+console.log(typeof score);
+
+
+
+// let score12 = NUmber('hello'); it wonmt work as hello is not a number
+
+let score21 = String(50);
+console.log(score21, typeof score21);
+// 0 is false but +ve and -ve number are true
+let score221 = Boolean(50);
+console.log(score221, typeof score221);
+
+// string of any length is tru but empty string is faluse
+let score2221 = Boolean('0');
+console.log(score2221, typeof score2221);
 
 
 
 
 
->>>>>>> 2ae186aab2289abf85484f2248d908a9fdf31883
+
