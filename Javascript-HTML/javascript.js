@@ -235,8 +235,35 @@ console.log(score2221, typeof score2221);
 
 for(let i = 0; i < 5; i++) {
 
+console.log('inloop:', i);
+}
+
+console.log('finish');
+
+const namess = ['shaun','mari','luigi'];
+// one interation is one cycle through i.e cycle of loop till the end
+for (let z=0; z < namess.length; z++){
+console.log('inloop', z , namess[z]);
+
+//``= back ticks for html template, we use $ to output the variable and the name in {} 
+let html = `<div>${namess[z]} </div>`;
+console.log(html);
 
 }
+
+//let i = 0;
+while( i < 5){
+console.log('in loop:', i);
+
+}
+
+
+
+
+
+
+
+
 
 
 
