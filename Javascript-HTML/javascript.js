@@ -251,10 +251,49 @@ console.log(html);
 
 }
 
-//let i = 0;
-while( i < 5){
+let i = 0;
+while( i < 9){
 console.log('in loop:', i);
+i++;
+}
+//wile loop
 
+let namew = ['umair', 'uzair','owais'];
+iw = 0;
+while( iw < namew.length){
+console.log(namew[iw]);
+iw++;
+}
+
+//do while, atleast runs once even if the condition is wrong
+let namewx = ['umair', 'uzair','owais'];
+iwx = 0;
+
+do{
+    console.log(namew[iwx]);
+    iwx++;
+}
+while( iwx < namewx.length);
+
+
+/// CONDITIONAL STATEMET= if stemetmss...
+
+
+// if stateent-condtional checkone time onyl and not repeted
+
+const agexxx = 20;
+
+if (agexxx > 19) {
+console.log('you are over 19 years old');
+
+}
+
+
+const ninjasxxx = ['umiar', 'uzair', 'daniyal'];
+
+if(ninjasxxx.length > 2){
+
+    console.log("that's a lot of ninjas");
 }
 
 
@@ -264,12 +303,34 @@ console.log('in loop:', i);
 
 
 
-<<<<<<< HEAD
-=======
 
 
 
 
 
 
->>>>>>> 5884fcc224793b8b02ae17d72671fe80849ae6cf
+
+
+
+
+
+
+
+
+const passwordd1 = 'passxxx';
+if(passwordd1.length >=9 ){
+
+    console.log('that  pass is not long enough!');
+}
+
+
+
+
+
+
+
+
+
+
+
+
