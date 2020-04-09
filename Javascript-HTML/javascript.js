@@ -323,6 +323,66 @@ if(passwordd1.length >=9 ){
     console.log('that  pass is not long enough!');
 }
 
+// if-esle , if ione is true do this if not then do the other
+const passwords1 = '@pass';
+
+if (passwords1.length >= 8 )
+{
+console.log('that password is enougfh long');
+} else { 
+console.log('password is not long enough')
+
+}
+
+
+
+const passworddsx1 = '@passffffffff';
+
+if (passworddsx1.length >= 12 )
+{
+console.log('that password is Mighty long');
+} else if (passworddsx1.length >= 8 ) { 
+console.log('password is not long enough');
+
+}
+else {
+console.log('password is not long enough');
+
+}
+
+
+//logical operatiors or ?/ , and &&
+
+
+const passworddsx12 = 'ccdpassffffffff';
+
+if (passworddsx12.length >= 12 && passworddsx12.includes('@') )
+{
+console.log('that password is Mighty long');
+} else if (passworddsx1.length >= 8 ) { 
+console.log('password is not long @ enough');
+
+}
+else {
+console.log('password doesnt have @');
+
+}
+
+
+// logical not (!)- it reverse the bollion if put infront
+
+
+console.log(!true);
+
+/// if statemt when the user is false .
+let user = true;
+
+if (!user){
+    console.log('the user is not loggedin now');
+}
+else {
+    console.log('the user is logged in');
+}
 
 
 
