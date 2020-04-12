@@ -384,9 +384,137 @@ else {
     console.log('the user is logged in');
 }
 
+// break and continue
+
+const scores = [50, 25, 0, 30, 100, 20, 10];
+
+for (let h = 0; h < scores.length; h++) {
+
+    console.log('your score: ', scores[h]);
+    // first = is for normal equal and the additional == are for strick comparison both in content and type but == is only content comparision
+if(scores[h] === 100){
+    console.log('congrats, you got the top score!');
+    // if it comes to this break statent then it will break the top for loop and will carry on from below here
+    break;
+}
+}
+
+for (let j = 0; j < scores.length; j++) {
+    
+
+    if (scores[j] === 0) {
+// continue will not go dwon if the statemetn is true and will continue the for loop i.e 0 value will not be printed
+        continue;
+    }
+
+    console.log('your score: ', scores[j]);
+    // first = is for normal equal and the additional == are for strick comparison both in content and type but == is only content comparision
+if(scores[j] === 100){
+    console.log('congrats, you got the top score!');
+    // if it comes to this break statent then it will break the top for loop and will carry on from below here
+    break;
+}
+}
 
 
+// switch statemnts these are strick matches only ===
 
+const grade ='D';
+
+switch(grade){
+case 'A':
+    console.log('you got an A!');
+    break;
+case 'B':
+    console.log('you got an B!');
+    break;
+case 'C':
+    console.log('you got an C!');
+    break;
+case 'D':
+    console.log('you got an D!');
+    break;
+case 'E':
+    console.log('you got an E!');
+    break;
+default:
+        console.log('not a valid grade');
+}
+
+
+const gradea = 50;
+
+switch(gradea){
+case 50 :
+    console.log('you got a digit 51');
+    break;
+case 60 :
+    console.log('you got anb 60!');
+    break;
+case 70 :
+    console.log('you got an70!');
+    break;
+case 80 :
+    console.log('you got an 80!');
+    break;
+case 90 :
+    console.log('you got a digit 90');
+    break;
+default:
+        console.log('not a valid grade');
+}
+
+
+// root of document  and can be access anywhere inside code block and outside code block 
+
+
+// the below is define in global scope
+const agee = 34;
+
+if(true){
+// we can creat local scope the smae avariaible dinfied in gloval scope
+//local scope
+    const agee = 50;
+ let name = 'umair';
+console.log('inside 1dt code block :', agee, name);
+// let and const follow block scope but var doesnt follow block scope, so in this var test will also appear in the cosole after the  end block }
+// therefore var is avaialbe all the way down to where it is defined
+var test ='hello';
+
+}
+
+console.log('outside 1dt code block :', agee, name, test);
+//1-first declare the function 2nd call the function
+//fuctiohn declaration
+
+function greet(){
+console.log('hello there');
+
+}
+// norma l function donr have a variable define but expression has variable define (uselful in Hoisting in javscript= expression dont but normal function declaration do)
+// hoisting= function declartion is defined after it is call the javascript will bring it up before the top of the fuction call statement.
+//fuction expression i.e any variable equal to function is expression and ; at the end of expression and not at the end of normal function defination
+const speak = function(){
+    console.log('i am good');
+};
+// call the function or invoke the function
+
+greet();
+greet();
+greet();
+greet();
+
+speak();
+speak();
+
+
+// passing values in the fucntion inside (), define varialbe inside
+//${}= template string and start and end with `` the end next to 1
+// ${}= is the place holder in template, and inside {expression} have the variable any expression that holds a value or call a function that returns a value
+const speakl = function(name){
+    console.log(`good day ${name}`);
+};
+speakl();
 
 
 
