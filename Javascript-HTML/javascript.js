@@ -1,4 +1,7 @@
 //alert("hello");
+
+
+
 let age =3;
 console.log(age);
 
@@ -81,7 +84,7 @@ let results11 = `the log is ${title}${auther} of ${likes}`
 
 // 3-creating html templetates
 
-let html = `
+let htmla = `
 
 <h2> ${title} </h2>
 <p>by ${auther} </p>
@@ -90,7 +93,7 @@ let html = `
 
 
 `;
-console.log(html);
+console.log(htmla);
 
 let ninjass = ['shaun', 'umair','ali'];
 
@@ -246,8 +249,8 @@ for (let z=0; z < namess.length; z++){
 console.log('inloop', z , namess[z]);
 
 //``= back ticks for html template, we use $ to output the variable and the name in {} 
-let html = `<div>${namess[z]} </div>`;
-console.log(html);
+let htmlz = `<div>${namess[z]} </div>`;
+console.log(htmlz);
 
 }
 
@@ -511,16 +514,348 @@ speak();
 // passing values in the fucntion inside (), define varialbe inside
 //${}= template string and start and end with `` the end next to 1
 // ${}= is the place holder in template, and inside {expression} have the variable any expression that holds a value or call a function that returns a value
-const speakl = function(name){
-    console.log(`good day ${name}`);
+const speakl = function(name, time){
+    console.log(`good ${time} day ${name}`);
 };
-speakl();
+// this name variable wont work as it will only work in the {} and its only the local varialbe inside the function 
+console.log(name);
+// the below function speak1 and mario is an argument  and name up related to function is called functions parameters.
+// the order of theargument below must match the order of parameters up 
+speakl('mario', 'morning');
+// we can give parameters the default values
+const speakl2 = function(name = 'ligiun', time = 'night'){
+    console.log(`good ${time} day ${name}`);
+};
+// if we pass the argument when the paramtereds have default cvalsue sthen the argument will override the default parmaneters values
+speakl2();
+
+ 
+
+
+const calcArea = function(radius){
+// we dont need to define the variable area1 and we can just do like retun  3.14 * radius**2; and it will work the same
+    let area1 = 3.14 * radius**2;
+
+//console.log(area); this will have local importance and outside the function its not saved to make it visiblae outside we do the return command 
+
+return area1;
+
+
+};
+
+// when this founction calcArea(5) is called it will call thefunction with variable radius =5 and then that function calcArea() will return the area1 values and then we defindthe areax = area1 (return value)
+const areax = calcArea(5);
+console.log(areax);
+
+
+const calcVol = function(areax){
+
+    console.log(` the volune is twice the${2+areax}`);
+};
+calcVol(areax);
+
+// clearner and short way to write, we dont use function keywork  => and code body
+
+const calcArea1 = (radius ) => {
+
+return 3.14 * radius **2;
+
+}
+//here areax from abouve will become the radius cvalye
+const areay = calcArea(areax);
+console.log('area is :', areay);
+
+//when qew havew only one parameter then we can take the parantesis of (), but if 2 or more or if empty then we need ()
+//as the body has only one line code that is returned, then we can define on the same line and dont write return as its default and not () either
+const calcAreaxy = radius =>  3.14*radius**2;
+
+
+const areaz = calcArea(areay);
+console.log('area is :', areaz);
+
+const greet1 = function(){
+    return 'hello, world';
+};
+const restl1x1 = greet1();
+console.log(`${restl1x1}`);
+
+
+// arrow function version, if no parameters then we need to pu empty () and then =>{} atleast. and as its single line return then we even dont need to write {} and retun 
+const greet123 = () => 'hello, worldx';
+const results123 = greet123();
+console.log(results123);
+
+
+const bill = function (products, tax){
+let total = 0;
+for(let i=0; i < products.length; i++){
+    // x = x+1 is smae as x += 1 unitill the loop finishes it will add up all and then return
+    total += products[i] + products[i] * tax;
+}
+return total;
+
+}
+console.log(bill([10,15,30],0.2))
+
+
+const bill1 = (products, tax)=>{
+    let total = 0;
+    for(let i=0; i < products.length; i++){
+        // x = x+1 is smae as x += 1 unitill the loop finishes it will add up all and then return
+        total += products[i] + products[i] * tax;
+    }
+    return total;
+    
+    }
+    console.log(bill([10,15,30],0.2))
+    
+// function is invoked through functionmane and (), like xyz(),,,,, but methond is invoked therough dot . notation
+// VALUE.METHOD()  this is how the metod is invoked
+const name123x ='shaun';
+let resulttwo = name123x.toUpperCase();
+console.log(resulttwo);
+
+
+// FUNCTION= is defined on its own
+//methods = defined on data type or an onject
+// methods are function but just differ that how we call them and where we define
+// 7 datatype in javascript
+
+// function as an argument = callback function
+
+
+const myFunc = (callbackFuncq) => { 
+let value = 50; 
+
+callbackFuncq(value);
+
+};
+
+myFunc(function(value){
+console.log(value);
+
+});
+
+
+const myFunct = (callbackFuncqx) => { 
+    let value = 50; 
+    
+    callbackFuncqx(value);
+    
+    };
+    // only one parameter (value) so no need the brackets ()
+    myFunct(value=> {
+    console.log(value);
+    
+    });
+
+
+let people = ['mario', 'umair', 'ryr'];
+// this will run three times as three items in arrays 
+people.forEach(function(){
+    console.log('something');
+})
+
+//when we invoke myfunc(), we have to pass some kind of parameter xxxx
+
+
+////////////////////////////////////////////////////////////////////
+
+// normal fuinction is with argument and it when invoke pass the argument ot the function
+// but in callback function, when invoked, it will first go to normal function and then return bakc the value for invoke function (step-1) and then step-1 will be execuited the inside function
+
+// callback function
+
+// step-1 we invoke the callback function, which dont have an argumnet but instead another function
+// step-2 after step-1 we will process this fucntion and return the value as an argument to the step-1 function
+
+
+
+// the below is step-2
+const myFuncxx =( callbackFunc) => {
+
+    let value =50;
+    callbackFunc(value);
+};
+//the below is step-1
+myFuncxx(function(value){
+console.log(value);
+
+
+})
+const myFuncxxy =( callbackFunc) => {
+
+    let value =50;
+    callbackFunc(value);
+};
+//the below is step-1
+myFuncxxy(value =>{
+console.log(value);
+
+
+})
+
+
+
+let people1 =['umair', 'uzair', 'zubair'];
+// beow forEach is builtin arrys method
+//below is callback fuinction, it will output three times
+// inside this callback function each element is equal to abc and will print out three times .foreach makes it for each item from array
+people1.forEach(function(abc){
+console.log(abc)
+
+});
+
+let people12 =['umair', 'uzair', 'zubair'];
+// beow forEach is builtin arrys method
+//below is callback fuinction, it will output three times
+// inside this callback function each element is equal to abc and will print out three times .foreach makes it for each item from array
+people12.forEach(abc =>{
+console.log(abc)
+
+});
+
+
+let people123 =['umair', 'uzair', 'zubair'];
+// beow forEach is builtin arrys method
+//below is callback fuinction, it will output three times
+// inside this callback function each element is equal to abc and will print out three times .foreach makes it for each item from array
+// 2nd will be index, i,e efg=index
+// so is like this, .foreach (person, index)
+people123.forEach((abc, efg) =>{
+console.log(abc, efg)
+
+});
+
+
+
+let people1234 =['umairx', 'uzairx', 'zubairx'];
+
+const logPerson = (person, index) =>{
+    console.log(`${index} - hello ${person}`)
+};
+
+//below logPerson is a call back function i.e passing to another function or another method as an ARGUMENT
+people1234.forEach(logPerson);
+
+////////////////////////////////////
+// the bvelow gets the .people class
+
+
+
+const ul = document.querySelector('.peoplesz');
+
+const peoplesz=['umairc', 'uzaircc', 'zubairccc'];
+
+let html = ``
+peoplesz.forEach(function(person){
+html +=`<li style="color: purple">${person}</li`;
+}); 
+
+console.log(html);
+
+ul.innerHTML = html;
 
 
 
 
+///  OBJECTS
+//onjects= they have properties and threy can do something
+//object= propoerties+ use(action)
+//objects = properties(tile+comntnet+auther...) + method(login+logout+publish+delte....)
+// bultinobject, day objet, mathobject
 
 
+//object literail notation
+
+let userxxc ={
+// key and value  key: value
+    name: 'crystal',
+    age: 30,
+    email: 'umair.ashraf@hotmail.co.uk',
+    location: 'berlin',
+    blogs: ['why mac and cheese rules','10 things to make with marmite']
+
+
+};
+
+console.log(userxxc);
+// just one value
+console.log(userxxc.name);
+// to replace or update
+console.log(userxxc['age']);
+userxxc.age =35;
+console.log(userxxc.age);
+
+
+
+
+// another way to grap replaced or updated property [name of the key]
+console.log(userxxc['age']);
+console.log(userxxc['blogs']);
+userxxc['age']=33;
+console.log(userxxc.age);
+
+// location object is equal to variable and is fine
+const  key ='location';
+console.log(user[key]);
+//user.key cant use it as it will look for key object which doest exist
+// otypeof = operator here (object type here)
+console.log(typeof userxxc);
+//const blogs = [
+    //{tile: '@why mac and cheese ruiles', likes: 30  }  is an object
+    //{title: '@10 things to make with MediaStreamTrackAudioSourceNode', likes:50} is an objecy
+
+    // below is array of objects 
+//{tile: '@why mac and cheese ruiles', likes: 30  }, {title: '@10 things to make with MediaStreamTrackAudioSourceNode', likes:50}
+
+//];
+
+let userxxc1 ={
+    // key and value  key: value
+        name: 'crystal',
+        age: 320,
+        email: 'umair.acxvshraf@hotmail.co.uk',
+        location: 'berlxcvin',
+        //blogs: ['why xcvvmac and cheese rules','10 things to make with marmite'],
+        blogs: [
+        {tile: '@why mac and cheese ruiles', likes: 30  }, {title: '@10 things to make with MediaStreamTrackAudioSourceNode', likes:50} ],
+    // login is key and function is value here
+        login:  function(){
+console.log('thi user logged in');
+       
+
+//console.log(blogs);   
+},
+//casue not to use arrow function here, as that will chage the propert of this. keyword, if we use this. keywork in an arrow function then this. will not equal to the local object and rather this will be the value at the time wheh the method was befine with the user i.e (user.logblogs(); and at that the this. was a global windows object )
+// we can also use like this logBlog(){ --- these are still regular functions and not arorw functions       
+logBlog(){
+        //context object=this,   if it is inside the document this it will refer to global object 
+       // this 
+       //console.log(this);  // this is here as whole user object so will outpu all the user info
+           //console.log(blogs);
+       //
+       console.log('this user has written the following blogs:');
+       //here this.blogs is directing to arrays of tw values, .forEach is the method we use  and inside we use callback function and here blog as paramenter 
+       //{ console.log(blog)});
+       this.blogs.forEach(blog =>{ console.log(blog.title, blog.likes);
+        });
+}
+};
+// call this method by using the below to display this user logged in
+// menthod is define inside the object or related to some variable but function is not depended on anything
+//userxxc1.login();
+// java set the method(logBlog()) to the value from the method its used on, in this case is the user xxc1, so here it will be equal to the this on line  logBlog: function(){console.log(this);
+//userxxc1.logBlog();
+ //Globa//l object in java is windows
+//console.log(this);
+// object inside arrays [{objects having elenets    },{2ns objects having elements 
+userxxc1.logBlog();
+
+// Math is an object in javascript
+
+console.log(Math);
+console.log(Math.PI);
 
 
 
