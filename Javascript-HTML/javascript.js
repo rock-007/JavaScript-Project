@@ -851,6 +851,7 @@ logBlog(){
 //console.log(this);
 // object inside arrays [{objects having elenets    },{2ns objects having elements 
 userxxc1.logBlog();
+console.log('userxxc1:', userxxc1)
 
 // Math is an object in javascript
 
@@ -858,4 +859,40 @@ console.log(Math);
 console.log(Math.PI);
 
 
+const area = 7.7;
+//math object  and in that object we have method round with parameter as area
+console.log(Math.round(area)); 
+// lower from the point value
+console.log(Math.floor(area)); 
+// up valur to point
+console.log(Math.ceil(area)); 
 
+//leave the decimal out
+console.log(Math.trunc(area)); 
+// randon between 0 and 1
+const random1 = Math.random();
+
+console.log(random1);
+// randon no b/w 1 and 100
+console.log(Math.round(random1 * 100));
+
+// premative and refernce type (how they are stored and used in Memoney)
+// premetive: number string and bollon,null undefined symoble
+//reference type: object types arrays functions dates other objects 
+//  
+// Primitive (when creat new value and assign to variable it  will store in memory in stack 
+//stack access is quick but limited space
+
+//reference type store in heap
+//heap is slow but have alot space  
+
+// STACK= any value(string,bollian...) is assigned the variable and if the array that will be stored in PRIMITIVE need to access the string has to refer to the varialbeto get the info, variablew can have pointer that referes to the heap stuff
+
+const userOne ={name: 'umair', age:34 };
+const userTwo = userOne;
+
+console.log(userOne, userTwo);
+userOne.age =40;
+
+// it will also affect the userTwo eventhorugh we havnet update to any new value, but beucase we created userTwo as copy of userOne so it created onyl new varialbe userTwo and poiting to the object {name: 'umair', age:34 } and having the same pointer value (pointit to heap object) as the one with userOne
+console.log(userOne, userTwo);
