@@ -896,3 +896,51 @@ userOne.age =40;
 
 // it will also affect the userTwo eventhorugh we havnet update to any new value, but beucase we created userTwo as copy of userOne so it created onyl new varialbe userTwo and poiting to the object {name: 'umair', age:34 } and having the same pointer value (pointit to heap object) as the one with userOne
 console.log(userOne, userTwo);
+
+
+// DOM= Documnet object Model
+// when html document loaded in the browser the browser creats an Objects which models this document,and this document is called DOM
+//when removing, resonse or add  on the html document we do it though the DOM.
+
+// addind removing chaging 
+// 1st step which elemt on the page we either want to add/remove content to, and reach into the DOM and refrence to that elemetm/node
+//Query = reaching in DOM and refernce is called query, that will enable us to chage the content of the elemet
+
+
+// first store that elemet (that we need to query) in some kind of variable
+//'h2' its CSS selector and it will grab the first h2 tag in html file adn dispaly in console
+//querySelector('h2') will only grab the first h2 tag
+const para = document.querySelector('h2');
+console.log(para);
+// we can get the first class with class name starting with dot, and it will refrence to class in the html file
+const para1 = document.querySelector('.peoplesz');
+// and that refernce will be printed out
+console.log(para1);
+// we cant use only the.class as it will pick up the first one but we want the one within div so we use this 
+const para2 = document.querySelector('div.peoplesz');
+// and that refernce will be printed out
+console.log(para2);
+
+
+// if we want to grab more than one element query.selectoryall
+// nodelist is not an arry but we can get particular element out as we go in array
+const para3 = document.querySelectorAll('p');
+console.log(para3);
+console.log(para3[1]);
+
+//cycle through node list 
+//for each method is applied on para3, and then call back function to it using the paramenter name we call it parax, and it will cycle through all of it
+para3.forEach(parax =>{
+ console.log(parax);   
+});
+//
+
+
+
+
+
+
+
+
+
+
