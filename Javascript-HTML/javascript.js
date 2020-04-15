@@ -1002,6 +1002,186 @@ peoples345.forEach(person =>{
     contenets123.innerHTML += `<div>${person}</div>`;
 
 })
+// grab the tag a and store in link refernce
+const link123 =document.querySelector('a');
+
+// getAttribte is a method as we uses the . in thestart and this methodf will get the attribute of a string href and the o/p will be google.com in the comnsole window
+console.log(link123.getAttribute('href'));
+// change the attribte to another value here is yahoo.comk
+// attribute= href value= www.yahoo.com
+
+link123.setAttribute('href', 'https://www.yahoo.com');
+console.log(link123.getAttribute('href'));
+//we can chage the ineer texct of the a
+// it will display in main window
+link123.innerText = 'the new site is for yahoo.';
+
+const mssg1 = document.querySelector('div');
+console.log(mssg1.getAttribute('class'));
+// class is attribute and sucess is value
+mssg1.setAttribute('class', 'sucess');
+// theout put will will sucess instead of peoplesz
+// we can use the font of or clor to another one
+console.log(mssg1.getAttribute('class'));
+
+//Any  HTML attribute if we have in our tags, we ca get and set it to any 
+// the above we chaged the attribtes that were already exist but we can also chage the attribbutes or can add new addributes of css html from the java script
+mssg1.setAttribute('style' , 'color: Red;');
+
+
+const title32 = document.querySelector('h2');
+// this will completely overrider the color already define in the html 
+//title32.setAttribute('style', 'margin: 50px;');
+// but if want to add extra style rather then overwrite it  using style property
+// first we see the css propert style of the h2 as below 
+console.log(title32.style);
+
+// constant =title32, style =object, color= one of the proprty of pobject style 
+console.log(title32.style.color);
+
+// the below is better as it will only change a specific propoert of an object style and will not over weriiter other p[roperties ]
+title32.style.margin= '50px';
+title32.style.color= 'crimson';
+
+//font-size: as in html we cant use like the same in javascript as it will think as subtract and will instead do fontScript
+
+
+title32.style.fontSize ='90px';
+// if want to delete the property, we use empty string ''
+title32.style.margin= '';
+
+//how to add/remove classes from element i.e specific css class define with atributes
+
+
+const content1 =document.querySelector('p');
+
+//classlist is propoerty as list of al the different class that centent1 element has 
+console.log(content1.classList);
+
+
+// add class
+//add class
+content1.classList.add('ping');
+
+console.log(content1.classList);
+
+// remove class
+
+content1.classList.remove('ping');
+
+console.log(content1.classList);
+
+
+content1.classList.add('success');
+console.log(content1.classList);
+
+// apply some class tags (success and error)that we define in the style css i.e error and succees to <p>
+// 1st refernce to that p tag and this will retunr the node list 
+
+
+const paras345 = document.querySelectorAll('p'); 
+
+// 2nd  we can use the forEach on the node list htat is rturn from step 1
+
+paras345.forEach(xx =>{
+    // innertext- display all of the visible text
+    // wecan also use (xx.textContent) it will show all text hidden or not
+    console.log(xx.innerText)
+    // textcontentet present in xx, xx is the content of para345, if the textcontent includes certen work i.e error, it will return bolliion
+    if(xx.textContent.includes('error')){
+        // if true then it will add class of error to the xx i.e of paras345
+        xx.classlist.add('error');
+    }   
+    // if(xx.textContent.includes('success')){
+    //     // if true then it will add class of error to the xx i.e of paras345
+    //     xx.classlist.add('success');
+   // }   
+    
+    
+});
+
+
+
+
+
+// toggle method
+const title123 = document.querySelector('.titlex');
+// it will add the class test on first toggle
+title123.classList.toggle('test');
+// it will removce the class toggle on 2nd one
+title123.classList.toggle('test');
+
+//relation of differnt elelemt on node tree (e.g relation b/w h1 and div or title and p)
+//h1,Div are subling as on same level, but p is child of div 
+
+
+// 1st we have reference to the artyicval
+
+const article1 = document.querySelector('article');
+
+//2nd we can get the children form the article by just using children proerties
+
+console.log(article1.children);
+
+// the output of the above will be all the tags under the HTMLcollection, and remember we cant use forEach on HTML collector bUT we can use forEach on Nodelist(when we use queryselect all ) and laos for Each on an array
+
+// in the above scenario we convert the HTMLcollection and turn into array and then we can use forEach on it
+
+
+// to do the above we take the Array object built into the javascript and then we use method on it .from and pass it on the location hwere we made the array from 
+
+// the below doesnt alter the original value but only convert and show them as an array as a new value
+console.log(Array.from(article1.children));
+// as the above dont alter anything rather convert and show the below will be the same html collection
+console.log(article1.children);
+// no can use forEach
+
+Array.from(article1.children).forEach(childxx =>{
+    // adding new class to each lelemet 
+childxx.classList.add('articleaa-element');
+
+
+});
+// how to find the parent of any element
+// this will grab h2 tag
+const title345 = document.querySelector('h2')
+// then the below will find the parent of the h2 elelmet AND THE result is article
+
+console.log(title345.parentElement);
+// this will firther find the parent of the article wxhich is the body
+console.log(title345.parentElement.parentElement);
+
+// to find sbling lelemt from h2
+console.log(title345.nextElementSibling);
+
+//privious subling i.e if we had p tag before the start of h2 then it will called the previous subling
+console.log(title345.previousElementSibling);
+
+//chainingnextElementSibling= next subling to h2, parentElement= parent of h2 i.e article and children= childrent of the article 
+console.log(title345.nextElementSibling.parentElement.children);
+
+//53
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

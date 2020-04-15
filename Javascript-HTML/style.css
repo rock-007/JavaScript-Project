@@ -1,0 +1,16 @@
+/*class of ::grammar-error */
+.error{
+    padding: 10px;
+    color: crimson;
+    border: 1px dotted crimson;
+
+}
+
+/* class of --> */
+
+.success{
+    padding: 10px;
+    color: limegreen;
+    border: 1px dotted orchid;
+    
+}
