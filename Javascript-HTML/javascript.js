@@ -935,12 +935,28 @@ para3.forEach(parax =>{
 });
 //
 
+// the above before was selecting the lelement thriugh css selector
+
+//  the below is get an element by ID
+// we can sue query selector to select an id by use '#page-title' but here we wont as we are using byId here
+const title1 = document.getElementById('page-title');
+console.log(title1)
+
+// get elements by thier class name
+// here we dont need .error as we are using the class with name class name so it know to pick up the class from the html
+const errors1 = document.getElementsByClassName('peoplesz');
+console.log(errors1);
+// the o/p is similar to node list and we can collect single element like node list BUT the below will not work as in jonde list
+//the below will come up an errors as forEach is not a function i.e we cant use .forEach of HTML collection
+//node list vs HTML collection
+//errors1.forEach(peoplesz => {console.log(peoplesz);});
+console.log(errors1[0]);
 
 
+// get element by their tag names
+// grab elements by P tags and store in HTML collection in a constant called parasme1
+const parame1 = document.getElementsByTagName('p');
+console.log(parame1);
+console.log(parame1[1]);
 
-
-
-
-
-
-
+// after grabbing something from the DOM we can do something with it
