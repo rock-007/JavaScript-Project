@@ -960,3 +960,73 @@ console.log(parame1);
 console.log(parame1[1]);
 
 // after grabbing something from the DOM we can do something with it
+// how to change text inside leement and text inside html
+
+const para123 = document.querySelector('p');
+// the below is not a method but just a property as if it was method then we would have used like this with paranthesis, innerTex()
+console.log(para.innerText);
+
+// the below will replace the text
+//para123.innerText ='ninjas are awesom!';
+// if we want to append then use +=
+
+para123.innerText +='ninjas are awesom!';
+
+
+const paras234 = document.querySelectorAll('p');
+
+paras234.forEach(para =>{
+    console.log(para.innerText);
+    para123.innerText += 'new text';
+})
+ 
+
+
+
+// change tet in html
+//.content class 
+const contenets123 = document.querySelector('div.peoplesz');
+
+console.log(contenets123.innerHTML);
+contenets123.innerHTML += '2ndddd thisi is new ';
+
+console.log(contenets123.innerHTML);
+ 
+
+// cycle through this paper and generate html sniipt for that person and display in html
+const peoples345 = ['umair', 'zair', 'onzair'];
+
+peoples345.forEach(person =>{
+
+    // grabing the conents123 and appending the info
+    contenets123.innerHTML += `<div>${person}</div>`;
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
