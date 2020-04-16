@@ -1163,31 +1163,120 @@ console.log(title345.nextElementSibling.parentElement.children);
 //53
 
 
+// first figure out where the even will happen (Click me button) 2nd  add event listnet of used event ofspeciic event 3rd call back function when button is pressed
+// const button1 =document.querySelector('button');
+// // the callbackfunction ewill fire when this click event happen on the button (here click is a method)
+// button1.addEventListener('click', () => {
+// console.log('you clicked me ')
+
+// });
+
+// passing the ul for the selector
+//const ulxx = document.querySelector('ul');
+
+// it will take out from webpage, remove() is a method
+//ulxx.remove();
+// the below we return the node list of li tags
+const buttonjh = document.querySelector('button');
+
+buttonjh.addEventListener('click',()=>{
+//items1.innerHTML += '<li>something new </li>';
+// another moethod  to add new li p div tag
+const lixx = document.createElement('LI');
+lixx.textContent= 'something new to do';
+// isert into the DOM , append to the parent or prepend to the parent
+//ul.append(lixx);
+// the above will take lixx and put at the bottob of Ul
+// we can use below to prepend of Ul
+ul.prepend(lixx);
+// point to be noted that these new items that created dont have the click functionallity. B/C the events list are only attached to the initial li tags and have to use event delegation if we want to apply on to any ew ones to as well
+// when an element get the click then the n leement becomes the event tag and that event tage can be used as e.target to do alot of things to that element.
+// event bubbling, after the eleemt having event tag got the call back fuction it will go up towards the parent to check if it has the event tag, and will go further up towards the more parent. i.e it will bubble up to the parent to see if any event listner attached to it and if present then it will fireoff the callback functions attached to thoses parent listner
+// e.stop proagation(); to stop bubbling effect to go towards the parent...
+}
+);
+// we cant use addevent listner here as there will be multiple items inside the li and we want ot attache the fucntion ot easch of it seperately ,as when the user click on any one of the intems then that particular oitem will be deleted
+// there for we use forEach
+// itemx is variable nae assinged to all the items one by one
+//items1.forEach(itemx =>{
+
+    // it will activiely listen on each item for a click (clcick is here as method), if the click happenes then it will call the call back function will firesonething inside the {}
+    // the call back function () works here as after the click happen it return as true and then the call back will execute the things in {}
+   // itemx.addEventListener('click',()=>{
+      //  console.log('item clicked');
+      
+// when clicked happenes, the browser will automatically give us the event -e oBJECTS and that will go to the callback function 
+
+//       itemx.addEventListener('click',e=>{
+//         console.log(e);
+
+//        // e i.e venet has a lot of properties but we looking for targert So,
+// // to know which li taget was clicked
+//e equal to events
+//        console.log(e.target);
+//        console.log(itemx);
+//        // target is the property and itemx is the specific elemet.
+//        // the above two result will be same as itmenx is one particular item and  that we working on and e.targetr is the same that we working on and is clicked
+// e.target.style.textDecoration= 'line-trough';
 
 
+// // the above is the CSS tex-Decoration but will write here as textDecoration
+// // it will remove the specific that comes form the target proprty
+// // the below the target(that got from e) the specific li tag  is the property that refers us to the element that was clicked and we can use this property to delete the item, remember as above itemx as cant use here to delete as it is just the refernece only.
+// e.target.remove();
+    // }
+       
+
+    // );
+//});
+const items1x = document.querySelector('ul');
+
+// stop propogation to event object = to stop thebubling effect And must be define inside the child one
+items1x.addEventListener('click', e =>{
+// rather then ataching event listiner to each onle of the li , attach a single event listner to the UL as it will apply to all the children
+// so here when we click the <li> items, the event is created and it will bubble up to the parent i.e <ul) and here we have attached the event listner, as now we dont have to creat a speperate event listner to the new elelents athat are added after 
+
+console.log('event in UL');
+// we can delete something thats clicks using the tagName,  like when we click on one item it will check if the tag name is <li> and then we can delete it
+if(e.target.TagName === 'LI' ) {
+    // it will remoe it from the DOM
+    e.target.remove();
+}
+
+} );
 
 
+// copy some item event
+
+// // .copy-me is class p tag in html
+// const copy = document.querySelector('.copy-me');
+
+// copy.addEventListener('copy', () =>{
+//     console.log('Oi!, my contenet private');
+// });
 
 
+// const boxxxx = document.querySelector('.box');
+// // // we dont need paratensisn if we use one parameter inside the method
+// // boxxxx.addEventListener('mousemove', e => {
+// //    // console.log(e);
+// //    //curser corrdimnates when it position inside the box
+//     console.log(e.offsetX,e.offsetY);
 
 
+//     // using template string as we will output some varialbes here ${}
+//     boxxxx.textcontent = `x pos - ${e.offsetX} y pos - ${e.offsetY}`;
+
+// });
+// wheel on mouse will call back funxtion
+document.addEventListener('wheel', e => {
+console.log(e.pageX, e.pageY);
+
+})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//56
+//practice one the 57
 
 
 
