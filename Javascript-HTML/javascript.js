@@ -1294,7 +1294,8 @@ console.log(e.pageX, e.pageY);
 
 
 
-
+//// event to catches the customer information from the user
+// keyboard evvent: user preses key on ske y board, or if shift/alt key is pressed and regular expression(validate user type date)
 
 
 
