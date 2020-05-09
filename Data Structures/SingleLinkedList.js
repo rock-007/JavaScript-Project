@@ -128,6 +128,36 @@ class SinglyLinkedList{
 
 
             }
+            reverse(){
+                // first save the first value that is head to a variable
+                var node = this.head;
+                // second change the first value that is the head to the this.tail i.e alst value
+                this.head = this.tail;
+                // now the first value that we saved in the node put as last value
+                this.tail= node;
+                var next;
+                // in reverse link list we want to make sure the next to the tail is always null so we define previous null
+                var prev = null;
+                // go through all the nodes
+                for(var i=0; i<this.length; i++){
+                    // save the next node temprarily so it will go to next node looping each time 
+                    next =node.next;
+                    // this will be reverse and the first will be poitning toward null as define up
+                    node.next = prev;
+                    // now the previous will be the current node
+                    prev = node;
+                    // and current node is the next node
+                    node = next;
+
+
+                }
+                return this;
+
+            }
+
+
+
+
 
 // insert is similar to set but it insert the new Node rather to update an existing one in case of set
             insert(index, val){
@@ -224,3 +254,5 @@ console.log(list.set(-1,"!!!"))
 
 list.insert(0,"it");
 console.log(list)
+
+list.reverse();
