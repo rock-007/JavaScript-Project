@@ -6,6 +6,11 @@ class ChatUI{
     // list is where we outputting templat to
 constructor(list){
 this.list = list;
+}
+// clear the list
+clear(){
+    this.list.innerHTML='';
+
 
 }
 render(data){ 

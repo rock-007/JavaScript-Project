@@ -5,8 +5,12 @@ constructor(room, username){
     this.room = room;
     this.username =username;
     // we picking up the specific collection'chats' from the db into this constractor chat varaible
+    // save the name in local storage a sif the page refreshes it will still keep theold naames
+    // 'usernaem' = argumentm name and username = value
+ 
     this.chats = db.collection('chats');
     this.unsub;
+    
 }
 // message will be string
 async addChat(message){
@@ -52,7 +56,7 @@ getchats(callback){
 updateName(username){
 
 this.username=username;
-
+localStorage.setItem('username', username)
 }
 
 updateRoom(room){
