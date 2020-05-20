@@ -9,7 +9,7 @@ constructor(game1) {
     this.gameHeight = game1.height;
     // this.position = {x:10, y:400};
     // this.speed ={ x:2, y:-2};
-    this.size = 14;
+    this.size = 24;
     console.log(this.gameWidth,this.gameHeight);
     // now we can use game1 in any of the other functions
     //    this.paddlex =game1.paddle1o r can bring the game all of it
@@ -18,7 +18,7 @@ constructor(game1) {
     }
     reset(){
         this.position ={x:10, y:400};
-        this.speed ={x:4, y: -2};
+        this.speed ={x:2, y: -2};
 
 
     }
