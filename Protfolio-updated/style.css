@@ -34,7 +34,7 @@ margin-right: auto;
 h3 {
 
     font-size: 2rem;
-  font-family: "Judson", serif;
+    font-family: "Judson", serif;
   padding-top: 0.5em;
   padding-bottom: 0.5rem;
 }
@@ -62,4 +62,5 @@ body {
     list-style: square outside none;
     font-size: 18px;
     line-height: 1.6;
+   
   }
