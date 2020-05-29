@@ -1,0 +1,36 @@
+   .btn{
+        width:100%;
+        box-sizing: border-box;
+       text-align: center ;
+       justify-content: center;
+       padding-right: 15px;
+       padding-left: 15px;
+       margin-right:20%;
+       margin-left: 20%;
+    color: rgb(14, 12, 12);
+    margin-bottom: 0%;
+    display: inline-block;
+        }
+       
+       
+    .btp{
+        max-width: 1402px;
+        font-size:19px;
+       text-align: center ;
+    color: rgb(14, 12, 12);
+    margin-top: 0%;
+    margin-bottom: 0%;
+        }
+    
+
+        .btc{
+            list-style: none;
+            max-width: 1402px;
+            font-size: 30px;
+            margin: 0px;
+           text-align: center ;
+        color: rgb(14, 12, 12);
+        margin-bottom: 0%;
+        margin-top: 0%;
+            
+        }
