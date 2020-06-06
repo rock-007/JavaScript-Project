@@ -72,6 +72,8 @@ const updateCity = async(city) =>{
 
 const cityDets = await getCity(city);
 console.log(typeof(cityDets))
+console.log(cityDets.Key)
+
 const weather1 = await getWether(cityDets.Key);
 // return object with two properties
 return{
@@ -92,5 +94,6 @@ const city =cityForm.city.value.trim();
 cityForm.reset();
 
 //update UI for with new city
-updateCity(city).then(data => updateUI(data)).catch(err => console.log(err))
+updateCity(city)
+.then(data => updateUI(data)).catch(err => console.log(err))
 })
