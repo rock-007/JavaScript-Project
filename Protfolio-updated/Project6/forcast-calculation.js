@@ -26,7 +26,7 @@ return {usercityinfo:cityname1, citycondition:citydata }
 cityid= async (cityname)=>{
     console.log(cityname)
 /// to fetch location key/id
-    cityidx=await fetch( `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=8aZI4psZO7TTBsN4WuFV9mUFyGbjHsAN&q=${cityname}`)
+    cityidx=await fetch( `https://dataservice.accuweather.com/locations/v1/cities/search?apikey=8aZI4psZO7TTBsN4WuFV9mUFyGbjHsAN&q=${cityname}`)
    
     cityid2= await cityidx.json()
     city3= cityid2[0]
@@ -39,7 +39,7 @@ cityid= async (cityname)=>{
 citywether = async (citykey)=>{
     console.log(citykey)
 
-    citywether3=await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${citykey}?apikey=8aZI4psZO7TTBsN4WuFV9mUFyGbjHsAN`)
+    citywether3=await fetch(`https://dataservice.accuweather.com/currentconditions/v1/${citykey}?apikey=8aZI4psZO7TTBsN4WuFV9mUFyGbjHsAN`)
 
     console.log(citywether3)
 
