@@ -15,9 +15,11 @@ const icon = document.querySelector('.icon img');
 const updateUI =(data) => {
     console.log(data);
 //cityDets is a variable that has property from the object
+console.log(data)
 const cityDets = data.cityDets;
 const weather1 =data.weather;
  console.log(cityDets);
+ console.log(weather1)
 //const {cityDets, weather1} = data;
 
 //destructure properties from data object get the property for onbject cityDets and weather1
@@ -69,6 +71,7 @@ card.classList.remove('d-none');
 const updateCity = async(city) =>{
 
 const cityDets = await getCity(city);
+console.log(typeof(cityDets))
 const weather1 = await getWether(cityDets.Key);
 // return object with two properties
 return{
@@ -79,6 +82,8 @@ cityDets: cityDets, weather: weather1
 
 }
 cityForm.addEventListener('submit',e =>{
+console.log(e);
+console.log(typeof(e));
 
     e.preventDefault();
     //citiy is the name(for refrence to the input) in the input section under the form and get value of that

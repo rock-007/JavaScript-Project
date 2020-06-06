@@ -1,7 +1,7 @@
 // this will interzasact with the API and then display
 
 // the bwlow key is the API key form accuwether, fre acount has 50 request per day, we will make two diffrent request to two end points one to get the city code and other to rquest the wether for the city
-const key = 'AA5Z2tcCCaA37aY78L6pBvGB9dWVKyI8';
+const key = '8aZI4psZO7TTBsN4WuFV9mUFyGbjHsAN';
 
 // make the fucntojun that will do the city code request 
 // we make async as we want it to return the promise
@@ -33,24 +33,28 @@ const getWether =async (id) =>{
     const base = 'http://dataservice.accuweather.com/currentconditions/v1/';
     //?= indicates the query parameters
     const query = `${id}?apikey=${key}`;
+    console.log(query)
     const response = await fetch(base+query);
     const data =await response.json();
-    console.log(data);
+
+    // here the dats is JSON array of object, ususally [0] we need and that all it has sometimes
+    console.log(data)
+    console.log(data[0],data[1]);
     // we data the array =data, although it has only one onject isnide will we will rather take out the pure object as [0], so returning will be object and not array
     return data[0];
 }
 
 // as we got the promise fro mthe above then
 // data is something and err is error
-getCity('manchester').then(data =>
+// getCity('manchester').then(data =>
     
-    {return getWether(data.Key);
+//     {return getWether(data.Key);
 
-    }).then(data => {
-      //  console.log(data);
-    })
+//     }).then(data => {
+//       //  console.log(data);
+//     })
     
-.catch(err => console.log(err));
+// .catch(err => console.log(err));
 
 
 //getWether("329260");
