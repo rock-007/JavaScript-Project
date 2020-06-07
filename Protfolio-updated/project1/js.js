@@ -45,9 +45,9 @@ let x1 = document.getElementById('apicallx')
       console.log(finalcity)
       console.log(finaldata)
 
-      x1.innerHTML=`<h5 class="text-muted"> ${finalcity.LocalizedName} </h5>
-      <div class="text-muted" style="padding: 5%">${finaldata.WeatherText}</div>
-      <h1 class="text-muted" style="padding: 5%">${finaldata.Temperature.Metric.Value}&degC</h1>`
+      x1.innerHTML=`<h5 class="text-muted"><span> ${finalcity.LocalizedName}</span> </h5>
+      <div class="text-muted" style="padding: 5%"><span>${finaldata.WeatherText}</span></div>
+      <h1 class="text-muted" style="padding: 5%;text-align: center"> <span>${finaldata.Temperature.Metric.Value}&degC</span></h1>`
 
 
 
