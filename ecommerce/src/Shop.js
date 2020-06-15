@@ -23,7 +23,7 @@ function Shop() {
   };
   return (
     <div>
-      {" "}
+      
       {items.then((value) => (
         <p>{value.data}</p>
       ))}
