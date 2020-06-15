@@ -8,7 +8,7 @@ function Shop() {
     fetchItem();
   }, []);
 
-  const [items, setItems] = useState({});
+  const [items, setItems] = useState([]);
 
   const fetchItem = async () => {
     const data1 = await fetch(
