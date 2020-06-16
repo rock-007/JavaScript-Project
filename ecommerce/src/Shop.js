@@ -15,7 +15,7 @@ function Shop() {
       "https://corona-virus-stats.herokuapp.com/api/v1/cases/general-stats"
     );
     const items = await data1.json();
-    const y = items.data;
+  
     console.log(data1);
     console.log(items);
     console.log(items.data);
@@ -23,9 +23,8 @@ function Shop() {
   };
   return (
     <div>
-      
-      {items.then((value) => (
-        <p>{value.data}</p>
+      {items.then((items) => (
+        <p>{items.data}</p>
       ))}
     </div>
   );
