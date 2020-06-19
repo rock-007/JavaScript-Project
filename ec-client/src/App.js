@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Nav from "./Nav";
+import Sidebar from "./Component/Sidebar";
 import About from "./Component/About";
 import Shop from "./Component/Shop";
 import Error from "./Error";
@@ -12,6 +13,7 @@ function App() {
     <Router>
       <div className="App">
         <Nav />
+        <Sidebar />
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/about" exact component={About} />
