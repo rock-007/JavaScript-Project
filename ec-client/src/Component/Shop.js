@@ -22,19 +22,18 @@ function Shop() {
   };
   return (
     <div>
-            
       {/* this is to creat 2 dimension array having key value pair and then use
       .map on each 2 doimension array to extract key valuefrom it*/}
       {items.map((entry) => {
-        let key = entry.id;
+        let key = entry.email;
         let valuefirst = entry.firstName;
-        let valuelast = entry.Lastname;
+        let valuelast = entry.created_at;
         // or, instead of ^, you could also use define
         // the params as `([key, value]) => {`
 
         return (
           <p key={key}>
-            {key}: {valuefirst}{" "}{valuelast}
+            {key}: {valuefirst} {valuelast}
           </p>
         );
       })}

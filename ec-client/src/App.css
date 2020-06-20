@@ -58,21 +58,33 @@
 
 .sidebardiv {
   background-color: rgb(218, 223, 226);
-  left: 0;
+  left: -250px;
   position: fixed;
   width: 190px;
   height: 100%;
   top: 180px;
 
   bottom: 280px;
+  transition: all 0.5s ease;
 }
+.sidebardiv header {
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  line-height: 70px;
+  user-select: none;
+  font-weight: 600;
 
+  background-color: rgb(73, 79, 82);
+}
 .sidebarul {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   list-style: none;
-  align-items:center ;
+  align-items: center;
   text-align: left;
+
+  border-top: 1px solid rgb(0, 0, 0);
 }
 
 .sidebardiv ul a {
@@ -95,9 +107,48 @@ ul li:hover a {
   padding-left: 50px;
 }
 
+.sidebardiv ul a i {
+  margin-right: 16px;
+}
 
-.sidebardiv ul a i{
+#check {
+  display: none;
+}
 
-margin-right:16px;
+label #btn,
+label #cancel {
+  position: absolute;
+  cursor: pointer;
+  background:#747b7e;
+  border-radius: 3px;
+}
 
+label #btn {
+  left: 45px;
+  top: 195px;
+  font-size: 35px;
+  color: rgb(15, 14, 14);
+  padding: 6px 12px;
+}
+
+label #cancel {
+  z-index: 111;
+  left: -145px;
+  top: 199px;
+  font-size: 30px;
+  padding: 4px 9px;
+}
+
+#check:checked ~ .sidebardiv {
+  left: 0;
+}
+
+#check:checked ~ label #btn {
+  left: 45px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#check:checked ~ label #cancel {
+  left:140px ;
 }
