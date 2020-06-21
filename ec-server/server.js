@@ -26,6 +26,7 @@ app.get("/api/customers", (req, res) => {
   // });
   let q = "SELECT * from users";
   connection.query(q, function (err, results) {
+    if (err) throw err;
     res.json(results);
   });
 });
