@@ -38,7 +38,7 @@
 }
 
 .navcolor {
-  display: flex;
+  display:flex	;
 
   justify-content: space-around;
 
@@ -119,7 +119,7 @@ label #btn,
 label #cancel {
   position: absolute;
   cursor: pointer;
-  background:#747b7e;
+  background: #747b7e;
   border-radius: 3px;
 }
 
@@ -150,5 +150,5 @@ label #cancel {
 }
 
 #check:checked ~ label #cancel {
-  left:140px ;
+  left: 140px;
 }
