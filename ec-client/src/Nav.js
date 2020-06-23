@@ -9,16 +9,25 @@ function Nav() {
   };
 
   return (
-    <nav className="navcolor">
-      <h3>Logo</h3>
-      <ul className="nav-links">
+    <nav className="header">
+      <div>
+        <h2>
+          <a href="/">UmairShop</a>
+        </h2>
+      </div>
+      <div>
+        <a href="./about">cart</a>
+        <a href="/Shop">Signin</a>
+      </div>
+
+      {/* <ul className="nav-links">
         <Link style={navStyle} to="/about">
           <li> about</li>
         </Link>
         <Link style={navStyle} to="/Shop">
           <li> Shop</li>
         </Link>
-      </ul>
+      </ul> */}
     </nav>
   );
 }

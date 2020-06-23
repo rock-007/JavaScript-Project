@@ -6,21 +6,29 @@ import Sidebar from "./Component/Sidebar";
 import About from "./Component/About";
 import Shop from "./Component/Shop";
 import Error from "./Error";
+import Footer from "./Component/Footer";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Nav />
+        
+        <Nav  />
+        
         <Sidebar />
+        <div className="main"> 
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/about" exact component={About} />
           <Route path="/Shop" exact component={Shop} />
           <Route component={Error} />
         </Switch>
+        </div>
+        
       </div>
+      <div className="footer"><Footer/> </div>
     </Router>
   );
 }
