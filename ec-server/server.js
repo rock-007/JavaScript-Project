@@ -13,17 +13,18 @@ let connection = mysqlx.createConnection({
   database: "join_us",
   insecureAuth: true,
 });
-
+// if he get request at http://localhost:5000/signin then it will response to it
 app.get("/api/customers", (req, res) => {
   // in real life it will usually come froma database like mysql,mongodb...
   // const cusotmers = [
   //   { id: 1, firstName: "Johssn", Lastname: "Don" },
-  //   { id: 2, firstName: "Umair", Lastname: "Ashraf" },
+  //   { id: 2,  firstName: "Umair", Lastname: "Ashraf" },
   //   { id: 3, firstName: "Owais", Lastname: "Aslam" },
   // ];
 
   //   res.json(cusotmers);
   // });
+  console.log(req);
   let q = "SELECT * from users";
   connection.query(q, function (err, results) {
     if (err) throw err;

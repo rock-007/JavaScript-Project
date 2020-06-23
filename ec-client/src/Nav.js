@@ -16,8 +16,8 @@ function Nav() {
         </h2>
       </div>
       <div>
-        <a href="./about">cart</a>
-        <a href="/Shop">Signin</a>
+        <a href="./about">about</a>
+        <a href="/signin">Signin</a>
       </div>
 
       {/* <ul className="nav-links">

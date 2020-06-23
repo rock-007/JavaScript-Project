@@ -4,7 +4,7 @@ import "./App.css";
 import Nav from "./Nav";
 import Sidebar from "./Component/Sidebar";
 import About from "./Component/About";
-import Shop from "./Component/Shop";
+import Signin from "./Component/Signin";
 import Error from "./Error";
 import Footer from "./Component/Footer";
 
@@ -14,21 +14,21 @@ function App() {
   return (
     <Router>
       <div className="App">
-        
-        <Nav  />
-        
+        <Nav />
+
         <Sidebar />
-        <div className="main"> 
-        <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/about" exact component={About} />
-          <Route path="/Shop" exact component={Shop} />
-          <Route component={Error} />
-        </Switch>
+        <div className="main">
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/about" exact component={About} />
+            <Route path="/signin" exact component={Signin} />
+            <Route component={Error} />
+          </Switch>
         </div>
-        
       </div>
-      <div className="footer"><Footer/> </div>
+      <div className="footer">
+        <Footer />{" "}
+      </div>
     </Router>
   );
 }
