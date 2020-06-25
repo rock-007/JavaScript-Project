@@ -1,7 +1,4 @@
-
-
-let x1 = document.getElementById('apicallx')
-
+let x1 = document.getElementById("apicallx");
 
 // async function  abc(){
 //   ///  const key='0b05c3bed050ac4af5b617adea26a6a4'
@@ -29,27 +26,20 @@ let x1 = document.getElementById('apicallx')
 //     });
 //     console.log(console.log(typeof(abc())))
 
-    //http://api.weatherstack.com/current?access_key=0b05c3bed050ac4af5b617adea26a6a4query=New%20York"
-    //http://api.weatherstack.com/current?access_key=0b05c3bed050ac4af5b617adea26a6a4&query=New%20York
-    //http://api.weatherstack.com/current?access_key=0b05c3bed050ac4af5b617adea26a6a4&query=New%20York
+//http://api.weatherstack.com/current?access_key=0b05c3bed050ac4af5b617adea26a6a4query=New%20York"
+//http://api.weatherstack.com/current?access_key=0b05c3bed050ac4af5b617adea26a6a4&query=New%20York
+//http://api.weatherstack.com/current?access_key=0b05c3bed050ac4af5b617adea26a6a4&query=New%20York
 
-    //328328?apikey=8aZI4psZO7TTBsN4WuFV9mUFyGbjHsAN
-    //328328?apikey=8aZI4psZO7TTBsN4WuFV9mUFyGbjHsAN
+//328328?apikey=8aZI4psZO7TTBsN4WuFV9mUFyGbjHsAN
+//328328?apikey=8aZI4psZO7TTBsN4WuFV9mUFyGbjHsAN
 
+updateUI = (data) => {
+  let finalcity = data.usercityinfo;
+  let finaldata = data.citycondition;
+  console.log(finalcity);
+  console.log(finaldata);
 
-
-     updateUI=(data)=> {
-
-      let finalcity=data.usercityinfo
-          let finaldata= data.citycondition
-      console.log(finalcity)
-      console.log(finaldata)
-
-      x1.innerHTML=`<h5 class="text-muted"><span> ${finalcity.LocalizedName}</span> </h5>
+  x1.innerHTML = `<h5 class="text-muted"><span> ${finalcity.LocalizedName}</span> </h5>
       <div class="text-muted" style="padding: 5%"><span>${finaldata.WeatherText}</span></div>
-      <h1 class="text-muted" style="padding: 5%;text-align: center"> <span>${finaldata.Temperature.Metric.Value}&degC</span></h1>`
-
-
-
-
-    }
+      <h1 class="text-muted" style="padding: 5%;text-align: center"> <span>${finaldata.Temperature.Metric.Value}&degC</span></h1>`;
+};

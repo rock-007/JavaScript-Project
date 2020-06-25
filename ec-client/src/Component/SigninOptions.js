@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
-import { Link } from "react-router-dom";
 
-function Signin() {
-  // empty string as default initial parameter ('')
+function SigninOptions() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [items, setItems] = useState([]);
@@ -22,7 +20,7 @@ function Signin() {
     console.log("event");
 
     //post construction
-    const dataSend = {name:name, password:password};
+    const dataSend = { name: name, password: password };
     // creating header to make sure we are sending the JSON format
     const headers = new Headers();
     headers.append("content-type", "application/json");
@@ -35,8 +33,6 @@ function Signin() {
 
     const request = new Request("http://localhost:5000/api/customers", options);
 
-
-    
     (async () => {
       const incomingdata = await fetch(request)
         .then((res) => res.json())
@@ -91,4 +87,5 @@ function Signin() {
     </div>
   );
 }
+
 export default Signin;

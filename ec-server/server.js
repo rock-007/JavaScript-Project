@@ -1,10 +1,12 @@
 // bring in express
 const express = require("express");
 const mysqlx = require("mysql");
-
 // initialise express and bind to app conastant so can be used later in the coding
 const app = express();
 // add the route to the server , when called from the react Frontend page at port 5000 when it is listening
+app.use(express.json());
+
+// it gives the ability to app to read json data
 
 let connection = mysqlx.createConnection({
   host: "localhost",
@@ -14,7 +16,7 @@ let connection = mysqlx.createConnection({
   insecureAuth: true,
 });
 // if he get request at http://localhost:5000/signin then it will response to it
-app.get("/api/customers", (req, res) => {
+app.post("/api/customers", (req, res) => {
   // in real life it will usually come froma database like mysql,mongodb...
   // const cusotmers = [
   //   { id: 1, firstName: "Johssn", Lastname: "Don" },
@@ -24,7 +26,18 @@ app.get("/api/customers", (req, res) => {
 
   //   res.json(cusotmers);
   // });
-  console.log(req);
+
+  //insert
+  let x1 = req.body;
+
+  var person = { email: x1.name, password: x1.password };
+
+  connection.query("INSERT INTO users SET ?", person, function (err, results) {
+    if (err) throw err;
+    console.log(results);
+  });
+
+  //query
   let q = "SELECT * from users";
   connection.query(q, function (err, results) {
     if (err) throw err;
