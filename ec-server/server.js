@@ -4,6 +4,8 @@ const mysqlx = require("mysql");
 const jwt = require("jsonwebtoken");
 const auth = require("./verifyTokenExisting");
 const authNew = require("./verifyTokenNew");
+const cors = require("cors");
+
 // initialise express and bind to app conastant so can be used later in the coding
 const app = express();
 // add the route to the server , when called from the react Frontend page at port 5000 when it is listening
@@ -11,6 +13,13 @@ app.use(express.json());
 
 // it gives the ability to app to read json data
 
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+    optionsSuccessStatus: 200,
+  })
+);
 let connection = mysqlx.createConnection({
   host: "localhost",
   user: "root",
@@ -44,7 +53,6 @@ app.post("/api/customers", (req, res) => {
   //});
 });
 
-// app.get("/api/1234", (req, res) => {
 //   // in real life it will usually come froma database like mysql,mongodb...
 //   // const cusotmers = [
 //   //   { id: 1, xxxe: "cccccccccccccccccccccJohn", Lahhhstname: "Don" },
@@ -78,9 +86,9 @@ app.post("/api/newuser", (req, res) => {
   ) {
     console.log("78", results);
 
-    //TOKEN
+    // const token =JWT.sign(payload,secret)
     const token = jwt.sign(
-      { _id: results[0].email },
+      { email: results[0].email },
       "lllfasdgfdadsfasdfdasfcadsf"
     );
     // console.log("74", results, err);
@@ -96,11 +104,16 @@ app.post("/api/newuser", (req, res) => {
           results[0].password == x1.password &&
           results[0].userlogin == false
         ) {
-          res.header("auth-token", token).send(token);
+          //res.header("auth-token", token).send(token);
+
+          res.cookie("access_token", token, { maxAge: 3600, httpOnly: true });
+
+          res.status(200).end();
+
           // update the userlogin to tre for this user
           connection.query(
             "UPDATE  users SET userlogin=? WHERE email=?",
-            ['1', results[0].email],
+            ["1", results[0].email],
             function (err, results) {
               if (err) throw err;
               console.log(results);
@@ -108,7 +121,7 @@ app.post("/api/newuser", (req, res) => {
           );
         } else {
           res.json({
-            data: "invalid password",
+            data: "invalid yy password",
           });
         }
       } else res.redirect("http://localhost:3000/about");

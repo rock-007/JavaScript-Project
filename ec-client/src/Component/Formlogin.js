@@ -31,8 +31,9 @@ function Formregister() {
     const options = {
       method: "POST",
       headers,
-      body: JSON.stringify(dataSend),
-      redirect: "follow",
+      body: JSON.stringify(dataSend), // here datassend is object
+     // redirect: "follow",
+      credentials:"include"
     };
     console.log(Email);
 
@@ -43,7 +44,8 @@ function Formregister() {
         .then((res) => {
           console.log(res);
           if (res.status >= 200 && res.status < 400) {
-            window.location.href = res.url;
+            window.location.href = "http://localhost:3000/";
+            console.log(res);
           } else {
             console.log(res.status);
             return res.json();
