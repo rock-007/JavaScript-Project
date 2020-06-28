@@ -41,7 +41,16 @@ function Formregister() {
     (async () => {
       const incomingdata = await fetch(request)
         .then((res) => {
-          window.location.href = res.url;
+          console.log(res);
+          if (res.status >= 200 && res.status < 400) {
+            window.location.href = res.url;
+          } else {
+            console.log(res.status);
+            return res.json();
+          }
+        })
+        .then((body) => {
+          return body;
         })
         .catch((err) => console.log("err"));
       // console.log(e);

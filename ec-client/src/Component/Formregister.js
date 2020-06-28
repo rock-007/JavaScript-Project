@@ -56,7 +56,7 @@ function Formregister() {
         .then((res) => {
           window.location.href = res.url;
         })
-        .catch((err) => console.log(err));
+        .then.catch((err) => console.log(err));
       // console.log(e);
 
       //  console.log(name, password);

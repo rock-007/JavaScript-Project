@@ -1,7 +1,9 @@
 // bring in express
 const express = require("express");
 const mysqlx = require("mysql");
-const token = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const auth = require("./verifyTokenExisting");
+const authNew = require("./verifyTokenNew");
 // initialise express and bind to app conastant so can be used later in the coding
 const app = express();
 // add the route to the server , when called from the react Frontend page at port 5000 when it is listening
@@ -59,6 +61,8 @@ app.post("/api/customers", (req, res) => {
 // });
 // // port where it can be listen on local host , dont use 3000 as it is default picked up by react
 
+/////////////////Login//////////////////////////////////////////////////////Login////////////////////////////////////////////////////////////
+
 app.post("/api/newuser", (req, res) => {
   let x1 = req.body;
 
@@ -66,33 +70,47 @@ app.post("/api/newuser", (req, res) => {
   //   email: x1.Email,
   //   //  password: x1.password,
   // };
+  console.log("73", x1);
 
   connection.query("SELECT * FROM  users WHERE email=?;", [x1.Email], function (
     err,
     results
   ) {
-    console.log(results, err);
-    console.log(results.email);
+    console.log("78", results);
+
+    //TOKEN
+    const token = jwt.sign(
+      { _id: results[0].email },
+      "lllfasdgfdadsfasdfdasfcadsf"
+    );
+    // console.log("74", results, err);
+    // console.log("75", results[0].email);
+
     if (err) throw err;
     else {
       if (results[0].email && results[0].password) {
-        console.log(results[0].email);
+        //  console.log("79", results[0].email);
 
-        //console.log(results[0]);
-        if (results[0].password == x1.password)
-          res.redirect("http://localhost:3000/");
-        else {
-
-res.json({
-
-data:"invalid password"
-
-
-})
-
-
-        };  
-
+        //below if the user and paswword is correct == to do user is not already logedin
+        if (
+          results[0].password == x1.password &&
+          results[0].userlogin == false
+        ) {
+          res.header("auth-token", token).send(token);
+          // update the userlogin to tre for this user
+          connection.query(
+            "UPDATE  users SET userlogin=? WHERE email=?",
+            ['1', results[0].email],
+            function (err, results) {
+              if (err) throw err;
+              console.log(results);
+            }
+          );
+        } else {
+          res.json({
+            data: "invalid password",
+          });
+        }
       } else res.redirect("http://localhost:3000/about");
     }
   });
