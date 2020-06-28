@@ -87,10 +87,7 @@ app.post("/api/newuser", (req, res) => {
     console.log("78", results);
 
     // const token =JWT.sign(payload,secret)
-    const token = jwt.sign(
-      { email: results[0].email },
-      "lllfasdgfdadsfasdfdasfcadsf"
-    );
+
     // console.log("74", results, err);
     // console.log("75", results[0].email);
 
@@ -105,8 +102,14 @@ app.post("/api/newuser", (req, res) => {
           results[0].userlogin == false
         ) {
           //res.header("auth-token", token).send(token);
-
-          res.cookie("access_token", token, { maxAge: 3600, httpOnly: true });
+          const token = jwt.sign(
+            { email: results[0].email },
+            "lllfasdgfdadsfasdfdasfcadsf"
+          );
+          res.cookie("access_token", token, {
+            maxAge: 9000000,
+            httpOnly: true,
+          });
 
           res.status(200).end();
 

@@ -32,8 +32,9 @@ function Formregister() {
       method: "POST",
       headers,
       body: JSON.stringify(dataSend), // here datassend is object
-     // redirect: "follow",
-      credentials:"include"
+      // redirect: "follow",
+      // we need to include credentails if not then the cookies will not be recieved or sent
+      credentials: "include",
     };
     console.log(Email);
 

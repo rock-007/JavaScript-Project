@@ -8,6 +8,8 @@ function Nav() {
     color: "White",
   };
 
+  // if cookies are present then signin and change the signin to `${name of account holder}`
+
   return (
     <nav className="header">
       <div>
