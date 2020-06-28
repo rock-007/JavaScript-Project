@@ -1,91 +1,48 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
+import { Link } from "react-router-dom";
+import Formlogin from "./Formlogin";
+import Formregister from "./Formregister";
 
 function SigninOptions() {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [items, setItems] = useState([]);
+  // empty string as default initial parameter ('')
 
-  const updateName = (e) => {
-    setName(e.target.value);
-  };
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  
+  const [login, setlogin] = useState(true);
+  const [register, setregister] = useState(false);
 
-  const credentialVerify = (event) => {
-    event.preventDefault();
-    console.log(event);
+ 
 
-    console.log("event");
+  function loginclicked() {
+    setlogin(true);
+    setregister(false);
+  }
+  function registerclicked() {
+    setlogin(false);
+    setregister(true);
+  }
 
-    //post construction
-    const dataSend = { name: name, password: password };
-    // creating header to make sure we are sending the JSON format
-    const headers = new Headers();
-    headers.append("content-type", "application/json");
-
-    const options = {
-      method: "POST",
-      headers,
-      body: JSON.stringify(dataSend),
-    };
-
-    const request = new Request("http://localhost:5000/api/customers", options);
-
-    (async () => {
-      const incomingdata = await fetch(request)
-        .then((res) => res.json())
-        .catch((err) => err);
-      // console.log(e);
-
-      console.log(name, password);
-      console.log(incomingdata);
-
-      setItems(incomingdata);
-      setName("");
-      setPassword("");
-    })();
-  };
   return (
     <div>
-      <div>
-        {
-          <form method="POST" className="formstyle" onSubmit={credentialVerify}>
-            <input
-              type="text"
-              placeholder="Username"
-              name="username"
-              value={name}
-              onChange={updateName}
-            />
+      <div className="root-container">
+        <div className="box-controller">
+          <div classname="box-container" onClick={loginclicked}>
+            <em> Login..... </em>
+          </div>
+          <div classname="box-container" onClick={registerclicked}>
+            <em>Register </em>
+          </div>
+        </div>
 
-            <input
-              type="text"
-              placeholder="Password"
-              name="password"
-              value={password}
-              onChange={updatePassword}
-            />
-            <button type="submit">Submit</button>
-          </form>
-        }
-      </div>
-      <div>
-        {items.map((entry) => {
-          let key = entry.email;
-          let valuefirst = entry.password;
-          let valuelast = entry.created_at;
+        <div className="box-controller">
+          <div>
+            {login && <Formlogin />} {register && <Formregister />}
 
-          return (
-            <p key={key}>
-              {key}: {valuefirst} {valuelast}
-            </p>
-          );
-        })}
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-export default Signin;
+export default SigninOptions;
