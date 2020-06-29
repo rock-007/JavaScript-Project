@@ -99,7 +99,7 @@ app.post("/api/newuser", (req, res) => {
         //below if the user and paswword is correct == to do user is not already logedin
         if (
           results[0].password == x1.password &&
-          results[0].userlogin == false
+          results[0].userlogin == true
         ) {
           //res.header("auth-token", token).send(token);
           const token = jwt.sign(
@@ -116,7 +116,7 @@ app.post("/api/newuser", (req, res) => {
           // update the userlogin to tre for this user
           connection.query(
             "UPDATE  users SET userlogin=? WHERE email=?",
-            ["1", results[0].email],
+            ["0", results[0].email],
             function (err, results) {
               if (err) throw err;
               console.log(results);

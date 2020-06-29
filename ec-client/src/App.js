@@ -14,10 +14,12 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Nav />
+        <header>
+          <Nav  />
+        </header>
 
-        <Sidebar />
         <div className="main">
+          <Sidebar />
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/about" exact component={About} />
@@ -25,9 +27,9 @@ function App() {
             <Route component={Error} />
           </Switch>
         </div>
-      </div>
-      <div className="footer">
-        <Footer />{" "}
+        <div className="footer">
+          <Footer />
+        </div>
       </div>
     </Router>
   );
