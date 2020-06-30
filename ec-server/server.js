@@ -78,19 +78,22 @@ app.post("/api/newuser", (req, res) => {
   //   email: x1.Email,
   //   //  password: x1.password,
   // };
-  console.log("73", x1);
+  console.log("81", x1);
 
   connection.query("SELECT * FROM  users WHERE email=?;", [x1.Email], function (
     err,
     results
   ) {
-    console.log("78", results);
-
+    console.log("89new", results[0].email);
+    console.log("87", results[0].email);
     // const token =JWT.sign(payload,secret)
 
     // console.log("74", results, err);
-    // console.log("75", results[0].email);
-
+    console.log("92", results[0].email);
+    console.log("93", JSON.stringify(results));
+    console.log("93", JSON.parse(JSON.stringify(results)));
+    console.log("94", JSON.parse(JSON.stringify(results))[0]);
+    console.log("95", JSON.parse(JSON.stringify(results))[0].email);
     if (err) throw err;
     else {
       if (results[0].email && results[0].password) {
@@ -99,7 +102,7 @@ app.post("/api/newuser", (req, res) => {
         //below if the user and paswword is correct == to do user is not already logedin
         if (
           results[0].password == x1.password &&
-          results[0].userlogin == true
+          results[0].userlogin == false
         ) {
           //res.header("auth-token", token).send(token);
           const token = jwt.sign(

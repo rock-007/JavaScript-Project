@@ -82,12 +82,11 @@
 .main {
   grid-area: main;
   padding: 1rem;
-  padding-left: 10%;
-  padding-top: 10%;
+  padding-left: 1.5%;
+  padding-top: 2%;
   grid-row-gap: 500px;
-  margin-left: 15%;
-  margin-top: 10%;
-
+  margin-left: 13.6%;
+  margin-top: 7%;
   justify-content: center;
   align-items: center;
 }
@@ -232,7 +231,7 @@ label #cancel {
 }
 
 .box-controller {
-  margin-left: 25%;
+  margin-left: 15%;
   visibility: visible;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -242,11 +241,11 @@ label #cancel {
   height: 35px;
   -webkit-box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
   box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   align-items: center;
   transition: visibility 0.5s ease-out;
 
-  padding: 9%;
+  padding: 2%;
 }
 
 .box-container {
