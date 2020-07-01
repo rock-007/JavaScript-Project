@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import logo from "../logo.svg";
 import "../App.css";
 
-function About() {
+function Basket() {
 
 const [num,setNum]= useState();
 
@@ -26,4 +26,4 @@ const [num,setNum]= useState();
   );
 }
 
-export default About;
+export default Basket;

@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Nav from "./Nav";
 import Sidebar from "./Component/Sidebar";
-import About from "./Component/About";
+import Basket from "./Component/Basket";
 import Signin from "./Component/Signin";
 import Error from "./Error";
 import Footer from "./Component/Footer";
@@ -15,14 +15,14 @@ function App() {
     <Router>
       <div className="App">
         <header>
-          <Nav  />
+          <Nav />
         </header>
 
         <div className="main">
           <Sidebar />
           <Switch>
             <Route path="/" component={Home} exact />
-            <Route path="/about" exact component={About} />
+            <Route path="/basket" exact component={Basket} />
             <Route path="/signin" exact component={Signin} />
             <Route component={Error} />
           </Switch>

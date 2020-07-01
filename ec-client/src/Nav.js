@@ -18,7 +18,7 @@ function Nav() {
         </h2>
       </div>
       <div>
-        <a href="./about">about</a>
+        <a href="./basket">Basket</a>
         <a href="/signin">Signin</a>
       </div>
 

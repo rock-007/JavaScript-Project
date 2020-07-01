@@ -16,6 +16,7 @@ function Formregister() {
     setPassword(e.target.value);
   };
 
+  // this is the function that will be called when the user submit the form and will passed the event as well
   const credentialVerify = (event) => {
     event.preventDefault();
     console.log(event);
@@ -49,6 +50,7 @@ function Formregister() {
             console.log(res);
           } else {
             console.log(res.status);
+            console.log(res.json())
             return res.json();
           }
         })
