@@ -1,9 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../App.css";
-import { Link } from "react-router-dom";
 import SigninOptions from "./SigninOptions";
+import Useraccount from "./Useraccount";
+
+import cookie from "react-cookies";
 
 function Signin() {
-  return <SigninOptions />;
+  const usecookies = cookie();
+
+  console.log(usecookies);
+
+  function is_logged_in() {
+    let cookies_state = usecookies !== undefined && usecookies !== null;
+    return cookies_state;
+  }
+
+  return is_logged_in() ? <SigninOptions /> : <Useraccount />;
 }
 export default Signin;
