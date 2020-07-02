@@ -5,46 +5,48 @@ import Useraccount from "./Useraccount";
 
 //import cookie from "react-cookies";
 
-function Signin() {
-  const [siginalready, setifsignedin] = useState(false);
-  const [userinfonew, setUserinfo] = useState([]);
+function Signin({ userinfo1, userinfo2 }) {
+  //const [siginalready, setifsignedin] = useState(false);
 
-  useEffect(() => {
-    credentailverify();
-  }, []);
+  // //initial userinfo is empty
+  // const [userinfonew, setUserinfo] = useState([]);
 
-  let url = "http://localhost:5000/api/verifyifloginalready";
+  // useEffect(() => {
+  //   credentailverify();
+  // }, []);
 
-  let options = {
-    credentials: "include",
-    method: "POST",
-  };
+  // let url = "http://localhost:5000/api/verifyifloginalready";
 
-  let verifyifloginalready = new Request(url, options);
+  // let options = {
+  //   credentials: "include",
+  //   method: "POST",
+  // };
 
-  let credentailverify = async () => {
-    // x1 will take if true then it will extract the user email address
-    const x1 = await fetch(verifyifloginalready)
-      .then((res) => {
-        if (res.status == 400 || res.status == 401) {
-          //return console.log(res.status)
-          return setifsignedin(false);
-        } else {
-          setifsignedin(true);
+  // let verifyifloginalready = new Request(url, options);
 
-          return  res.json();
-          
-        }
-      }).then((data)=> 
+  // let credentailverify = async () => {
+  //   // x1 will take if true then it will extract the user email address
+  //   const x1 = await fetch(verifyifloginalready)
+  //     .then((res) => {
+  //       if (res.status == 400 || res.status == 401) {
+  //         //return console.log(res.status)
+  //         return setifsignedin(false);
+  //       } else {
+  //         setifsignedin(true);
 
-      {
-        console.log(data.data)
-        setUserinfo(data.data)
+  //         return res.json();
+  //       }
+  //     })
+  //     .then((data) => {
+  //       let x = data.data;
 
-    })
-      .catch((err) => console.log("err"));
-    return x1;
-  };
+  //       setUserinfo(data.data)
+  //       console.log(userinfonew)
+  //     })
+  //     .catch((err) => console.log("err"));
+  //   return x1;
+  // };
+  // console.log("outside",userinfonew)
 
   // const usecookies = cookie();
 
@@ -56,10 +58,18 @@ function Signin() {
   // }
 
   // return (is_logged_in() ? <SigninOptions /> : <Useraccount />)
+  let siginalready;
+  console.log(userinfo2);
+  if (userinfo2 == true) siginalready = true;
+  else {
+    siginalready = false;
+  }
+  console.log(siginalready);
+
   return (
     <div>
       {siginalready ? (
-        <Useraccount userinfo={userinfonew} />
+        <Useraccount userinfo1={userinfo1} userinfo2={userinfo2} />
       ) : (
         <SigninOptions />
       )}

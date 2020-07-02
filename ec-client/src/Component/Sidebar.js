@@ -14,14 +14,14 @@ function Sidebar() {
         <header> Menu</header>
         <ul className="sidebarul">
           <li>
-            <a href="#">
+            <a href="/phones">
               <i className="fas fa-mobile-alt"></i>
               Phones
             </a>
           </li>
           <li>
             {" "}
-            <a href="#">
+            <a href="/accessories">
               <i className="fas fa-stream"></i>
               Accessories
             </a>{" "}

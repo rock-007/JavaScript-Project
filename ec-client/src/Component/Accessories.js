@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "../logo.svg";
 import "../App.css";
 
-function Basket({ userinfo1,userinfo2}) {
+function Accessories({ userinfo1, userinfo2 }) {
   const [num, setNum] = useState();
 
   return (
@@ -23,4 +23,4 @@ function Basket({ userinfo1,userinfo2}) {
   );
 }
 
-export default Basket;
+export default Accessories;
