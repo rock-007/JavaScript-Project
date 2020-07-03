@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "../logo.svg";
 import "../App.css";
 
-function Formregister() {
+function Forlogin() {
   const [Email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [items, setItems] = useState([]);
@@ -50,7 +50,7 @@ function Formregister() {
             console.log(res);
           } else {
             console.log(res.status);
-            console.log(res.json())
+            console.log(res.json());
             return res.json();
           }
         })
@@ -96,4 +96,4 @@ function Formregister() {
   );
 }
 
-export default Formregister;
+export default Forlogin;

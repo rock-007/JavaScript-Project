@@ -60,7 +60,7 @@ function App() {
     <Router>
       <div className="App">
         <header>
-          <Nav />
+          <Nav userinfo1={userinfonew} userinfo2={siginalready}/>
         </header>
 
         <div className="main">
@@ -69,7 +69,8 @@ function App() {
             <Route
               path="/"
               exact
-              render={(props) => <Home {...props} userinfo={userinfonew} />}
+              // not sure if we need to pass states for home
+              render={(props) => <Home {...props} userinfo1={userinfonew} />}
             />
             // render here work for passing the ste into the child component //
             from router {/* render={props=>(<newComponent}/> )} */}

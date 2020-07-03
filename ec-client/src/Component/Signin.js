@@ -58,17 +58,12 @@ function Signin({ userinfo1, userinfo2 }) {
   // }
 
   // return (is_logged_in() ? <SigninOptions /> : <Useraccount />)
-  let siginalready;
-  console.log(userinfo2);
-  if (userinfo2 == true) siginalready = true;
-  else {
-    siginalready = false;
-  }
-  console.log(siginalready);
+ 
+  userinfo1="welcome to the Adam account"
 
   return (
     <div>
-      {siginalready ? (
+      {userinfo2 ? (
         <Useraccount userinfo1={userinfo1} userinfo2={userinfo2} />
       ) : (
         <SigninOptions />

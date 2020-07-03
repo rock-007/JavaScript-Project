@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Link } from "react-router-dom";
 
-function Nav() {
+function Nav({ userinfo1, userinfo2 }) {
   const navStyle = {
     color: "White",
   };
@@ -19,7 +19,7 @@ function Nav() {
       </div>
       <div>
         <a href="./basket">Basket</a>
-        <a href="/signin">Signin</a>
+        <a href="/signin">{userinfo2 ? userinfo1 : `Signin`}</a>
       </div>
 
       {/* <ul className="nav-links">

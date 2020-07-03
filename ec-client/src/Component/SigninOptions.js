@@ -7,11 +7,8 @@ import Formregister from "./Formregister";
 function SigninOptions() {
   // empty string as default initial parameter ('')
 
-  
   const [login, setlogin] = useState(true);
   const [register, setregister] = useState(false);
-
- 
 
   function loginclicked() {
     setlogin(true);
@@ -36,8 +33,8 @@ function SigninOptions() {
 
         <div className="box-controller">
           <div>
+            {/* //it will be either  {login && <Formlogin />} or {register && <Formregister />} */}
             {login && <Formlogin />} {register && <Formregister />}
-
           </div>
         </div>
       </div>

@@ -95,7 +95,7 @@ app.post("/api/verifyifloginalready", (req, res) => {
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
       //https://www.sohamkamani.com/blog/javascript/2019-03-29-node-jwt-authentication/
-
+      // invalid token
       res.status(401).end();
     } else {
       res.status(400).end();
