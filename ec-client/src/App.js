@@ -12,19 +12,19 @@ import Footer from "./Component/Footer";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-const userAccountinfo = () => {
+const userAccountData = () => {
   // user info can be loaded after refresh
-  return window.localStorage.getItem("user-info"); // !! : cast to boolean
+  return window.localStorage.getItem("user-data"); // !! : cast to boolean
 };
 const isLoggedIn = () => {
   // user info can be loaded after refresh
-  return window.localStorage.getItem("user-status"); // !! : cast to boolean
+  return !!window.localStorage.getItem("user-status"); // !! : cast to boolean
 };
 
 function App() {
   const [siginalready, setifsignedin] = useState(isLoggedIn());
 
-  const [userinfonew, setUserinfo] = useState(userAccountinfo());
+  const [userData, setUserData] = useState(userAccountData());
 
   let url = "http://localhost:5000/api/verifyifloginalready";
 
@@ -45,7 +45,7 @@ function App() {
           if (res.status == 400 || res.status == 401) {
             console.log(res.status);
             // to do call delete current  cookies function
-            window.localStorage.removeItem("user-info");
+            window.localStorage.removeItem("user-data");
 
             return setifsignedin(false);
           } else if (siginalready == false) {
@@ -57,11 +57,12 @@ function App() {
           }
         })
         .then((data) => {
-          window.localStorage.setItem("user-info", data.data);
+          setUserData(data.data);
           window.localStorage.setItem("user-status", true);
+          window.localStorage.setItem("user-data", data.data);
         })
         .catch((err) => console.log("err"));
-      console.log(userinfonew);
+      console.log(userData);
       console.log(siginalready);
 
       return x1;
@@ -72,7 +73,7 @@ function App() {
     <Router>
       <div className="App">
         <header className="header">
-          <Nav userinfo={userinfonew} userstatus={siginalready} />
+          <Nav userinfo={userData} userstatus={siginalready} />
         </header>
 
         <div className="main">
@@ -82,7 +83,7 @@ function App() {
               path="/"
               exact
               // not sure if we need to pass states for h
-              render={(props) => <Home {...props} userinfo={userinfonew} />}
+              render={(props) => <Home {...props} userData={userData} />}
             />
             // render here work for passing the ste into the child component //
             from router {/* render={props=>(<newComponent}/> )} */}
@@ -92,7 +93,7 @@ function App() {
               render={(props) => (
                 <Basket
                   {...props}
-                  userinfo={userinfonew}
+                  userData={userData}
                   userstatus={siginalready}
                 />
               )}
@@ -103,7 +104,7 @@ function App() {
               render={(props) => (
                 <Signin
                   {...props}
-                  userinfo={userinfonew}
+                  userData={userData}
                   userstatus={siginalready}
                 />
               )}
@@ -114,7 +115,7 @@ function App() {
               render={(props) => (
                 <Accessories
                   {...props}
-                  userinfo={userinfonew}
+                  userData={userData}
                   userstatus={siginalready}
                 />
               )}
@@ -125,7 +126,7 @@ function App() {
               render={(props) => (
                 <Phones
                   {...props}
-                  userinfo={userinfonew}
+                  userData={userData}
                   userstatus={siginalready}
                 />
               )}

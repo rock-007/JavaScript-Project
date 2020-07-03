@@ -5,8 +5,11 @@ import Useraccount from "./Useraccount";
 
 //import cookie from "react-cookies";
 
-function Signin({ userinfo, userstatus }) {
+function Signin({ userData, userstatus }) {
   //const [siginalready, setifsignedin] = useState(false);
+  console.log (userData)
+  console.log (userstatus)
+
 
   // //initial userinfo is empty
   // const [userinfonew, setUserinfo] = useState([]);
@@ -61,11 +64,11 @@ function Signin({ userinfo, userstatus }) {
   //console.log("userinfo2 61 at signinmain",userstatus);
 
  // userinfo1="welcome to the Adam account"
-
+console.log (userData)
   return (
     <div>
       {userstatus ? (
-        <Useraccount userinfo={userinfo} userstatus={userstatus} />
+        <Useraccount userinfo={userData} userstatus={userstatus} />
       ) : (
         <SigninOptions  />
       )}
