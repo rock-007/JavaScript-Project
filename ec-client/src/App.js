@@ -12,15 +12,19 @@ import Footer from "./Component/Footer";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+const userAccountinfo = () => {
+  // user info can be loaded after refresh
+  return window.localStorage.getItem("user-info"); // !! : cast to boolean
+};
+const isLoggedIn = () => {
+  // user info can be loaded after refresh
+  return window.localStorage.getItem("user-status"); // !! : cast to boolean
+};
+
 function App() {
-  const [siginalready, setifsignedin] = useState(false);
+  const [siginalready, setifsignedin] = useState(isLoggedIn());
 
-  //initial userinfo is empty
-  const [userinfonew, setUserinfo] = useState([]);
-
-  useEffect(() => {
-    credentailverify();
-  }, []);
+  const [userinfonew, setUserinfo] = useState(userAccountinfo());
 
   let url = "http://localhost:5000/api/verifyifloginalready";
 
@@ -30,37 +34,45 @@ function App() {
   };
 
   let verifyifloginalready = new Request(url, options);
+  useEffect(() => {
+    credentailverify();
+  }, []);
 
-  let credentailverify = async () => {
-    // x1 will take if true then it will extract the user email address
-    const x1 = await fetch(verifyifloginalready)
-      .then((res) => {
-        if (res.status == 400 || res.status == 401) {
-          //return console.log(res.status)
-          return setifsignedin(false);
-        } else {
-          setifsignedin(true);
+  function credentailverify() {
+    (async () => {
+      const x1 = await fetch(verifyifloginalready)
+        .then((res) => {
+          if (res.status == 400 || res.status == 401) {
+            console.log(res.status);
+            // to do call delete current  cookies function
+            window.localStorage.removeItem("user-info");
 
-          return res.json();
-        }
-      })
-      .then((data) => {
-        console.log(data.data);
-        setUserinfo(data.data);
-        console.log(userinfonew);
-      })
-      .catch((err) => console.log("err"));
-    console.log(x1);
-    return x1;
-  };
+            return setifsignedin(false);
+          } else if (siginalready == false) {
+            setifsignedin(true);
 
-  console.log(userinfonew);
+            return res.json();
+          } else {
+            return;
+          }
+        })
+        .then((data) => {
+          window.localStorage.setItem("user-info", data.data);
+          window.localStorage.setItem("user-status", true);
+        })
+        .catch((err) => console.log("err"));
+      console.log(userinfonew);
+      console.log(siginalready);
+
+      return x1;
+    })();
+  }
 
   return (
     <Router>
       <div className="App">
-        <header>
-          <Nav userinfo1={userinfonew} userinfo2={siginalready}/>
+        <header className="header">
+          <Nav userinfo={userinfonew} userstatus={siginalready} />
         </header>
 
         <div className="main">
@@ -69,8 +81,8 @@ function App() {
             <Route
               path="/"
               exact
-              // not sure if we need to pass states for home
-              render={(props) => <Home {...props} userinfo1={userinfonew} />}
+              // not sure if we need to pass states for h
+              render={(props) => <Home {...props} userinfo={userinfonew} />}
             />
             // render here work for passing the ste into the child component //
             from router {/* render={props=>(<newComponent}/> )} */}
@@ -80,8 +92,8 @@ function App() {
               render={(props) => (
                 <Basket
                   {...props}
-                  userinfo1={userinfonew}
-                  userinfo2={siginalready}
+                  userinfo={userinfonew}
+                  userstatus={siginalready}
                 />
               )}
             />
@@ -91,8 +103,8 @@ function App() {
               render={(props) => (
                 <Signin
                   {...props}
-                  userinfo1={userinfonew}
-                  userinfo2={siginalready}
+                  userinfo={userinfonew}
+                  userstatus={siginalready}
                 />
               )}
             />
@@ -102,8 +114,8 @@ function App() {
               render={(props) => (
                 <Accessories
                   {...props}
-                  userinfo1={userinfonew}
-                  userinfo2={siginalready}
+                  userinfo={userinfonew}
+                  userstatus={siginalready}
                 />
               )}
             />
@@ -113,8 +125,8 @@ function App() {
               render={(props) => (
                 <Phones
                   {...props}
-                  userinfo1={userinfonew}
-                  userinfo2={siginalready}
+                  userinfo={userinfonew}
+                  userstatus={siginalready}
                 />
               )}
             />

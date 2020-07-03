@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Link } from "react-router-dom";
 
-function Nav({ userinfo1, userinfo2 }) {
+function Nav({ userinfo, userstatus }) {
   const navStyle = {
     color: "White",
   };
@@ -11,16 +11,25 @@ function Nav({ userinfo1, userinfo2 }) {
   // if cookies are present then signin and change the signin to `${name of account holder}`
 
   return (
-    <nav className="header">
-      <div>
-        <h2>
-          <a href="/">UmairShop</a>
-        </h2>
+    <nav>
+      <div className="logo">
+        {" "}
+        <a href="/">UmairShop</a>
       </div>
-      <div>
-        <a href="./basket">Basket</a>
-        <a href="/signin">{userinfo2 ? userinfo1 : `Signin`}</a>
-      </div>
+
+      <ul>
+        <li>
+          <a href="./basket">Basket</a>
+        </li>
+        <li>
+          <a href="/signin">
+              {userstatus ? <a className="glyphicon glyphicon-user	
+" ></a> : <a >SIGNIN</a>}
+
+           {/* {userinfo2 ? <a class="glyphicon glyphicon-log-in">SIGNIN</a> : userinfo1} */}
+          </a>
+        </li>
+      </ul>
 
       {/* <ul className="nav-links">
         <Link style={navStyle} to="/about">

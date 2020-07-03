@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Formlogin from "./Formlogin";
 import Formregister from "./Formregister";
 
-function SigninOptions() {
+function SigninOptions({userinfo2}) {
   // empty string as default initial parameter ('')
 
   const [login, setlogin] = useState(true);
@@ -18,6 +18,7 @@ function SigninOptions() {
     setlogin(false);
     setregister(true);
   }
+  console.log("userinfo2 21 at SIGNINOPTIONS",userinfo2);
 
   return (
     <div>

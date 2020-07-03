@@ -5,7 +5,7 @@ import Useraccount from "./Useraccount";
 
 //import cookie from "react-cookies";
 
-function Signin({ userinfo1, userinfo2 }) {
+function Signin({ userinfo, userstatus }) {
   //const [siginalready, setifsignedin] = useState(false);
 
   // //initial userinfo is empty
@@ -58,15 +58,16 @@ function Signin({ userinfo1, userinfo2 }) {
   // }
 
   // return (is_logged_in() ? <SigninOptions /> : <Useraccount />)
- 
-  userinfo1="welcome to the Adam account"
+  //console.log("userinfo2 61 at signinmain",userstatus);
+
+ // userinfo1="welcome to the Adam account"
 
   return (
     <div>
-      {userinfo2 ? (
-        <Useraccount userinfo1={userinfo1} userinfo2={userinfo2} />
+      {userstatus ? (
+        <Useraccount userinfo={userinfo} userstatus={userstatus} />
       ) : (
-        <SigninOptions />
+        <SigninOptions  />
       )}
     </div>
   );
