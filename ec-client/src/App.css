@@ -103,6 +103,36 @@ font-size: 2rem; */
   padding-right: 27px;
   border-radius: 3px;
 }
+
+nav ul li.searchbar {
+  /* width: calc(100%-180px); */
+  /* padding:10px 15px;
+margin-right:15px; */
+  line-height: 19px;
+  font-weight: bold;
+  margin-top: 12px;
+  max-height: 45px;
+  overflow: auto;
+  left: absolute;
+  /* padding-right has made the search bar go in center */
+  padding-right: 450px;
+  border-radius: 25px 0 0 25px;
+  border: none;
+  font-size: 20px;
+  right: flex;
+}
+
+nav ul li.searchbar button {
+  position: relative;
+  padding: 7px;
+  align-items: center;
+  border: none;
+  font-size: 16px;
+  float: right;
+  cursor: pointer;
+  border-radius: 0 25px 25px 0;
+  background-color: #747b7e;
+}
 nav ul li {
   display: inline-block;
   margin: 0 5px;
@@ -123,7 +153,6 @@ nav ul li ul {
   /* margin-right: 27px; */
 }
 nav ul li:hover ul {
-  
   /* left:relative; */
   float: right;
   margin-right: 2px;
@@ -138,7 +167,7 @@ nav ul li ul li {
 }
 
 nav ul li ul:after {
-  right:relative;
+  right: relative;
   display: block;
   clear: both;
   content: " ";

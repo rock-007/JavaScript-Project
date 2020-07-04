@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Link } from "react-router-dom";
 import ProjectLogo from "./Img/logo.svg";
+import Search from "./Component/Search";
 
 function Nav({ userinfo, userstatus }) {
   const navStyle = {
@@ -13,16 +14,24 @@ function Nav({ userinfo, userstatus }) {
 
   return (
     <nav>
-      <label className="logo">
-        <a href="/"><img src={ProjectLogo}/>UmairShop</a>
+       <label className="logo">
+        <a href="/">
+          <img src={ProjectLogo} />
+          UmairShop
+        </a>
       </label>
 
       <ul>
+        <li className="searchbar">
+        <Search/>
+
+        </li>
         <li>
-          <a className="active glyphicon glyphicon-shopping-cart
-" href="./basket">
-            
-          </a>
+          <a
+            className="active glyphicon glyphicon-shopping-cart
+"
+            href="./basket"
+          ></a>
           <ul>
             <li>
               <a href="#">link1</a>
