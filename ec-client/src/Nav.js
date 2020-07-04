@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Link } from "react-router-dom";
+import ProjectLogo from "./Img/logo.svg";
 
 function Nav({ userinfo, userstatus }) {
   const navStyle = {
@@ -12,22 +13,58 @@ function Nav({ userinfo, userstatus }) {
 
   return (
     <nav>
-      <div className="logo">
-        {" "}
-        <a href="/">UmairShop</a>
-      </div>
+      <label className="logo">
+        <a href="/"><img src={ProjectLogo}/>UmairShop</a>
+      </label>
 
       <ul>
         <li>
-          <a href="./basket">Basket</a>
+          <a className="active glyphicon glyphicon-shopping-cart
+" href="./basket">
+            
+          </a>
+          <ul>
+            <li>
+              <a href="#">link1</a>
+            </li>
+            <li>
+              <a href="#">link2</a>
+            </li>
+            <li>
+              <a href="#">link3</a>
+            </li>
+            <li>
+              <a href="#">link4</a>
+            </li>
+          </ul>
         </li>
         <li>
-          <a href="/signin">
-              {userstatus ? <a className="glyphicon glyphicon-user	
-" ></a> : <a >SIGNIN</a>}
+          <a className="active" href="/signin">
+            {userstatus ? (
+              <a
+                className="glyphicon glyphicon-user	
+"
+              ></a>
+            ) : (
+              <a>SIGNIN</a>
+            )}
 
-           {/* {userinfo2 ? <a class="glyphicon glyphicon-log-in">SIGNIN</a> : userinfo1} */}
+            {/* {userinfo2 ? <a class="glyphicon glyphicon-log-in">SIGNIN</a> : userinfo1} */}
           </a>
+          <ul>
+            <li>
+              <a href="#">link1</a>
+            </li>
+            <li>
+              <a href="#">link2</a>
+            </li>
+            <li>
+              <a href="#">link3</a>
+            </li>
+            <li>
+              <a href="#">link4</a>
+            </li>
+          </ul>
         </li>
       </ul>
 
