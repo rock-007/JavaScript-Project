@@ -5,13 +5,16 @@ function Search() {
   const [name, setnewName] = useState();
 
   let updatedName = (e) => {
+    e.preventDefault();
     setnewName(e.target.value);
   };
+
+  function handlesubmit() {}
 
   return (
     <div>
       {
-        <form method="get">
+        <form method="get" onsubmit={handlesubmit}>
           <input
             type="text"
             placeholder="Enter here for search"

@@ -141,7 +141,7 @@ app.post("/api/newuser", (req, res) => {
         //below if the user and paswword is correct == to do user is not already logedin
         if (
           results[0].password == x1.password &&
-          results[0].userlogin == false
+          results[0].userloginStatus == false
         ) {
           const payload = { email: results[0].email };
           //res.header("auth-token", token).send(token);
@@ -154,10 +154,11 @@ app.post("/api/newuser", (req, res) => {
 
           res.status(200).end();
 
-          // update the userlogin to tre for this user
+          // update the userloginStatus to true for this user
           connection.query(
-            "UPDATE  users SET userlogin=? WHERE email=?",
-            ["0", results[0].email],
+            "UPDATE  users SET userloginStatus=? WHERE email=?",
+            // hardcoding userloginStatus=1 to show the use is loggedin
+            ["1", results[0].email],
             function (err, results) {
               if (err) throw err;
               console.log(results);
@@ -165,7 +166,7 @@ app.post("/api/newuser", (req, res) => {
           );
         } else {
           res.json({
-            data: "invalid yy password",
+            data: "invalid  password",
           });
         }
       } else res.redirect("http://localhost:3000/about");

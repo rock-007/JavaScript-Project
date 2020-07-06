@@ -8,6 +8,8 @@ import Phones from "./Component/Phones";
 import Accessories from "./Component/Accessories";
 import Signin from "./Component/Signin";
 import Error from "./Error";
+import Home from "./Component/Home";
+
 import Footer from "./Component/Footer";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -77,13 +79,13 @@ function App() {
         </header>
 
         <div className="main">
-          <Sidebar />
+          {/* <Sidebar /> */}
           <Switch>
             <Route
               path="/"
               exact
               // not sure if we need to pass states for h
-              render={(props) => <Home {...props} userData={userData} />}
+              render={(props) => <Home {...props} userData={userData} userstatus={siginalready} />}
             />
             // render here work for passing the ste into the child component //
             from router {/* render={props=>(<newComponent}/> )} */}
@@ -142,10 +144,10 @@ function App() {
   );
 }
 
-const Home = () => (
-  <div>
-    <h1> Home page</h1>
-  </div>
-);
+// const Home = () => (
+//   <div>
+//     <h1> Home page</h1>
+//   </div>
+// );
 
 export default App;

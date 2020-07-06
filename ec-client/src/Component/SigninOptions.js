@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Formlogin from "./Formlogin";
 import Formregister from "./Formregister";
 
-function SigninOptions({userinfo2}) {
+function SigninOptions({ userinfo2 }) {
   // empty string as default initial parameter ('')
 
   const [login, setlogin] = useState(true);
@@ -18,8 +18,8 @@ function SigninOptions({userinfo2}) {
     setlogin(false);
     setregister(true);
   }
-  console.log("userinfo2 21 at SIGNINOPTIONS",userinfo2);
-
+  console.log("userinfo2 21 at SIGNINOPTIONS", userinfo2);
+  // TO Do check the login input and ifusers put worng info or empty filed then pop up error using Rejex
   return (
     <div>
       <div className="root-container">
