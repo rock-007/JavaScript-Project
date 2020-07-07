@@ -1,0 +1,6 @@
+###
+GET http://localhost:5000/api/newuser
+
+
+###
+POST  https://localhost:5000/api/newuser

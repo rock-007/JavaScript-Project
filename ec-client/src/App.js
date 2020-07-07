@@ -72,6 +72,7 @@ function App() {
   }
 
   return (
+    // Router,Route,  swtch... that will help us in change pages
     <Router>
       <div className="App">
         <header className="header">
@@ -85,52 +86,43 @@ function App() {
               path="/"
               exact
               // not sure if we need to pass states for h
-              render={(props) => <Home {...props} userData={userData} userstatus={siginalready} />}
-            />
-            // render here work for passing the ste into the child component //
-            from router {/* render={props=>(<newComponent}/> )} */}
-            <Route
-              path="/basket"
-              exact
               render={(props) => (
-                <Basket
+                <Home
+                  //  why we pass all pros {...props} here
                   {...props}
                   userData={userData}
                   userstatus={siginalready}
                 />
+              )}
+            />
+            // render here work for passing the ste into the child component // from
+            router {/* render={props=>(<newComponent}/> )} */}
+            <Route
+              path="/basket"
+              exact
+              render={(props) => (
+                <Basket {...props} userData={userData} userstatus={siginalready} />
               )}
             />
             <Route
               path="/signin"
               exact
               render={(props) => (
-                <Signin
-                  {...props}
-                  userData={userData}
-                  userstatus={siginalready}
-                />
+                <Signin {...props} userData={userData} userstatus={siginalready} />
               )}
             />
             <Route
               path="/accessories"
               exact
               render={(props) => (
-                <Accessories
-                  {...props}
-                  userData={userData}
-                  userstatus={siginalready}
-                />
+                <Accessories {...props} userData={userData} userstatus={siginalready} />
               )}
             />
             <Route
               path="/phones"
               exact
               render={(props) => (
-                <Phones
-                  {...props}
-                  userData={userData}
-                  userstatus={siginalready}
-                />
+                <Phones {...props} userData={userData} userstatus={siginalready} />
               )}
             />
           </Switch>

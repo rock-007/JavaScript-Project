@@ -20,7 +20,6 @@ function Forlogin() {
   const credentialVerify = (event) => {
     event.preventDefault();
     console.log(event);
-
     console.log("event");
 
     //post construction, after the set name nad set password updated it will get send here
@@ -32,7 +31,7 @@ function Forlogin() {
     const options = {
       method: "POST",
       headers,
-      body: JSON.stringify(dataSend), // here datassend is object
+      body: JSON.stringify(dataSend), // here datassend is object so first convert the data into object before stingify
       // redirect: "follow",
       // we need to include credentails if not then the cookies will not be recieved or sent
       credentials: "include",
