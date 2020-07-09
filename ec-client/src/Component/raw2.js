@@ -19,6 +19,8 @@ const credentialVerify = (event) => {
   };
   const request = new Request("http://localhost:5000/api/newuser", options);
 
+
+
   (async () => {
     const incomingdata = await fetch(request)
       .then((res) => {

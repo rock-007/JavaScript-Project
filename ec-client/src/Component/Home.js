@@ -49,20 +49,21 @@ function Home({ userData, userstatus }) {
   }
 
   function tabsearch(selection) {
-    // event.preventDefault();
-    const header = new header();
-    // const userselection=
-    const datasent = { selectitem: selection };
 
-    let options = {
-      method: "GET",
-      header,
-      crendtials: "include",
-      body: JSON.stringify(datasent),
-    };
+
+    // const headers = new Headers();
+    // //  const userselection=
+    // const datasent = { selectitem: selection };
+
+    // let options = {
+    //   method: "POST",
+    //   headers,
+    //   crendtials: "include",
+    //   body: JSON.stringify(datasent),
+    // }; let url = `http://localhost:5000/api/#/${selection}`;
 
     let url = `http://localhost:5000/api/#/${selection}`;
-    let request = new Request(url, options);
+    let request = new Request(url);
 
     (async () => {
       let tabsearchback = await fetch(request).then((res) => {
@@ -74,7 +75,8 @@ function Home({ userData, userstatus }) {
     })();
   }
   return (
-    // <React.Fragment> its a wrapper and then we dont need to wrap around divs...
+    // TODO: <React.Fragment> its a wrapper and then we dont need to wrap around divs...
+    //FIXME:
 
     <React.Fragment>
       <div className="homestyle">

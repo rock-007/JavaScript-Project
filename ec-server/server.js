@@ -7,7 +7,7 @@ const authNew = require("./verifyTokenNew");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-// initialise express and bind to app conastant so can be used later in the coding
+// initialise express and bind to app conastant so can be used later in the coding //to create server= we have  to run express as function and resolve inside app variable
 const app = express();
 // add the route to the server , when called from the react Frontend page at port 5000 when it is listening
 app.use(express.json());
@@ -31,7 +31,7 @@ let connection = mysqlx.createConnection({
 });
 // if he get request at http://localhost:5000/signin then it will response to it
 
-/////////////////Register//////////////////////////////////////////////////////Register////////////////////////////////////////////////////////////
+/////////////////:warning Register//////////////////////////////////////////////////////Register////////////////////////////////////////////////////////////
 
 app.post("/api/customers", (req, res) => {
   let x1 = req.body;
@@ -139,10 +139,7 @@ app.post("/api/newuser", (req, res) => {
         //  console.log("79", results[0].email);
 
         //below if the user and paswword is correct == to do user is not already logedin
-        if (
-          results[0].password == x1.password &&
-          results[0].userloginStatus == false
-        ) {
+        if (results[0].password == x1.password && results[0].userloginStatus == false) {
           const payload = { email: results[0].email };
           //res.header("auth-token", token).send(token);
           const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");

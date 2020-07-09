@@ -1,6 +1,17 @@
-###
 GET http://localhost:5000/api/newuser
 
 
 ###
 POST  https://localhost:5000/api/newuser
+
+###
+POST  http://localhost:5000/api/#/Eco-YogaMats
+Content-Type: application/json
+
+{
+ crendtials: "include",
+      body: JSON.stringify({ selectitem: selection }),
+
+
+
+}
