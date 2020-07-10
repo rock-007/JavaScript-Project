@@ -4,6 +4,7 @@ const mysqlx = require("mysql");
 const jwt = require("jsonwebtoken");
 const auth = require("./verifyTokenExisting");
 const authNew = require("./verifyTokenNew");
+// const searchrequest = require("./searchrequest");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
@@ -29,9 +30,24 @@ let connection = mysqlx.createConnection({
   database: "join_us",
   insecureAuth: true,
 });
-// if he get request at http://localhost:5000/signin then it will response to it
+// if he get request at :TODO  http://localhost:5000/signin then it will response to it
 
-/////////////////:warning Register//////////////////////////////////////////////////////Register////////////////////////////////////////////////////////////
+app.get("/api/:abc", (req, res) => {
+  const lati = req.params.abc; //decode
+  console.log(lati);
+
+connection.query(Select productNumber from products  )
+
+
+
+
+
+
+
+  res.send(lati);
+});
+
+// ! ///////////////// REGISTER //////////////////////////////////////////////////////Register////////////////////////////////////////////////////////////
 
 app.post("/api/customers", (req, res) => {
   let x1 = req.body;
@@ -52,12 +68,18 @@ app.post("/api/customers", (req, res) => {
   //  let q = "SELECT * from users";
   // connection.query(q, function (err, results) {
   //   if (err) throw err;
-  //res.json(results);
-
-  res.redirect("http://localhost:3000/signin");
+  res.json("results");
+  //res.send("sadsdas");
+  //  res.redirect("http://localhost:3000/signin");
   //});
 });
 
+app.get("api/#/Eco-YogaMats", (req, res) => {
+  // const userSelection = req.params.selection; // can also be params.[selection].split if multiple together
+
+  console.log(38, " userSelection");
+  res.end();
+});
 //   // in real life it will usually come froma database like mysql,mongodb...
 //   // const cusotmers = [
 //   //   { id: 1, xxxe: "cccccccccccccccccccccJohn", Lahhhstname: "Don" },
@@ -74,7 +96,7 @@ app.post("/api/customers", (req, res) => {
 // });
 // // port where it can be listen on local host , dont use 3000 as it is default picked up by react
 
-// when clicked on signin page
+//?  when clicked on signin page
 
 app.post("/api/verifyifloginalready", (req, res) => {
   let token = req.cookies.access_token;
@@ -108,7 +130,7 @@ app.post("/api/verifyifloginalready", (req, res) => {
   });
 });
 
-/////////////////Login//////////////////////////////////////////////////////Login////////////////////////////////////////////////////////////
+//* /////////////////LOGIN//////////////////////////////////////////////////////Login////////////////////////////////////////////////////////////
 
 app.post("/api/newuser", (req, res) => {
   let x1 = req.body;
@@ -126,13 +148,9 @@ app.post("/api/newuser", (req, res) => {
     console.log("89new", results[0].email);
     console.log("87", results[0].email);
     // const token =JWT.sign(payload,secret)
-
-    // console.log("74", results, err);
-    // console.log("92", results[0].email);
-    // console.log("93", JSON.stringify(results));
-    // console.log("93", JSON.parse(JSON.stringify(results)));
-    // console.log("94", JSON.parse(JSON.stringify(results))[0]);
+    // console.log("74", results, err);console.log("92", results[0].email);console.log("93", JSON.stringify(results)); ///console.log("93", JSON.parse(JSON.stringify(results)));console.log("94", JSON.parse(JSON.stringify(results))[0]);
     // console.log("95", JSON.parse(JSON.stringify(results))[0].email);
+
     if (err) throw err;
     else {
       if (results[0].email && results[0].password) {
@@ -140,11 +158,12 @@ app.post("/api/newuser", (req, res) => {
 
         //below if the user and paswword is correct == to do user is not already logedin
         if (results[0].password == x1.password && results[0].userloginStatus == false) {
+          //TODO: send user account details it like update the basket and user purchaee history
           const payload = { email: results[0].email };
           //res.header("auth-token", token).send(token);
           const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");
           res.cookie("access_token", token, {
-            maxAge: 2 * 24 * 60 * 60 * 1000,
+            maxAge: 5 * 24 * 60 * 60 * 1000,
             httpOnly: true, // it will enable on frotend-javascript to not have access to cokkies
             // secure:true ................. when in production
           });
@@ -155,7 +174,7 @@ app.post("/api/newuser", (req, res) => {
           connection.query(
             "UPDATE  users SET userloginStatus=? WHERE email=?",
             // hardcoding userloginStatus=1 to show the use is loggedin
-            ["1", results[0].email],
+            ["0", results[0].email],
             function (err, results) {
               if (err) throw err;
               console.log(results);

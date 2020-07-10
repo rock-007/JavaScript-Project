@@ -50,6 +50,7 @@ function Forlogin() {
           } else {
             console.log(res.status);
             console.log(res.json());
+            console.log(res.location);
             return res.json();
           }
         })

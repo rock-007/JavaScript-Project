@@ -30,6 +30,7 @@ function Home({ userData, userstatus }) {
 
     reset();
     setYogaMatState(e.currentTarget.textContent);
+    console.log(e.currentTarget.textContent);
     tabsearch(e.currentTarget.textContent);
   }
   function equipmentSelected(e) {
@@ -49,20 +50,18 @@ function Home({ userData, userstatus }) {
   }
 
   function tabsearch(selection) {
-
-
     // const headers = new Headers();
-    // //  const userselection=
-    // const datasent = { selectitem: selection };
-
+    // //  const userselection= // const datasent = { selectitem: selection };
     // let options = {
     //   method: "POST",
     //   headers,
     //   crendtials: "include",
     //   body: JSON.stringify(datasent),
     // }; let url = `http://localhost:5000/api/#/${selection}`;
-
-    let url = `http://localhost:5000/api/#/${selection}`;
+    let selection1 = `/#/${selection}`;
+    let customerSelection = encodeURIComponent(selection1);
+    console.log(customerSelection);
+    let url = `http://localhost:5000/api/${customerSelection}`;
     let request = new Request(url);
 
     (async () => {
@@ -75,8 +74,9 @@ function Home({ userData, userstatus }) {
     })();
   }
   return (
-    // TODO: <React.Fragment> its a wrapper and then we dont need to wrap around divs...
-    //FIXME:
+    // // TODO: <React.Fragment> its a wrapper and then we dont need to wrap around divs...
+    // //FIXME:
+    // //
 
     <React.Fragment>
       <div className="homestyle">
@@ -95,6 +95,7 @@ function Home({ userData, userstatus }) {
                   {/* // we dont use yogaMatSelected() here as it will fire right away and we
                   dont want that we want when it get executed by onclick event */}
                   <Dropdown.Item href="#/Eco-YogaMats" onClick={yogaMatSelected}>
+                    {/* //TODO: we can later take off the href as it doesnt seems to have any effect here */}
                     Eco-YogaMats
                   </Dropdown.Item>
                   <Dropdown.Item href="#/Travel-YogaMats" onClick={yogaMatSelected}>
@@ -174,7 +175,8 @@ function Home({ userData, userstatus }) {
         </h3>
       </div>
       <Container>
-        {showPage ? <HomeDisplay props={homePage} /> : null}
+        {showPage ? <HomeDisplay props={homePage} /> : null} // this will be the body of
+        home page will display items that will be selected from the menue
         {`The user is looged in ${userstatus}and the email is ${userData}`}
       </Container>
     </React.Fragment>
