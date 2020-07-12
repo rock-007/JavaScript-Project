@@ -62,14 +62,25 @@ function Home({ userData, userstatus }) {
     let customerSelection = encodeURIComponent(selection1);
     console.log(customerSelection);
     let url = `http://localhost:5000/api/${customerSelection}`;
+    // this request make the http request format
     let request = new Request(url);
 
     (async () => {
-      let tabsearchback = await fetch(request).then((res) => {
-        console.log(res);
-      });
+      let tabsearchback = await fetch(request)
+        .then((res) => {
+          console.log(res);
 
-      // setHomepage(res.json());
+          console.log("70bew");
+          // console.log(res.json());
+          // setHomepage(res.json());
+         let y= res.json();
+         console.log(y);
+return y;
+        })
+        .then((data1) => {
+          console.log(data1);
+            console.log(data1.key1);
+        });
       setShowPage(1);
     })();
   }

@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // it gives the ability to app to read json data
-
+//connection.query(sql, function (error, results, fields) sample https://github.com/mysqljs/mysql#performing-queries
 app.use(
   cors({
     credentials: true, // for cookies
@@ -33,18 +33,34 @@ let connection = mysqlx.createConnection({
 // if he get request at :TODO  http://localhost:5000/signin then it will response to it
 
 app.get("/api/:abc", (req, res) => {
-  const lati = req.params.abc; //decode
-  console.log(lati);
+  const decoded = { key1: req.params.abc }; //decode
+  console.log(typeof decoded);
+  console.log("38new", decoded);
+  console.log(typeof decoded.key1);
+  console.log("41new", decoded.key1);
+  //RegExp using positive lookbehind (?<=^...) it is checking that the match is after the three characters from the begin.
+  let re = /(?<=^...)(.*)/;
+  //let decoded_refine = re.remove(decoded.key1);
+  let decoded_refine = decoded.key1.match(re);
+  console.log("46new", decoded_refine);
+  console.log("47new", typeof decoded_refine);
+  console.log("48new", decoded_refine[0]);
+  // Eco-YogaMats,.... decoded_refine[0]
+  // var sql=
 
-connection.query(Select productNumber from products  )
+  connection.query(
+    "SELECT * FROM main_Products_sub_category  INNER JOIN main_Product_Info  ON main_Products_sub_category.main_Products_sub_category_id= main_Product_Info.main_Products_sub_category_main_Products_sub_category_id WHERE main_Products_sub_category.main_Products_sub_category_name= ?",
+    [decoded_refine[0]],
+    function (err, results) {
+      // console.log(results);
+      let results1 = JSON.stringify(results);
+      console.log(results); // showing the table
+    }
+  );
 
+ 
 
-
-
-
-
-
-  res.send(lati);
+  res.send(results1);
 });
 
 // ! ///////////////// REGISTER //////////////////////////////////////////////////////Register////////////////////////////////////////////////////////////
@@ -74,12 +90,12 @@ app.post("/api/customers", (req, res) => {
   //});
 });
 
-app.get("api/#/Eco-YogaMats", (req, res) => {
-  // const userSelection = req.params.selection; // can also be params.[selection].split if multiple together
+// app.get("api/#/Eco-YogaMats", (req, res) => {
+//   // const userSelection = req.params.selection; // can also be params.[selection].split if multiple together
 
-  console.log(38, " userSelection");
-  res.end();
-});
+//   console.log(38, " userSelection");
+//   res.end();
+// });
 //   // in real life it will usually come froma database like mysql,mongodb...
 //   // const cusotmers = [
 //   //   { id: 1, xxxe: "cccccccccccccccccccccJohn", Lahhhstname: "Don" },
@@ -96,7 +112,7 @@ app.get("api/#/Eco-YogaMats", (req, res) => {
 // });
 // // port where it can be listen on local host , dont use 3000 as it is default picked up by react
 
-//?  when clicked on signin page
+//?  when clicked on signin page/////////////////////////////////////////////////////////////////
 
 app.post("/api/verifyifloginalready", (req, res) => {
   let token = req.cookies.access_token;
@@ -139,14 +155,15 @@ app.post("/api/newuser", (req, res) => {
   //   email: x1.Email,
   //   //  password: x1.password,
   // };
-  console.log("81", x1);
+  console.log("144", x1);
 
   connection.query("SELECT * FROM  users WHERE email=?;", [x1.Email], function (
     err,
     results
   ) {
-    console.log("89new", results[0].email);
-    console.log("87", results[0].email);
+    console.log(results);
+    console.log("150new", results[0].email);
+    console.log("151", results[0].email);
     // const token =JWT.sign(payload,secret)
     // console.log("74", results, err);console.log("92", results[0].email);console.log("93", JSON.stringify(results)); ///console.log("93", JSON.parse(JSON.stringify(results)));console.log("94", JSON.parse(JSON.stringify(results))[0]);
     // console.log("95", JSON.parse(JSON.stringify(results))[0].email);
@@ -160,6 +177,7 @@ app.post("/api/newuser", (req, res) => {
         if (results[0].password == x1.password && results[0].userloginStatus == false) {
           //TODO: send user account details it like update the basket and user purchaee history
           const payload = { email: results[0].email };
+          console.log(payload);
           //res.header("auth-token", token).send(token);
           const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");
           res.cookie("access_token", token, {
