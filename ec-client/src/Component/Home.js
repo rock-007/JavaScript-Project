@@ -73,13 +73,16 @@ function Home({ userData, userstatus }) {
           console.log("70bew");
           // console.log(res.json());
           // setHomepage(res.json());
-         let y= res.json();
-         console.log(y);
-return y;
+          let y = res.json();
+          console.log(y);
+          return y;
         })
         .then((data1) => {
-          console.log(data1);
-            console.log(data1.key1);
+          console.log(data1); // array of object
+          //   console.log(data1.key1);
+          console.log(data1[0]); //object
+          console.log(data1[0].price); // value from the object
+          setHomepage(data1);
         });
       setShowPage(1);
     })();
