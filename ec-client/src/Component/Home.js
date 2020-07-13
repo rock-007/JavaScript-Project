@@ -189,9 +189,11 @@ function Home({ userData, userstatus }) {
         </h3>
       </div>
       <Container>
-        {showPage ? <HomeDisplay props={homePage} /> : null} // this will be the body of
+        {/* // in place of null we can set a slider window for default page */}
+        {showPage ? <HomeDisplay props={homePage} /> : null}
+        {/* // this will be the body of
         home page will display items that will be selected from the menue
-        {`The user is looged in ${userstatus}and the email is ${userData}`}
+        {`The user is looged in ${userstatus}and the email is ${userData}`} */}
       </Container>
     </React.Fragment>
   );
