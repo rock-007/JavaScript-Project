@@ -14,9 +14,31 @@ import {
   MenuItem,
   Container,
 } from "react-bootstrap";
+
+
+
+
 // props here are arrays of object
 function Home({ props }) {
-  const [quantitiyselected, setQuantity] = useState(0);
+
+  const initialQuantities = props.reduce((quantities, product) => ({ ...quantities, [product.product_name]: 0 }), {})
+  console.log(props)
+
+  // for (let i = 0; i < props.length; i++) {
+
+
+  //   products[i] = { name:props[i].product_name }
+
+
+  // }
+
+  // const initialQuantitiy = props.reduce((quantities, product) => ({ ...quantities, [props.product_name]: 0 }, {})) // array of object return
+
+
+  // const [quantitiyselected, setQuantity] = useState(initialQuantitiy);
+  //quantitiyselected=[{object1},{props.product_name:..},{},...]
+
+
   //   const [yogaMatState, setYogaMatState] = useState("---Select Yogamats---");
   //   const [yogaEquipState, setYogaEquipState] = useState("---Select Equipments---");
 
@@ -36,19 +58,43 @@ function Home({ props }) {
   //   console.log("26", e.currentTarget.value);
   //   console.log("26", e.currentTarget.key);
 
-  let selectquantity = (e) => {
-    if (e.currentTarget.name == "add") {
-      let i = quantitiyselected + 1;
-      setQuantity(i);
-    } else if (e.currentTarget.name == "subtract" && quantitiyselected > 0) {
-      let z = quantitiyselected - 1;
-      setQuantity(z);
-    } else;
-  };
+  // let selectquantity = (e) => {
+  //   if (e.currentTarget.name == "add") {
+  //     let i = quantitiyselected + 1;
+  //     setQuantity(i);
+  //   } else if (e.currentTarget.name == "subtract" && quantitiyselected > 0) {
+  //     let z = quantitiyselected - 1;
+  //     setQuantity(z);
+  //   } else;
+  // };
+
+
+
+
+  const [quantities, setQuantites] = useState(initialQuantities)
+
+
+
+
+
+  const increase = (productName) => {
+
+    setQuantites({ ...quantities, [productName]: quantities[productName] + 1 });
+
+  }
+
+
+
+
+  const decrease = (productName) => {
+
+    setQuantites({ ...quantities, [productName]: Math.max(0, quantities[productName] - 1) });
+
+  }
 
   return (
     <div className="products">
-      {props.map((eachproduct, index) => {
+      {props.map((eachproduct) => {
         let productName = eachproduct.product_name;
         let producNumber = eachproduct.producNumber;
         let price = eachproduct.price;
@@ -69,32 +115,23 @@ function Home({ props }) {
               <li>{desc}</li>
               <li>
                 <ButtonGroup aria-label="quantityofproduct">
-                  <Button
-                    key={index}
-                    variant="secondary"
-                    name="subtract"
-                    value="subtract"
-                    onClick={selectquantity}
+                  <Button variant="secondary" name="subtract" value="subtract" onClick={() => decrease(productName)}
                   >
                     -
                   </Button>
-                  <Button  variant="secondary">
-                    {quantitiyselected}
+                  <Button name={productName} variant="secondary">
+                    {quantities[productName]}
                   </Button>
-                  <Button
-                    
-                    variant="secondary"
-                    name="add"
-                    value="add"
-                    onClick={selectquantity}
+                  <Button variant="secondary" name="add" value="add" onClick={() => increase(productName)}
                   >
                     +
                   </Button>
                 </ButtonGroup>
                 &nbsp;
-                <Button  variant="primary">
-                  Buy
-                </Button>
+                {/* will get the value and object passed as on click for all the info of the selectede item */}
+                  <Button name={producNumber} value={quantities[productName]} variant="primary" onClick={(e) => console.log(e.currentTarget.value ,eachproduct)}>
+                  Add to Basket
+                  </Button >
               </li>
             </ul>
           </div>
