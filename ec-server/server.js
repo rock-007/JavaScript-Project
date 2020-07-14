@@ -49,14 +49,18 @@ app.get("/api/:abc", (req, res) => {
   // var sql=
 
   connection.query(
-    "SELECT * FROM main_Products_sub_category  INNER JOIN main_Product_Info LEFT JOIN images ON main_Products_sub_category.main_Products_sub_category_id= main_Product_Info.main_Products_sub_category_main_Products_sub_category_id AND main_Product_Info.producInfoId=images.main_Product_Info_producInfoId WHERE main_Products_sub_category.main_Products_sub_category_name= ?",
+    "SELECT product_name,producNumber,price,productDescription,image_URL,stockQuantity FROM main_Products_sub_category  INNER JOIN main_Product_Info INNER JOIN images ON main_Products_sub_category.main_Products_sub_category_id= main_Product_Info.main_Products_sub_category_main_Products_sub_category_id AND main_Product_Info.producInfoId=images.main_Product_Info_producInfoId WHERE main_Products_sub_category.main_Products_sub_category_name= ?",
     [decoded_refine[0]],
     function (err, results) {
       // console.log(results);
-      console.log(typeof results);
-      let results1 = JSON.stringify(results);
-      console.log(results); // showing the table
-      res.send(results1);
+      console.log(typeof (results));
+      console.log("57namne", results);
+      if (err) { throw err }
+      else {
+        let results1 = JSON.stringify(results);
+        console.log(results); // showing the table
+        res.send(results1);
+      }
     }
   );
 });

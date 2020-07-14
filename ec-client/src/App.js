@@ -26,9 +26,35 @@ const isLoggedIn = () => {
 };
 
 function App() {
+
+
+  let basketinitialvalue=()=>{}
   const [siginalready, setifsignedin] = useState(isLoggedIn());
 
   const [userData, setUserData] = useState(userAccountData());
+  const [basketItems, setBasketItems] = useState(basketinitialvalue) // this will come from two level down child the items customers put in basket
+
+
+  const addBasketitems = (event) => {
+    let x = event.currentTarget.value.split(",") // array string
+    setBasketItems(event.currentTarget)
+
+
+
+
+
+    console.log(typeof (event.currentTarget.name))
+    console.log(typeof (event.currentTarget))
+    console.log(event.currentTarget.name)
+    console.log(event.currentTarget)
+    console.log(event.currentTarget.value) // value here is string so convert to an array 
+
+
+    
+    console.log(typeof (event.currentTarget.value))
+    console.log(x)
+
+  }
 
   let url = "http://localhost:5000/api/verifyifloginalready";
 
@@ -84,18 +110,13 @@ function App() {
         <div className="main">
           {/* <Sidebar /> */}
           <Switch>
-            <Route
-              path="/"
-              exact
+            <Route path="/" exact render={(props) => (
               // not sure if we need to pass states for h
-              render={(props) => (
-                <Home
-                  //  why we pass all pros {...props} here
-                  {...props}
-                  userData={userData}
-                  userstatus={siginalready}
-                />
-              )}
+
+              <Home {...props} userData={userData} userstatus={siginalready} addBasketitems={addBasketitems}
+              //  why we pass all pros {...props} here
+              />
+            )}
             />
             // render here work for passing the ste into the child component // from
             router {/* render={props=>(<newComponent}/> )} */}
@@ -103,7 +124,7 @@ function App() {
               path="/basket"
               exact
               render={(props) => (
-                <Basket {...props} userData={userData} userstatus={siginalready} />
+                <Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} />
               )}
             />
             <Route

@@ -19,10 +19,12 @@ import {
 
 
 // props here are arrays of object
-function Home({ props }) {
+function Home({ props, addBasketitems }) {
 
   const initialQuantities = props.reduce((quantities, product) => ({ ...quantities, [product.product_name]: 0 }), {})
   console.log(props)
+  console.log(initialQuantities)
+
 
   // for (let i = 0; i < props.length; i++) {
 
@@ -121,7 +123,8 @@ function Home({ props }) {
                   </Button>
                   <Button name={productName} variant="secondary">
                     {quantities[productName]}
-                  </Button>
+  
+              </Button>
                   <Button variant="secondary" name="add" value="add" onClick={() => increase(productName)}
                   >
                     +
@@ -129,7 +132,19 @@ function Home({ props }) {
                 </ButtonGroup>
                 &nbsp;
                 {/* will get the value and object passed as on click for all the info of the selectede item */}
-                  <Button name={producNumber} value={quantities[productName]} variant="primary" onClick={(e) => console.log(e.currentTarget.value ,eachproduct)}>
+                <Button name={producNumber} value={[productName, producNumber, price, desc, photo, stockQuantity, quantities[productName]]} variant="primary" onClick={(event) => {
+                  // let details = [{ productName: eachproduct.product_name, value:value}]
+
+                  { addBasketitems(event) }
+
+
+                }
+
+
+                  // console.log(e.currentTarget.value, eachproduct)
+
+
+                }>
                   Add to Basket
                   </Button >
               </li>

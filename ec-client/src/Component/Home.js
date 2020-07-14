@@ -8,7 +8,7 @@ import HomeDisplay from "./HomeDisplay";
 
 import { Button, ButtonGroup, Dropdown, MenuItem, Container } from "react-bootstrap";
 
-function Home({ userData, userstatus }) {
+function Home({ userData, userstatus, addBasketitems }) {
   const [yogaMatState, setYogaMatState] = useState("---Select Yogamats---");
   const [yogaEquipState, setYogaEquipState] = useState("---Select Equipments---");
 
@@ -83,7 +83,8 @@ function Home({ userData, userstatus }) {
           console.log(data1[0]); //object
           console.log(data1[0].price); // value from the object
           setHomepage(data1);
-        });
+        }).catch(err => setHomepage(undefined)) // if not data comes then it will turn page to default 
+        
       setShowPage(1);
     })();
   }
@@ -190,7 +191,7 @@ function Home({ userData, userstatus }) {
       </div>
       <Container>
         {/* // in place of null we can set a slider window for default page */}
-        {showPage ? <HomeDisplay props={homePage} /> : null}
+        {showPage ? <HomeDisplay props={homePage} addBasketitems={addBasketitems} /> : null}
         {/* // this will be the body of
         home page will display items that will be selected from the menue
         {`The user is looged in ${userstatus}and the email is ${userData}`} */}
