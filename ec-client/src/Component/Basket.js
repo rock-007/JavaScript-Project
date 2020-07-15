@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import logo from "../logo.svg";
 import "../App.css";
 
-function Basket({ userData, userstatus, basketItems1}) {
+function Basket({ userData, userstatus,basketItems}) {
   const [num, setNum] = useState();
-  console.log(basketItems1)
+  console.log("7",basketItems)
 
   return (
     <div >
@@ -18,7 +18,7 @@ function Basket({ userData, userstatus, basketItems1}) {
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
-        <option value="4">{` ${userData}${userstatus}x ${basketItems1}`}</option>
+        <option value="4">{` ${userData}${userstatus}x ${basketItems}`}</option>
       </select>
     </div>
   );

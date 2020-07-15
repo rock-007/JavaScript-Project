@@ -28,34 +28,25 @@ const isLoggedIn = () => {
 function App() {
 
 
-  let basketinitialvalue=()=>{}
-  const [siginalready, setifsignedin] = useState(isLoggedIn());
 
+  const [siginalready, setifsignedin] = useState(isLoggedIn());
   const [userData, setUserData] = useState(userAccountData());
   const [basketItems, setBasketItems] = useState([]); // this will come from two level down child the items customers put in basket
 
-
   const addBasketitems = (product, quantity) => {
     setBasketItems(prevItems => [...prevItems, { ...product, quantity }])
-  
+
 
     let x = { ...product, quantity }
     console.log(x)
     console.log(product, quantity)
 
-     console.log(basketItems)
-   
+    console.log(basketItems)
 
+    // console.log(typeof (product))
+    // console.log(product)
 
-
-// console.log(typeof (product))
-   // console.log(product)
-   
-  //  console.log(product.currentTarget.value) // value here is string so convert to an array 
-
-
-    
-   
+    //  console.log(product.currentTarget.value) // value here is string so convert to an array 
 
   }
   console.log(basketItems)
@@ -124,12 +115,8 @@ function App() {
             />
             // render here work for passing the ste into the child component // from
             router {/* render={props=>(<newComponent}/> )} */}
-            <Route
-              path="/basket"
-              exact
-              render={(props) => (
-                <Basket {...props} userData={userData} userstatus={siginalready} basketItems1={basketItems} />
-              )}
+            <Route path="/basket" exact render={(props) => (<Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} />
+            )}
             />
             <Route
               path="/signin"
@@ -170,3 +157,7 @@ function App() {
 // );
 
 export default App;
+
+
+
+

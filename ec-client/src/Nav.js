@@ -14,7 +14,7 @@ function Nav({ userinfo, userstatus }) {
 
   return (
     <nav>
-       <label className="logo">
+      <label className="logo">
         <a href="/">
           <img src={ProjectLogo} />
           UmairShop
@@ -23,7 +23,7 @@ function Nav({ userinfo, userstatus }) {
 
       <ul>
         <li className="searchbar">
-        <Search/>
+          <Search />
 
         </li>
         <li>
@@ -55,8 +55,8 @@ function Nav({ userinfo, userstatus }) {
 "
               ></a>
             ) : (
-              <a>SIGNIN</a>
-            )}
+                <a>SIGNIN</a>
+              )}
 
             {/* {userinfo2 ? <a class="glyphicon glyphicon-log-in">SIGNIN</a> : userinfo1} */}
           </a>
