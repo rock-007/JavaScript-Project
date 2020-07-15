@@ -85,7 +85,7 @@ function Home({ props, addBasketitems }) {
     //  { Yogamatters Eco Everyday Rise Yoga Mat: 0, Yogamatters Organic Cotton Yoga Mat: 0, CorkYogis Classic Cork Yoga Mat: 0, Jade Yoga Voyager Mat: 0 }
     setQuantites({ ...quantities, [productName]: quantities[productName] + 1 });
     console.log(quantities)
-     // below o/p
+    // below o/p
 
   }
   console.log(quantities)
@@ -151,3 +151,6 @@ function Home({ props, addBasketitems }) {
 }
 
 export default Home;
+
+
+

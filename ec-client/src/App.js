@@ -25,31 +25,44 @@ const isLoggedIn = () => {
   return !!window.localStorage.getItem("user-status"); // !! : cast to boolean
 };
 
+let initialvalue = () => {
+  return window.localStorage.getItem("user-basket", {});
+};
+
+// [...prevItems, { ...product, quantity }]
 function App() {
-
-
-
   const [siginalready, setifsignedin] = useState(isLoggedIn());
   const [userData, setUserData] = useState(userAccountData());
-  const [basketItems, setBasketItems] = useState([]); // this will come from two level down child the items customers put in basket
+  const [basketItems, setBasketItems] = useState(initialvalue()); // this will come from two level down child the items customers put ]initialvalue() in basket
 
   const addBasketitems = (product, quantity) => {
-    setBasketItems(prevItems => [...prevItems, { ...product, quantity }])
+    // setBasketItems((prevItems) => [...prevItems, { ...product, quantity }]);
+    setBasketItems((prevItems) => {
+      let newItems = [...prevItems, { ...product, quantity }];
+      window.localStorage.setItem("user-basket", JSON.stringify(newItems));
+      return newItems;
+    });
 
+    // window.localStorage.setItem(
+    //   "user-basket",
+    //   JSON.stringify([...prevItems, { ...product, quantity }])
+    // );
 
-    let x = { ...product, quantity }
-    console.log(x)
-    console.log(product, quantity)
-
-    console.log(basketItems)
+    console.log(typeof product);
+    console.log("product", product);
+    console.log(typeof quantity);
+    console.log("quantity", quantity);
+    console.log(typeof basketItems);
+    console.log("baskitem", basketItems);
 
     // console.log(typeof (product))
     // console.log(product)
 
-    //  console.log(product.currentTarget.value) // value here is string so convert to an array 
-
-  }
-  console.log(basketItems)
+    //  console.log(product.currentTarget.value) // value here is string so convert to an array
+  };
+  // window.localStorage.setItem('user-basket', basketItems)
+  console.log(typeof basketItems);
+  console.log(basketItems);
 
   let url = "http://localhost:5000/api/verifyifloginalready";
 
@@ -105,39 +118,48 @@ function App() {
         <div className="main">
           {/* <Sidebar /> */}
           <Switch>
-            <Route path="/" exact render={(props) => (
-              // not sure if we need to pass states for h
-
-              <Home {...props} userData={userData} userstatus={siginalready} addBasketitems={addBasketitems}
+            {/* // not sure if we need to pass states for h */}
+            <Route
+              path="/"
+              exact
+              render={(props) => (
+                <Home
+                  {...props}
+                  userData={userData}
+                  userstatus={siginalready}
+                  addBasketitems={addBasketitems}
+                />
+              )}
               //  why we pass all pros {...props} here
-              />
-            )}
             />
-            // render here work for passing the ste into the child component // from
-            router {/* render={props=>(<newComponent}/> )} */}
-            <Route path="/basket" exact render={(props) => (<Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} />
-            )}
+            // render here work for passing the ste into the child component // from router{" "}
+            {/* render={props=>(<newComponent}/> )} */}
+            <Route
+              path="/basket"
+              exact
+              render={(props) => (
+                <Basket
+                  {...props}
+                  userData={userData}
+                  userstatus={siginalready}
+                  basketItems={basketItems}
+                />
+              )}
             />
             <Route
               path="/signin"
               exact
-              render={(props) => (
-                <Signin {...props} userData={userData} userstatus={siginalready} />
-              )}
+              render={(props) => <Signin {...props} userData={userData} userstatus={siginalready} />}
             />
             <Route
               path="/accessories"
               exact
-              render={(props) => (
-                <Accessories {...props} userData={userData} userstatus={siginalready} />
-              )}
+              render={(props) => <Accessories {...props} userData={userData} userstatus={siginalready} />}
             />
             <Route
               path="/phones"
               exact
-              render={(props) => (
-                <Phones {...props} userData={userData} userstatus={siginalready} />
-              )}
+              render={(props) => <Phones {...props} userData={userData} userstatus={siginalready} />}
             />
           </Switch>
         </div>
@@ -157,7 +179,3 @@ function App() {
 // );
 
 export default App;
-
-
-
-
