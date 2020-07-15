@@ -32,29 +32,33 @@ function App() {
   const [siginalready, setifsignedin] = useState(isLoggedIn());
 
   const [userData, setUserData] = useState(userAccountData());
-  const [basketItems, setBasketItems] = useState(basketinitialvalue) // this will come from two level down child the items customers put in basket
+  const [basketItems, setBasketItems] = useState([]); // this will come from two level down child the items customers put in basket
 
 
-  const addBasketitems = (event) => {
-    let x = event.currentTarget.value.split(",") // array string
-    setBasketItems(event.currentTarget)
+  const addBasketitems = (product, quantity) => {
+    setBasketItems(prevItems => [...prevItems, { ...product, quantity }])
+  
+
+    let x = { ...product, quantity }
+    console.log(x)
+    console.log(product, quantity)
+
+     console.log(basketItems)
+   
 
 
 
-
-
-    console.log(typeof (event.currentTarget.name))
-    console.log(typeof (event.currentTarget))
-    console.log(event.currentTarget.name)
-    console.log(event.currentTarget)
-    console.log(event.currentTarget.value) // value here is string so convert to an array 
+// console.log(typeof (product))
+   // console.log(product)
+   
+  //  console.log(product.currentTarget.value) // value here is string so convert to an array 
 
 
     
-    console.log(typeof (event.currentTarget.value))
-    console.log(x)
+   
 
   }
+  console.log(basketItems)
 
   let url = "http://localhost:5000/api/verifyifloginalready";
 
@@ -124,7 +128,7 @@ function App() {
               path="/basket"
               exact
               render={(props) => (
-                <Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} />
+                <Basket {...props} userData={userData} userstatus={siginalready} basketItems1={basketItems} />
               )}
             />
             <Route

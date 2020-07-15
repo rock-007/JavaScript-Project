@@ -80,11 +80,15 @@ function Home({ props, addBasketitems }) {
 
 
   const increase = (productName) => {
-
+    console.log(initialQuantities)
+    // below o/p
+    //  { Yogamatters Eco Everyday Rise Yoga Mat: 0, Yogamatters Organic Cotton Yoga Mat: 0, CorkYogis Classic Cork Yoga Mat: 0, Jade Yoga Voyager Mat: 0 }
     setQuantites({ ...quantities, [productName]: quantities[productName] + 1 });
+    console.log(quantities)
+     // below o/p
 
   }
-
+  console.log(quantities)
 
 
 
@@ -123,8 +127,7 @@ function Home({ props, addBasketitems }) {
                   </Button>
                   <Button name={productName} variant="secondary">
                     {quantities[productName]}
-  
-              </Button>
+                  </Button>
                   <Button variant="secondary" name="add" value="add" onClick={() => increase(productName)}
                   >
                     +
@@ -132,19 +135,10 @@ function Home({ props, addBasketitems }) {
                 </ButtonGroup>
                 &nbsp;
                 {/* will get the value and object passed as on click for all the info of the selectede item */}
-                <Button name={producNumber} value={[productName, producNumber, price, desc, photo, stockQuantity, quantities[productName]]} variant="primary" onClick={(event) => {
-                  // let details = [{ productName: eachproduct.product_name, value:value}]
-
-                  { addBasketitems(event) }
-
-
-                }
-
-
-                  // console.log(e.currentTarget.value, eachproduct)
-
-
-                }>
+                <Button name={producNumber} value={quantities[productName]} variant="primary"
+                  onClick={() => {
+                    addBasketitems(eachproduct, quantities[productName])
+                  }}>
                   Add to Basket
                   </Button >
               </li>
