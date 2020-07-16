@@ -26,6 +26,10 @@ const isLoggedIn = () => {
 };
 
 let initialvalue = () => {
+  // (prevItems, basketItems) => {
+  //   return [1];
+  // };
+
   return window.localStorage.getItem("user-basket", {});
 };
 
@@ -34,14 +38,32 @@ function App() {
   const [siginalready, setifsignedin] = useState(isLoggedIn());
   const [userData, setUserData] = useState(userAccountData());
   const [basketItems, setBasketItems] = useState(initialvalue()); // this will come from two level down child the items customers put ]initialvalue() in basket
-
+  // product here is object and quantity is number and both coming from child componenet
   const addBasketitems = (product, quantity) => {
-    // setBasketItems((prevItems) => [...prevItems, { ...product, quantity }]);
     setBasketItems((prevItems) => {
-      let newItems = [...prevItems, { ...product, quantity }];
+      console.log("prevItems", prevItems);
+      console.log("product", product);
+      console.log("quantity", quantity);
+      let dummy = [
+        {
+          image_URL: "https://res.cloudinary.com/umair007/image/upload/v1594578469/ecommerece%20project/Yogamats/Eco-YogaMats/213_6_hvjstk.jpg",
+          price: "00.00",
+          producNumber: "1",
+          productDescription: "0000",
+          stockQuantity: "00",
+          quantity: "00",
+        },
+      ];
+      const newItems = [...(prevItems == null ? dummy : prevItems), { ...product, quantity }];
       window.localStorage.setItem("user-basket", JSON.stringify(newItems));
       return newItems;
+      //// setBasketItems((prevItems) => [...prevItems, { ...product, quantity }]);
+      //  console.log("ff", prevItems);
+      // console.log(typeof newItems);
+      // console.log("newItems", newItems);
+      //  return newItems;
     });
+    // console.log(typeof quantity);
 
     // window.localStorage.setItem(
     //   "user-basket",
@@ -50,10 +72,8 @@ function App() {
 
     console.log(typeof product);
     console.log("product", product);
-    console.log(typeof quantity);
+    // console.log(typeof quantity);
     console.log("quantity", quantity);
-    console.log(typeof basketItems);
-    console.log("baskitem", basketItems);
 
     // console.log(typeof (product))
     // console.log(product)
@@ -122,45 +142,14 @@ function App() {
             <Route
               path="/"
               exact
-              render={(props) => (
-                <Home
-                  {...props}
-                  userData={userData}
-                  userstatus={siginalready}
-                  addBasketitems={addBasketitems}
-                />
-              )}
+              render={(props) => <Home {...props} userData={userData} userstatus={siginalready} addBasketitems={addBasketitems} />}
               //  why we pass all pros {...props} here
             />
-            // render here work for passing the ste into the child component // from router{" "}
-            {/* render={props=>(<newComponent}/> )} */}
-            <Route
-              path="/basket"
-              exact
-              render={(props) => (
-                <Basket
-                  {...props}
-                  userData={userData}
-                  userstatus={siginalready}
-                  basketItems={basketItems}
-                />
-              )}
-            />
-            <Route
-              path="/signin"
-              exact
-              render={(props) => <Signin {...props} userData={userData} userstatus={siginalready} />}
-            />
-            <Route
-              path="/accessories"
-              exact
-              render={(props) => <Accessories {...props} userData={userData} userstatus={siginalready} />}
-            />
-            <Route
-              path="/phones"
-              exact
-              render={(props) => <Phones {...props} userData={userData} userstatus={siginalready} />}
-            />
+            // render here work for passing the ste into the child component // from router {/* render={props=>(<newComponent}/> )} */}
+            <Route path="/basket" exact render={(props) => <Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} />} />
+            <Route path="/signin" exact render={(props) => <Signin {...props} userData={userData} userstatus={siginalready} />} />
+            <Route path="/accessories" exact render={(props) => <Accessories {...props} userData={userData} userstatus={siginalready} />} />
+            <Route path="/phones" exact render={(props) => <Phones {...props} userData={userData} userstatus={siginalready} />} />
           </Switch>
         </div>
 
