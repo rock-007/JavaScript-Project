@@ -30,7 +30,9 @@ let initialvalue = () => {
   //   return [1];
   // };
 
-  return window.localStorage.getItem("user-basket", {});
+  let y1 = JSON.parse(window.localStorage.getItem("user-basket") || "[]");
+  console.log(y1);
+  return y1;
 };
 
 // [...prevItems, { ...product, quantity }]
@@ -44,19 +46,43 @@ function App() {
       console.log("prevItems", prevItems);
       console.log("product", product);
       console.log("quantity", quantity);
-      let dummy = [
-        {
-          image_URL: "https://res.cloudinary.com/umair007/image/upload/v1594578469/ecommerece%20project/Yogamats/Eco-YogaMats/213_6_hvjstk.jpg",
-          price: "00.00",
-          producNumber: "1",
-          productDescription: "0000",
-          stockQuantity: "00",
-          quantity: "00",
-        },
-      ];
-      const newItems = [...(prevItems == null ? dummy : prevItems), { ...product, quantity }];
-      window.localStorage.setItem("user-basket", JSON.stringify(newItems));
-      return newItems;
+
+      // let dummy = [  {
+      //     image_URL: "xx",
+      //     price: "00.00",
+      //     producNumber: "1",
+      //     productDescription: "0000",
+      //     stockQuantity: "00",
+      //     quantity: "00",
+      //   },
+      // ];
+
+      //       console.log(prevItems);
+      //       if (prevItems === null) {
+      //         console.log(prevItems);
+      //          window.localStorage.setItem("user-basket", JSON.stringify({ ...product, quantity }));
+      // let r1 = JSON.parse(window.localStorage.getItem("user-basket"));
+      //         console.log(r1);
+      //         return r1;
+      //       } else if (prevItems != null)
+
+      console.log(typeof prevItems);
+      console.log(prevItems);
+
+      if (prevItems === null) {
+        const newItems = [prevItems, { ...product, quantity }];
+        console.log(newItems);
+        window.localStorage.setItem("user-basket", JSON.stringify(newItems));
+        console.log(prevItems);
+        return newItems;
+      } else {
+        const newItems = [...prevItems, { ...product, quantity }];
+        console.log(newItems);
+        window.localStorage.setItem("user-basket", JSON.stringify(newItems));
+        console.log(prevItems);
+        return newItems;
+      }
+
       //// setBasketItems((prevItems) => [...prevItems, { ...product, quantity }]);
       //  console.log("ff", prevItems);
       // console.log(typeof newItems);
