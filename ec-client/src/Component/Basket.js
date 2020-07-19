@@ -24,7 +24,7 @@ function Basket({ basketItems }) {
         
       </select> */}
       (
-      <div className="products">
+      <div className="BasketProducts">
         {basketItems.map((eachproduct) => {
           let productName = eachproduct.product_name;
           let producNumber = eachproduct.producNumber;
@@ -33,17 +33,17 @@ function Basket({ basketItems }) {
           let photo = eachproduct.image_URL;
           let stockQuantity = eachproduct.stockQuantity;
           return (
-            <div className="products" key={producNumber}>
+            <div className="BasketEachProduct" key={producNumber}>
               <ul>
                 <li>
-                  <img className="products-image" src={photo} />
+                  <img className="BasketProducts-image" src={photo} />
                 </li>
                 <li>{productName} </li>
                 <li>
                   Item No:{producNumber}(InStock:{stockQuantity})
                 </li>
                 <li>price:{price}£ </li>
-                <li>{desc}</li>
+                {/* <li>{desc}</li> */}
                 <li>
                   {/* <ButtonGroup aria-label="quantityofproduct">
                     <Button variant="secondary" name="subtract" value="subtract" onClick={() => decrease(productName)}>
@@ -69,8 +69,8 @@ function Basket({ basketItems }) {
                     }}
                   >
                     Add to Basket
-                  // </Button> */} 
-                                  </li>
+                  // </Button> */}
+                </li>
               </ul>
             </div>
           );
