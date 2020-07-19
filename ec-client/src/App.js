@@ -41,6 +41,18 @@ function App() {
   const [userData, setUserData] = useState(userAccountData());
   const [basketItems, setBasketItems] = useState(initialvalue()); // this will come from two level down child the items customers put ]initialvalue() in basket
   // product here is object and quantity is number and both coming from child componenet
+
+const updatedBasket = (newProductQty) => {
+
+
+  console.log(newProductQty);
+};
+
+
+
+
+
+
   const addBasketitems = (product, quantity) => {
     setBasketItems((prevItems) => {
       console.log("prevItems", prevItems);
@@ -168,7 +180,7 @@ function App() {
             <Route
               path="/"
               exact
-              render={(props) => <Home {...props} userData={userData} userstatus={siginalready} addBasketitems={addBasketitems} />}
+              render={(props) => <Home {...props} userData={userData} userstatus={siginalready} addBasketitems={addBasketitems} updatedBasket={updatedBasket} />}
               //  why we pass all pros {...props} here
             />
             // render here work for passing the ste into the child component // from router {/* render={props=>(<newComponent}/> )} */}
