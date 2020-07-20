@@ -32,41 +32,84 @@ function Basket({ basketItems, updatedBasket }) {
     //else we can throw error that not enough porducts in stock
   };
 
-  return (
-    <div className="BasketProducts">
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell> </TableCell>
-              <TableCell>Product Name </TableCell>
-              <TableCell> Item No.</TableCell>
-              <TableCell> StockLevel</TableCell>
-              <TableCell> Quantitiy</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {basketItems.map((eachproduct) => {
-              let productName = eachproduct.product_name;
-              let producNumber = eachproduct.producNumber;
-              let price = eachproduct.price;
-              let desc = eachproduct.productDescription;
-              let photo = eachproduct.image_URL;
-              let stockQuantity = eachproduct.stockQuantity;
+  const CalculateTotalPrice = (eachproduct) => {
+    let totalbought = eachproduct.price;
+    let unitPrice = eachproduct.quantity;
 
-              <TableRow key={producNumber}>
-                <TableCell>
-                  {" "}
-                  <img className="BasketProducts-image" src={photo} />{" "}
-                </TableCell>
-                <TableCell>{productName}</TableCell>
-                <TableCell>{productName}</TableCell>
-              </TableRow>;
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+    let total = totalbought * unitPrice;
+    return total;
+  };
+
+  return (
+    <>
+      <div className="BasketProducts">
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell> </TableCell>
+                <TableCell>Product Name </TableCell>
+                <TableCell> Item No./Stock Level</TableCell>
+                <TableCell> Quantitiy</TableCell>
+                <TableCell> Total Price</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {basketItems.map((eachproduct) => {
+                let productName = eachproduct.product_name;
+                let producNumber = eachproduct.producNumber;
+                let price = eachproduct.price;
+                let desc = eachproduct.productDescription;
+                let photo = eachproduct.image_URL;
+                let stockQuantity = eachproduct.stockQuantity;
+                let boughtQuantitiy = eachproduct.quantity;
+                return (
+                  <TableRow key={producNumber}>
+                    <TableCell>
+                      <img className="BasketProducts-image" src={photo} />
+                    </TableCell>
+                    <TableCell>{productName}</TableCell>
+                    <TableCell>
+                      Item No:{producNumber} (InStock:{stockQuantity})
+                    </TableCell>
+                    <TableCell>
+                      <ul style={{ float: "bottom", display: "flex", flexDirection: "column", maxWidth: "6vw" }}>
+                        <li>
+                          <span>{boughtQuantitiy} </span>
+                        </li>
+                        <li>
+                          <ButtonGroup aria-label="quantityofproduct">
+                            <Button variant="secondary" name="subtract" value="subtract" onClick={() => decreseQuantity(eachproduct)}>
+                              -
+                            </Button>
+                            <Button name={productName} variant="secondary">
+                              {eachproduct.quantity}
+                            </Button>
+                            <Button variant="secondary" name="add" value="add" onClick={() => increaseQuantity(eachproduct)}>
+                              +
+                            </Button>
+                          </ButtonGroup>
+                        </li>
+                      </ul>
+                    </TableCell>
+                    <TableCell>£{CalculateTotalPrice(eachproduct)}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+      <div>
+        <TableContainer component={Paper} style={{ float: "right", display: "flex", flexDirection: "column", maxWidth: "6vw" }}>
+          <Table>
+            <TableHead>
+              <TableRow>Summary</TableRow>
+            </TableHead>
+          </Table>
+        </TableContainer>
+      </div>
+    </>
   );
 }
 
@@ -93,17 +136,17 @@ export default Basket;
 //           <li>price:{price}£ </li>
 
 //           <li>
-//             <ButtonGroup aria-label="quantityofproduct">
-//               <Button variant="secondary" name="subtract" value="subtract" onClick={() => decreseQuantity(eachproduct)}>
-//                 -
-//               </Button>
-//               <Button name={productName} variant="secondary">
-//                 {eachproduct.quantity}
-//               </Button>
-//               <Button variant="secondary" name="add" value="add" onClick={() => increaseQuantity(eachproduct)}>
-//                 +
-//               </Button>
-//             </ButtonGroup>
+// <ButtonGroup aria-label="quantityofproduct">
+//   <Button variant="secondary" name="subtract" value="subtract" onClick={() => decreseQuantity(eachproduct)}>
+//     -
+//   </Button>
+//   <Button name={productName} variant="secondary">
+//     {eachproduct.quantity}
+//   </Button>
+//   <Button variant="secondary" name="add" value="add" onClick={() => increaseQuantity(eachproduct)}>
+//     +
+//   </Button>
+// </ButtonGroup>
 //             &nbsp;
 //             {/* will get the value and object passed as on click for all the info of the selectede item */}
 //             {/* <Button

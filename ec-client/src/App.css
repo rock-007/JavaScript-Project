@@ -438,7 +438,7 @@ label #cancel {
   padding-bottom: 1rem;
   margin-top: 10rem;
   position: relative;
-    width: 80vw;
+    max-width: 60vw;
 
 }
 
