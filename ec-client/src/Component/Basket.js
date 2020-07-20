@@ -4,12 +4,8 @@ import "../App.css";
 import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, MenuItem, Container } from "react-bootstrap";
 import { makeStyle, Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer } from "@material-ui/core";
 
-function Basket({ basketItems, updatedBasket }) {
-  const [num, setNum] = useState();
-
-  console.log(basketItems);
-  // let x = [...basketItems];
-  // console.log(x);
+function Basket({ basketItems, updatedBasket, resetBasket }) {
+  let [totalPrice, setTotalPrice] = useState(0);
 
   const increaseQuantity = (eachproduct) => {
     if (eachproduct.stockQuantity > eachproduct.quantity + 1) {
@@ -32,13 +28,26 @@ function Basket({ basketItems, updatedBasket }) {
     //else we can throw error that not enough porducts in stock
   };
 
-  const CalculateTotalPrice = (eachproduct) => {
-    let totalbought = eachproduct.price;
-    let unitPrice = eachproduct.quantity;
-
-    let total = totalbought * unitPrice;
-    return total;
+  const buyNow = () => {
+    //else we can throw error that not enough porducts in stock
+    console.log();
+    resetBasket();
   };
+
+  useEffect(() => {
+    if (basketItems) {
+      let total = 0;
+      for (let i = 0; i < basketItems.length; i++) {
+        let eachItemTotalPrice = basketItems[i].price * basketItems[i].quantity;
+        total = eachItemTotalPrice + total;
+      }
+      console.log(total);
+
+      setTotalPrice(total);
+    }
+  });
+
+  console.log(totalPrice);
 
   return (
     <>
@@ -92,7 +101,7 @@ function Basket({ basketItems, updatedBasket }) {
                         </li>
                       </ul>
                     </TableCell>
-                    <TableCell>£{CalculateTotalPrice(eachproduct)}</TableCell>
+                    <TableCell>£{boughtQuantitiy * price}</TableCell>
                   </TableRow>
                 );
               })}
@@ -101,11 +110,28 @@ function Basket({ basketItems, updatedBasket }) {
         </TableContainer>
       </div>
       <div>
-        <TableContainer component={Paper} style={{ float: "right", display: "flex", flexDirection: "column", maxWidth: "6vw" }}>
+        <TableContainer component={Paper} style={{ float: "right", display: "flex", flexDirection: "column", maxHeight: "9vw", maxWidth: "14vw" }}>
           <Table>
             <TableHead>
-              <TableRow>Summary</TableRow>
+              <TableRow>
+                <TableCell>Summary </TableCell>
+              </TableRow>
             </TableHead>
+            <TableBody>
+              <tr>
+                <td>SubTotal:{totalPrice}</td>
+              </tr>
+
+              <tr>
+                <td>
+                  <ButtonGroup aria-label="quantityofproduct">
+                    <Button variant="secondary" name="subtract" value="subtract" onClick={() => buyNow()}>
+                      Buy Now
+                    </Button>
+                  </ButtonGroup>
+                </td>
+              </tr>
+            </TableBody>
           </Table>
         </TableContainer>
       </div>
@@ -136,17 +162,17 @@ export default Basket;
 //           <li>price:{price}£ </li>
 
 //           <li>
-// <ButtonGroup aria-label="quantityofproduct">
-//   <Button variant="secondary" name="subtract" value="subtract" onClick={() => decreseQuantity(eachproduct)}>
-//     -
-//   </Button>
-//   <Button name={productName} variant="secondary">
-//     {eachproduct.quantity}
-//   </Button>
-//   <Button variant="secondary" name="add" value="add" onClick={() => increaseQuantity(eachproduct)}>
-//     +
-//   </Button>
-// </ButtonGroup>
+//  <ButtonGroup aria-label="quantityofproduct">
+// {/* //   <Button variant="secondary" name="subtract" value="subtract" onClick={() => decreseQuantity(eachproduct)}>
+// //     -
+// //   </Button> */}
+// //   <Button name={productName} variant="secondary">
+// //     {eachproduct.quantity}
+// //   </Button>
+// //   <Button variant="secondary" name="add" value="add" onClick={() => increaseQuantity(eachproduct)}>
+// //     +
+// //   </Button>
+// // </ButtonGroup>
 //             &nbsp;
 //             {/* will get the value and object passed as on click for all the info of the selectede item */}
 //             {/* <Button

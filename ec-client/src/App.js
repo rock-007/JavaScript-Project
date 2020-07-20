@@ -6,6 +6,7 @@ import "./App.css";
 import Nav from "./Nav";
 import Sidebar from "./Component/Sidebar";
 import Basket from "./Component/Basket";
+// import Phones from "./Component/Phones";
 import Accessories from "./Component/Accessories";
 import Signin from "./Component/Signin";
 import Error from "./Error";
@@ -39,6 +40,16 @@ function App() {
   const [siginalready, setifsignedin] = useState(isLoggedIn());
   const [userData, setUserData] = useState(userAccountData());
   const [basketItems, setBasketItems] = useState(initialvalue()); // this will come from two level down child the items customers put ]initialvalue() in basket
+
+
+const resetBasket=(t)=>{
+console.log(t)
+window.localStorage.setItem("user-basket", []);
+
+setBasketItems([]);
+}
+
+
 
   const updatedBasket = (newProductQty) => {
     console.log(newProductQty);
@@ -216,7 +227,7 @@ function App() {
     // Router,Route,  swtch... that will help us in change pages
     <Router>
       <div className="App">
-        <header >
+        <header className="header">
           <Nav userinfo={userData} userstatus={siginalready} />
         </header>
 
@@ -234,10 +245,13 @@ function App() {
             <Route
               path="/basket"
               exact
-              render={(props) => <Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} updatedBasket={updatedBasket} />}
+              render={(props) => (
+                <Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} updatedBasket={updatedBasket} resetBasket={resetBasket} />
+              )}
             />
             <Route path="/signin" exact render={(props) => <Signin {...props} userData={userData} userstatus={siginalready} />} />
             <Route path="/accessories" exact render={(props) => <Accessories {...props} userData={userData} userstatus={siginalready} />} />
+            {/* <Route path="/phones" exact render={(props) => <Phones {...props} userData={userData} userstatus={siginalready} />} /> */}
           </Switch>
         </div>
 
