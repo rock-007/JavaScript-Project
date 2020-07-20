@@ -51,7 +51,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
 
   return (
     <>
-      <div className="BasketProducts">
+      <div className="BasketProducts" style={{ float: "left" }}>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -109,8 +109,8 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
           </Table>
         </TableContainer>
       </div>
-      <div>
-        <TableContainer component={Paper} style={{ float: "right", display: "flex", flexDirection: "column", maxHeight: "9vw", maxWidth: "14vw" }}>
+      <div style={{ float: "right",paddingRight:"5rem" }}>
+        <TableContainer component={Paper} style={{ float: "right", top: "0", display: "flex", flexDirection: "column", maxHeight: "9vw", maxWidth: "14vw" }}>
           <Table>
             <TableHead>
               <TableRow>
