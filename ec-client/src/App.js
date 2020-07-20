@@ -41,13 +41,12 @@ function App() {
   const [userData, setUserData] = useState(userAccountData());
   const [basketItems, setBasketItems] = useState(initialvalue()); // this will come from two level down child the items customers put ]initialvalue() in basket
 
- const updatedBasket = (newProductQty) => {
+  const updatedBasket = (newProductQty) => {
+ setBasketItems((prevItems) => {
 
-console.log(newProductQty)
-   console.log(newProductQty);
-console.log(newProductQty);
+ return     console.log("prevItems", prevItems);
 
- };
+ }  }
 
   // product here is object and quantity is number and both coming from child componenet
   const addBasketitems = (product, quantity) => {
