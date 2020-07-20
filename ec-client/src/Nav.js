@@ -13,7 +13,7 @@ function Nav({ userinfo, userstatus }) {
   // if cookies are present then signin and change the signin to `${name of account holder}`
 
   return (
-    <nav>
+    <nav  className="header">
       <label className="logo">
         <a href="/">
           <img src={ProjectLogo} />
@@ -24,7 +24,6 @@ function Nav({ userinfo, userstatus }) {
       <ul>
         <li className="searchbar">
           <Search />
-
         </li>
         <li>
           <a
@@ -55,8 +54,8 @@ function Nav({ userinfo, userstatus }) {
 "
               ></a>
             ) : (
-                <a>SIGNIN</a>
-              )}
+              <a>SIGNIN</a>
+            )}
 
             {/* {userinfo2 ? <a class="glyphicon glyphicon-log-in">SIGNIN</a> : userinfo1} */}
           </a>

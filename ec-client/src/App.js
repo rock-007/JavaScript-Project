@@ -216,7 +216,7 @@ function App() {
     // Router,Route,  swtch... that will help us in change pages
     <Router>
       <div className="App">
-        <header className="header">
+        <header >
           <Nav userinfo={userData} userstatus={siginalready} />
         </header>
 

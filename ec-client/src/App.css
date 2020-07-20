@@ -72,24 +72,26 @@
   /* padding: 1rem; */
   font-size: 1.25rem;
   display: flex;
+    width: 100vw; 
+
 }
 
 label.logo {
   /* box-sizing: border-box; */
   /* float: left; */
   /* padding-right: 22%; */
-  padding-left: 50px;
+  margin-left: 50px;
   /* margin-right: 10%; */
   font-weight: bold;
   /* line-height: 80px; */
   line-height: 10px;
 }
-nav {
-  margin-top: 1%;
+/* nav {
+  padding-top: 1%;
   /* clear: both; */
-  width: 100%;
-  height: 80%;
-}
+  /* width: 100%; */
+  /* height: 80%; */
+/* } */ */
 
 nav ul {
   float: right;
@@ -154,14 +156,14 @@ nav ul li ul {
   /* right: 0; */
   /* margin-right: 27px; */
 }
-nav ul li:hover ul {
+/* nav ul li:hover ul {
   /* left:relative; */
-  float: right;
-  margin-right: 2px;
-  display: block;
-  /* right:relative; */
-}
-nav ul li ul li {
+/* float: right; */
+/* margin-right: 2px; */
+/* display: block; */
+/* right:relative; */
+/* } */
+*/ nav ul li ul li {
   display: block;
   right: 0;
 
@@ -174,13 +176,13 @@ nav ul li ul:after {
   clear: both;
   content: " ";
 }
-a:hover {
+/* a:hover {
   background: #747b7e;
   transition: 0.5s;
 }
 
 @media (max-width: 55px) {
-}
+} */
 
 /* .header-div{
   display: inline-block;
@@ -434,7 +436,10 @@ label #cancel {
   justify-content: left;
   align-items: left;
   padding-bottom: 1rem;
-  margin: auto;
+  margin-top: 10rem;
+  position: relative;
+    width: 80vw;
+
 }
 
 .BasketProducts ul {
@@ -452,7 +457,7 @@ label #cancel {
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   position: relative;
-  display: flex;
+  display: block;
   /* float:left; */
 }
 
