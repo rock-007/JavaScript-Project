@@ -42,11 +42,28 @@ function App() {
   const [basketItems, setBasketItems] = useState(initialvalue()); // this will come from two level down child the items customers put ]initialvalue() in basket
 
   const updatedBasket = (newProductQty) => {
- setBasketItems((prevItems) => {
-
- return     console.log("prevItems", prevItems);
-
- }  }
+    console.log(newProductQty);
+    setBasketItems((prevItems) => {
+      let updatedQuantityArray = [];
+      for (let z = 0; z < basketItems.length; z++) {
+        console.log(basketItems[z].producNumber);
+        console.log(newProductQty.producNumber);
+        if (newProductQty.producNumber !== basketItems[z].producNumber) {
+          console.log(newProductQty.producNumber);
+          console.log(basketItems[z].producNumber);
+          updatedQuantityArray.push(basketItems[z]);
+        } else {
+          if (newProductQty.quantity == 0) {
+          } else {
+            // updatedQuantityArray.unshift(basketItems[i]);
+            updatedQuantityArray.push(newProductQty);
+          }
+        }
+      }
+      window.localStorage.setItem("user-basket", JSON.stringify(updatedQuantityArray));
+      return updatedQuantityArray;
+    });
+  };
 
   // product here is object and quantity is number and both coming from child componenet
   const addBasketitems = (product, quantity) => {

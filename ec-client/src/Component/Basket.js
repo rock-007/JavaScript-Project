@@ -10,15 +10,24 @@ function Basket({ basketItems, updatedBasket }) {
   // let x = [...basketItems];
   // console.log(x);
 
-  const increase = (eachproduct) => {
+  const increaseQuantity = (eachproduct) => {
     if (eachproduct.stockQuantity > eachproduct.quantity + 1) {
       // TODO for when this is not true return not enough item in stock
       let newProductQty = eachproduct;
-       newProductQty.quantity = +eachproduct.quantity + 1;
+      newProductQty.quantity = +eachproduct.quantity + 1;
       console.log(newProductQty);
       updatedBasket(newProductQty);
     }
-
+    //else we can throw error that not enough porducts in stock
+  };
+  const decreseQuantity = (eachproduct) => {
+    if (eachproduct.stockQuantity > eachproduct.quantity + 1) {
+      // TODO for when this is not true return not enough item in stock
+      let newProductQty = eachproduct;
+      newProductQty.quantity = +eachproduct.quantity - 1;
+      console.log(newProductQty);
+      updatedBasket(newProductQty);
+    }
     //else we can throw error that not enough porducts in stock
   };
 
@@ -45,13 +54,13 @@ function Basket({ basketItems, updatedBasket }) {
               <li>{desc}</li>
               <li>
                 <ButtonGroup aria-label="quantityofproduct">
-                  <Button variant="secondary" name="subtract" value="subtract">
+                  <Button variant="secondary" name="subtract" value="subtract" onClick={() => decreseQuantity(eachproduct)}>
                     -
                   </Button>
                   <Button name={productName} variant="secondary">
                     {eachproduct.quantity}
                   </Button>
-                  <Button variant="secondary" name="add" value="add" onClick={() => increase(eachproduct)}>
+                  <Button variant="secondary" name="add" value="add" onClick={() => increaseQuantity(eachproduct)}>
                     +
                   </Button>
                 </ButtonGroup>
