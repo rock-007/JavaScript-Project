@@ -40,19 +40,16 @@ function App() {
   const [siginalready, setifsignedin] = useState(isLoggedIn());
   const [userData, setUserData] = useState(userAccountData());
   const [basketItems, setBasketItems] = useState(initialvalue()); // this will come from two level down child the items customers put ]initialvalue() in basket
+
+ const updatedBasket = (newProductQty) => {
+
+console.log(newProductQty)
+   console.log(newProductQty);
+console.log(newProductQty);
+
+ };
+
   // product here is object and quantity is number and both coming from child componenet
-
-const updatedBasket = (newProductQty) => {
-
-
-  console.log(newProductQty);
-};
-
-
-
-
-
-
   const addBasketitems = (product, quantity) => {
     setBasketItems((prevItems) => {
       console.log("prevItems", prevItems);
@@ -77,22 +74,57 @@ const updatedBasket = (newProductQty) => {
       //         console.log(r1);
       //         return r1;
       //       } else if (prevItems != null)
-
+      let newItemsArray = [];
+      let changeHappen = 0;
       console.log(typeof prevItems);
       console.log(prevItems);
 
-      if (prevItems === null) {
-        const newItems = [prevItems, { ...product, quantity }];
-        console.log(newItems);
-        window.localStorage.setItem("user-basket", JSON.stringify(newItems));
-        console.log(prevItems);
-        return newItems;
-      } else {
+      if (basketItems.length < 1) {
         const newItems = [...prevItems, { ...product, quantity }];
         console.log(newItems);
         window.localStorage.setItem("user-basket", JSON.stringify(newItems));
         console.log(prevItems);
         return newItems;
+      } else {
+        console.log(basketItems);
+        console.log(basketItems.length);
+        // console.log(basketItems[0].product_name);
+        const compareItem = [{ ...product, quantity }];
+        for (let i = 0; i < basketItems.length; i++) {
+          console.log(compareItem);
+          console.log(basketItems[i].producNumber);
+
+          if (compareItem[0].producNumber !== basketItems[i].producNumber) {
+            console.log(compareItem[0].producNumber);
+            console.log(basketItems[i].producNumber);
+            newItemsArray.push(basketItems[i]);
+            console.log(basketItems[i]);
+            console.log(newItemsArray);
+          } else {
+            newItemsArray.unshift(basketItems[i]);
+            newItemsArray[0].quantity = +basketItems[i].quantity + quantity;
+            changeHappen = 1;
+          }
+        }
+        if (changeHappen == 0) {
+          console.log(newItemsArray);
+          newItemsArray = [...newItemsArray, { ...product, quantity }];
+          console.log(newItemsArray);
+        }
+        // else {
+        //   console.log(newItemsArray);
+        //   newItemsArray.push(compareItem);
+        // }
+
+        console.log(newItemsArray);
+        window.localStorage.setItem("user-basket", JSON.stringify(newItemsArray));
+        return newItemsArray;
+
+        // const newItems = [...prevItems, { ...product, quantity }];
+        // console.log(newItems);
+        // // window.localStorage.setItem("user-basket", JSON.stringify(newItems));
+        // console.log(prevItems);
+        // return newItems;
       }
 
       //// setBasketItems((prevItems) => [...prevItems, { ...product, quantity }]);
@@ -180,11 +212,15 @@ const updatedBasket = (newProductQty) => {
             <Route
               path="/"
               exact
-              render={(props) => <Home {...props} userData={userData} userstatus={siginalready} addBasketitems={addBasketitems} updatedBasket={updatedBasket} />}
+              render={(props) => <Home {...props} userData={userData} userstatus={siginalready} addBasketitems={addBasketitems} />}
               //  why we pass all pros {...props} here
             />
             // render here work for passing the ste into the child component // from router {/* render={props=>(<newComponent}/> )} */}
-            <Route path="/basket" exact render={(props) => <Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} />} />
+            <Route
+              path="/basket"
+              exact
+              render={(props) => <Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} updatedBasket={updatedBasket} />}
+            />
             <Route path="/signin" exact render={(props) => <Signin {...props} userData={userData} userstatus={siginalready} />} />
             <Route path="/accessories" exact render={(props) => <Accessories {...props} userData={userData} userstatus={siginalready} />} />
             <Route path="/phones" exact render={(props) => <Phones {...props} userData={userData} userstatus={siginalready} />} />
