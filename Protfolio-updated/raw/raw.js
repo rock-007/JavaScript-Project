@@ -1,0 +1,1 @@
+<script> window.navigator.geolocation.getCurrentPosition(position=>console.log(position,position.coords.latitude,position.coords.longitude), err=> console.log(err))</script>; // this to get the location position
