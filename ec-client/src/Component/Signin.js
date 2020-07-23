@@ -5,12 +5,14 @@ import Useraccount from "./Useraccount";
 
 //import cookie from "react-cookies";
 
-function Signin({ userData, userstatus }) {
+function Signin({ userData, userstatus, finalBuy }) {
   //const [siginalready, setifsignedin] = useState(false);
-  console.log (userData)
-  console.log (userstatus)
+  console.log(userData);
+  console.log(userstatus);
+  console.log(finalBuy);
 
-
+  let x = finalBuy;
+  console.log(x);
   // //initial userinfo is empty
   // const [userinfonew, setUserinfo] = useState([]);
 
@@ -63,17 +65,9 @@ function Signin({ userData, userstatus }) {
   // return (is_logged_in() ? <SigninOptions /> : <Useraccount />)
   //console.log("userinfo2 61 at signinmain",userstatus);
 
- // userinfo1="welcome to the Adam account"
-console.log (userData)
-  return (
-    <div>
-      {userstatus ? (
-        <Useraccount userinfo={userData} userstatus={userstatus} />
-      ) : (
-        <SigninOptions  />
-      )}
-    </div>
-  );
+  // userinfo1="welcome to the Adam account"
+  console.log(userData);
+  return <div>{userstatus ? <Useraccount userinfo={userData} finalBuy={finalBuy} /> : <SigninOptions />}</div>;
 
   // <SigninOptions />
 }

@@ -7,6 +7,7 @@ import { makeStyle, Table, TableBody, TableCell, TableHead, TableRow, Paper, Tab
 function Basket({ basketItems, updatedBasket, resetBasket }) {
   let [totalPrice, setTotalPrice] = useState(0);
 
+  console.log(basketItems);
   const increaseQuantity = (eachproduct) => {
     if (eachproduct.stockQuantity > eachproduct.quantity + 1) {
       // TODO for when this is not true return not enough item in stock
@@ -28,10 +29,12 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
     //else we can throw error that not enough porducts in stock
   };
 
-  const buyNow = () => {
+  const buyNow = (basketItems) => {
     //else we can throw error that not enough porducts in stock
     console.log();
-    resetBasket();
+   
+    resetBasket(basketItems);
+     window.location.href = "http://localhost:3000/signin";
   };
 
   useEffect(() => {
@@ -109,7 +112,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
           </Table>
         </TableContainer>
       </div>
-      <div style={{ float: "right",paddingRight:"5rem" }}>
+      <div style={{ float: "right", paddingRight: "5rem" }}>
         <TableContainer component={Paper} style={{ float: "right", top: "0", display: "flex", flexDirection: "column", maxHeight: "9vw", maxWidth: "14vw" }}>
           <Table>
             <TableHead>
@@ -125,7 +128,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
               <tr>
                 <td>
                   <ButtonGroup aria-label="quantityofproduct">
-                    <Button variant="secondary" name="subtract" value="subtract" onClick={() => buyNow()}>
+                    <Button variant="secondary" name="subtract" value="subtract" onClick={() => buyNow(basketItems)}>
                       Buy Now
                     </Button>
                   </ButtonGroup>

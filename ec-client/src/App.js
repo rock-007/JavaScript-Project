@@ -35,21 +35,35 @@ let initialvalue = () => {
   return y1;
 };
 
+let finalbuyitems = () => {
+  console.log(window.localStorage.getItem("user-final"));
+  let z1 = JSON.parse(window.localStorage.getItem("user-final") || "[]");
+  console.log(z1);
+
+  return z1;
+};
+console.log(finalbuyitems);
+
 // [...prevItems, { ...product, quantity }]
 function App() {
   const [siginalready, setifsignedin] = useState(isLoggedIn());
   const [userData, setUserData] = useState(userAccountData());
   const [basketItems, setBasketItems] = useState(initialvalue()); // this will come from two level down child the items customers put ]initialvalue() in basket
+  console.log(finalbuyitems);
 
+  const [finalBuy, setfinalBuy] = useState(finalbuyitems());
+  console.log("finalbuyitems", finalbuyitems);
+  const resetBasket = (basketItems) => {
+    console.log(basketItems);
 
-const resetBasket=(t)=>{
-console.log(t)
-window.localStorage.setItem("user-basket", []);
+    setfinalBuy(basketItems);
+    console.log(finalBuy);
+    window.localStorage.setItem("user-final", JSON.stringify(basketItems));
 
-setBasketItems([]);
-}
-
-
+    //  setBasketItems([]);
+    // window.localStorage.setItem("user-basket", JSON.stringify([]));
+  };
+  console.log(finalBuy);
 
   const updatedBasket = (newProductQty) => {
     console.log(newProductQty);
@@ -249,7 +263,7 @@ setBasketItems([]);
                 <Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} updatedBasket={updatedBasket} resetBasket={resetBasket} />
               )}
             />
-            <Route path="/signin" exact render={(props) => <Signin {...props} userData={userData} userstatus={siginalready} />} />
+            <Route path="/signin" exact render={(props) => <Signin {...props} userData={userData} finalBuy={finalBuy} userstatus={siginalready} />} />
             <Route path="/accessories" exact render={(props) => <Accessories {...props} userData={userData} userstatus={siginalready} />} />
             {/* <Route path="/phones" exact render={(props) => <Phones {...props} userData={userData} userstatus={siginalready} />} /> */}
           </Switch>
