@@ -60,8 +60,8 @@ function App() {
     console.log(finalBuy);
     window.localStorage.setItem("user-final", JSON.stringify(basketItems));
 
-    //  setBasketItems([]);
-    // window.localStorage.setItem("user-basket", JSON.stringify([]));
+      setBasketItems([]);
+     window.localStorage.setItem("user-basket", JSON.stringify([]));
   };
   console.log(finalBuy);
 
