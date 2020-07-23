@@ -74,21 +74,9 @@ function Forlogin() {
     <div>
       {
         <form method="POST" className="formstyle" onSubmit={credentialVerify}>
-          <input
-            type="text"
-            placeholder="Email"
-            name="Email"
-            value={Email}
-            onChange={updateEmail}
-          />
+          <input type="text" placeholder="Email" name="Email" value={Email} onChange={updateEmail} />
 
-          <input
-            type="text"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={updatePassword}
-          />
+          <input type="text" placeholder="Password" name="password" value={password} onChange={updatePassword} />
           <button type="submit">Submit</button>
         </form>
       }

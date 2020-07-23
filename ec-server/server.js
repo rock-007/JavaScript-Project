@@ -53,16 +53,31 @@ app.get("/api/:abc", (req, res) => {
     [decoded_refine[0]],
     function (err, results) {
       // console.log(results);
-      console.log(typeof (results));
+      console.log(typeof results);
       console.log("57namne", results);
-      if (err) { throw err }
-      else {
+      if (err) {
+        throw err;
+      } else {
         let results1 = JSON.stringify(results);
         console.log(results); // showing the table
         res.send(results1);
       }
     }
   );
+});
+
+// ! ///////////////// FInal INVOICE //////////////////////////////////////////////////////FInal INVOICE////////////////////////////////////////////////////////////
+
+app.post("/api/invoice", (req, res) => {
+  let token = req.cookies.access_token;
+  console.log("body11x", token);
+  console.log("body11y", req.body);
+  console.log("data111", req.body.length);
+
+  if (token) {
+    let z1 = req.body;
+    console.log("hey", z1);
+  }
 });
 
 // ! ///////////////// REGISTER //////////////////////////////////////////////////////Register////////////////////////////////////////////////////////////
@@ -159,10 +174,7 @@ app.post("/api/newuser", (req, res) => {
   // };
   console.log("144", x1);
 
-  connection.query("SELECT * FROM  users WHERE email=?;", [x1.Email], function (
-    err,
-    results
-  ) {
+  connection.query("SELECT * FROM  users WHERE email=?;", [x1.Email], function (err, results) {
     console.log(results);
     console.log("150new", results[0].email);
     console.log("151", results[0].email);
@@ -212,6 +224,4 @@ app.post("/api/newuser", (req, res) => {
 
 //connection.end();
 const port = 5000;
-app.listen(port, "localhost", "localhost", () =>
-  console.log(`server started on port${port}`)
-);
+app.listen(port, "localhost", "localhost", () => console.log(`server started on port${port}`));

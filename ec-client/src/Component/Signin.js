@@ -7,12 +7,28 @@ import Useraccount from "./Useraccount";
 
 function Signin({ userData, userstatus, finalBuy }) {
   //const [siginalready, setifsignedin] = useState(false);
-  console.log(userData);
-  console.log(userstatus);
-  console.log(finalBuy);
 
-  let x = finalBuy;
-  console.log(x);
+  if (finalBuy) {
+    const headers = new Headers();
+    headers.append("content-type", "application/json");
+    // let token =localStorage.getItem()
+    // this incase from local storage headers.append("Authorization",bearer"token")
+console.log(JSON.stringify(finalBuy));
+    const options = {
+      method: "POST",
+      headers,
+      credentials: "include",
+      body: JSON.stringify(finalBuy),
+    };
+
+    const newRequest = new Request("http://localhost:5000/api/invoice", options);
+
+    (async () => {
+      let invoiceFetch = await fetch(newRequest).then().then().catch();
+    })();
+  }
+  //else {"just fetch the old invoices"}
+
   // //initial userinfo is empty
   // const [userinfonew, setUserinfo] = useState([]);
 
