@@ -70,13 +70,40 @@ app.get("/api/:abc", (req, res) => {
 
 app.post("/api/invoice", (req, res) => {
   let token = req.cookies.access_token;
+  let selectedProducts = req.body.length;
   console.log("body11x", token);
-  console.log("body11y", req.body);
+
   console.log("data111", req.body.length);
+  let decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
+  console.log("decodepayload", decodepayload);
 
   if (token) {
+    let userIdentitiy = decodepayload.email;
+
+    console.log("78xx", `${decodepayload.email}`); // confirm the user detail email
+    console.log("83xx", userIdentitiy);
+    console.log("body11y", req.body);
     let z1 = req.body;
     console.log("hey", z1);
+    // get the user_user_id
+
+    const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
+      let user_id = results[0].user_id;
+      let user_email = userIdentitiy;
+      console.log("heyc", user_id);
+      console.log("heyxx", user_email);
+
+      // we now got the correct users
+      if (user_id) {
+        // create users_basket(by submitting email and userID ) and generate the inovice number for this Transaction
+
+        console.log("103", user_email);
+        connection.query("INSERT INTO users_basket SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {
+          // let z1 = get_info(user_id, user_email, function (result) {});
+          console.log("103", results);
+        });
+      }
+    });
   }
 });
 
@@ -93,7 +120,7 @@ app.post("/api/customers", (req, res) => {
   };
 
   connection.query("INSERT INTO users SET ?", person, function (err, results) {
-    if (err) throw err;
+    if (err) console.log(err);
     console.log("46", results);
   });
 
