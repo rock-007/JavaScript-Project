@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import SigninOptions from "./SigninOptions";
 import Useraccount from "./Useraccount";
+import { savsAs } from "file-saver";
 
 //import cookie from "react-cookies";
 
@@ -13,7 +14,7 @@ function Signin({ userData, userstatus, finalBuy }) {
     headers.append("content-type", "application/json");
     // let token =localStorage.getItem()
     // this incase from local storage headers.append("Authorization",bearer"token")
-console.log(JSON.stringify(finalBuy));
+    console.log(JSON.stringify(finalBuy));
     const options = {
       method: "POST",
       headers,

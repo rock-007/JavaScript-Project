@@ -7,6 +7,8 @@ const authNew = require("./verifyTokenNew");
 // const searchrequest = require("./searchrequest");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const pdf = require("html-pdf");
+const pdfTemplate = require("./documents/pdfTemplate");
 
 // initialise express and bind to app conastant so can be used later in the coding //to create server= we have  to run express as function and resolve inside app variable
 const app = express();
@@ -90,6 +92,7 @@ app.post("/api/invoice", (req, res) => {
     const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
       let user_id = results[0].user_id;
       let user_email = userIdentitiy;
+
       console.log("heyc", user_id);
       console.log("heyxx", user_email);
 
@@ -98,10 +101,21 @@ app.post("/api/invoice", (req, res) => {
         // create users_basket(by submitting email and userID ) and generate the inovice number for this Transaction
 
         console.log("103", user_email);
-        connection.query("INSERT INTO users_basket SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {
-          // let z1 = get_info(user_id, user_email, function (result) {});
-          console.log("103", results);
-        });
+        connection.query(" INSERT INTO users_basket  SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {});
+        async function Invoice_No() {
+          connection.query("SELECT invoiceNo FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
+            return invoiceNo;
+          });
+        }
+        let Invoice_No_Per_Trasaction = Invoice_No();
+        let user_details = {
+          user_FirstName: results[0].first_name,
+          user_email: userIdentitiy,
+          Invoice_No: Invoice_No_Per_Trasaction,
+        };
+
+        //pdf.create(pdfTemplate([user_FirstName]));
+        console.log("118", user_details);
       }
     });
   }
