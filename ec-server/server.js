@@ -101,13 +101,30 @@ app.post("/api/invoice", (req, res) => {
         // create users_basket(by submitting email and userID ) and generate the inovice number for this Transaction
 
         console.log("103", user_email);
-        connection.query(" INSERT INTO users_basket  SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {});
-        async function Invoice_No() {
-          connection.query("SELECT invoiceNo FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
-            return invoiceNo;
+       
+        // how exports. ? works
+        function Invoice_No(callback) {
+           connection.query(" INSERT INTO users_basket  SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {
+             console.log("104xx", results.insertId);
+           });
+          connection.query("SELECT u1.user_id,b1.invoiceNo FROM  users u1 INNER JOIN users_basket b1 ON b1.users_user_id=u1.user_id where u1.user_id=?;", [user_id], function (
+            err,
+            results
+          ) {
+            if (err) throw err;
+            console.log("107xx", results);
+
+            callback(results);
           });
         }
-        let Invoice_No_Per_Trasaction = Invoice_No();
+        let Invoice_No_Per_Trasaction = Invoice_No(function (results) {
+          console.log("1ytx", results);
+
+          return results;
+        });
+        console.log("117x", Invoice_No_Per_Trasaction);
+        console.log("117dx", Invoice_No_Per_Trasaction);
+        console.log("120x", Invoice_No_Per_Trasaction);
         let user_details = {
           user_FirstName: results[0].first_name,
           user_email: userIdentitiy,
@@ -115,7 +132,7 @@ app.post("/api/invoice", (req, res) => {
         };
 
         //pdf.create(pdfTemplate([user_FirstName]));
-        console.log("118", user_details);
+        console.log("118x1", user_details);
       }
     });
   }
