@@ -116,13 +116,15 @@ app.post("/api/invoice", (req, res) => {
          
         }
 
-        //  let user_details = {
-        //    user_FirstName: results[0].first_name,
-        //    user_email: userIdentitiy,
-        //    Invoice_No: result,
-        //  };
+       
         let Invoice_No_Per_Trasaction = Invoice_No(function(value){
  return new Promise((resolve, reject) => {
+  let user_details = {
+    user_FirstName: results[0].first_name,
+    user_email: userIdentitiy,
+    Invoice_No:null,
+  };
+
    connection.query("SELECT u1.user_id,b1.invoiceNo FROM  users u1 INNER JOIN users_basket b1 ON b1.users_user_id=u1.user_id where b1.invoiceNo=?; ", [value], function (
      err,
      results
@@ -139,6 +141,11 @@ app.post("/api/invoice", (req, res) => {
 
           
         })
+
+      if(Invoice_No_Per_Trasaction!= undefined){
+
+        console.log("145xx",Invoice_No_Per_Trasaction);
+      }
 
         // let Invoice_No_Per_Trasaction = Invoice_No(function (results) {
         //   console.log("1ytxz", results[0].invoiceNo);
