@@ -1,6 +1,14 @@
-module.exports = ({ name, price1, price2, receiptId }) => {
+module.exports = (customer_dataand_Itemsbought) => {
+  console.log("3xxz", customer_dataand_Itemsbought);
+
+  let customer_Name = customer_dataand_Itemsbought[0].user_FirstName;
+  let receipt_Id = customer_dataand_Itemsbought[0].Invoice_No_latest;
+  let total_Price;
+
+  customer_dataand_Itemsbought.shift();
+
   const today = new Date();
-  return `
+  return  `
     <!doctype html>
     <html>
        <head>
@@ -100,30 +108,33 @@ module.exports = ({ name, price1, price2, receiptId }) => {
                       <table>
                          <tr>
                             <td>
-                               Customer name: ${name}
+                               Customer name: ${customer_Name}
                             </td>
                             <td>
-                               Receipt number: ${receiptId}
+                               Receipt number: ${receipt_Id}
                             </td>
                          </tr>
                       </table>
                    </td>
-                </tr>
-                <tr class="heading">
+                </tr>`;
+  customer_dataand_Itemsbought.map((eachitem) => {
+    total = total + eachitem.price;
+    return `<tr class="heading">
                    <td>Bought items:</td>
                    <td>Price</td>
                 </tr>
                 <tr class="item">
                    <td>First item:</td>
-                   <td>${price1}$</td>
+                   <td>${eachitem.price}$</td>
                 </tr>
                 <tr class="item">
                    <td>Second item:</td>
-                   <td>${price2}$</td>
-                </tr>
+                   <td>${eachitem.price}$</td>
+                </tr>`;
+  })`  Thanks Aditya, i have now updated the code above, i still cant see the remaining items,
              </table>
              <br />
-             <h1 class="justify-center">Total price: ${parseInt(price1) + parseInt(price2)}$</h1>
+             <h1 class="justify-center">Total price: ${total_Price}£</h1>
           </div>
        </body>
     </html>

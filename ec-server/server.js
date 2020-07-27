@@ -81,6 +81,7 @@ app.post("/api/invoice", (req, res) => {
 
   if (token) {
     let userIdentitiy = decodepayload.email;
+    let actaul_Bought_Items = req.body;
 
     console.log("78xx", `${decodepayload.email}`); // confirm the user detail email
     console.log("83xx", userIdentitiy);
@@ -98,7 +99,6 @@ app.post("/api/invoice", (req, res) => {
 
       // we now got the correct users
       if (user_id) {
-
         //1- delete the   quantitiy from the product info
         // create users_basket(by submitting email and userID ) and generate the inovice number for this Transaction
 
@@ -112,47 +112,56 @@ app.post("/api/invoice", (req, res) => {
             console.log("116tty", latest_invoice[0].latest_Invoice);
             callback(latest_invoice[0].latest_Invoice);
           });
-
-         
         }
 
-       
-        let Invoice_No_Per_Trasaction = Invoice_No(function(value){
- return new Promise((resolve, reject) => {
-  let user_details = {
-    user_FirstName: results[0].first_name,
-    user_email: userIdentitiy,
-    Invoice_No:null,
-  };
+        let Invoice_No_Per_Trasaction = Invoice_No(function (value) {
+          connection.query(
+            "SELECT u1.first_name,u1.user_id,b1.invoiceNo FROM  users u1 INNER JOIN users_basket b1 ON b1.users_user_id=u1.user_id where b1.invoiceNo=?; ",
+            [value],
+            function (err, results) {
+              if (err) {
+                console.log("133", err);
+              } else {
+                console.log("135", results); //RowDataPacket { invoiceNo: 1 },. ....
+                Invoice_No_latest = results[0].latest_Invoice;
+                let user_details = {
+                  user_FirstName: results[0].first_name,
+                  user_email: userIdentitiy,
+                  Invoice_No_latest: results[0].invoiceNo,
+                };
+                let customer_dataand_Itemsbought = [user_details, ...actaul_Bought_Items];
+                console.log("123ddf", user_details);
+                console.log("123ddf", typeof user_details);
+                console.log("133", actaul_Bought_Items);
+                console.log("133", typeof actaul_Bought_Items);
+                console.log("135xc", customer_dataand_Itemsbought);
+                //    options={format:'letter'};
 
-   connection.query("SELECT u1.user_id,b1.invoiceNo FROM  users u1 INNER JOIN users_basket b1 ON b1.users_user_id=u1.user_id where b1.invoiceNo=?; ", [value], function (
-     err,
-     results
-   ) {
-     if (err) {
-       reject(err);
-     } else {
-       console.log("107", results); //RowDataPacket { invoiceNo: 1 },. ....
-       resolve(results);
-     }
-   });
- });
-
-
-          
-        })
-
-      if(Invoice_No_Per_Trasaction!= undefined){
-
-        console.log("145xx",Invoice_No_Per_Trasaction);
-      }
+                pdf.create(pdfTemplate(customer_dataand_Itemsbought), {}).toFile(`./${user_details.Invoice_No_latest}.pdf`, function (err, res) {
+                  if (err) {
+                    console.log(err);
+                  } else console.log("143rrt", res, typeof res);
+                });
+console.log("145", user_details.Invoice_No_latest);
+                 connection.query(
+                   "UPDATE users_basket SET invoice_document=? WHERE invoiceNo=?;",
+                   [`${__dirname}/${user_details.Invoice_No_latest}.pdf`, user_details.Invoice_No_latest],
+                   function (err, results) {
+                     if (err) console.log(err);
+                     else console.log(results);
+                   }
+                 );
+              }
+            }
+          );
+        });
 
         // let Invoice_No_Per_Trasaction = Invoice_No(function (results) {
         //   console.log("1ytxz", results[0].invoiceNo);
 
         //   return results[0].invoiceNo;
         // });
-     
+
         //pdf.create(pdfTemplate([user_FirstName]));
       }
     });
