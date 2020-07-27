@@ -98,41 +98,55 @@ app.post("/api/invoice", (req, res) => {
 
       // we now got the correct users
       if (user_id) {
+
+        //1- delete the   quantitiy from the product info
         // create users_basket(by submitting email and userID ) and generate the inovice number for this Transaction
 
-        console.log("103", user_email);
-       
         // how exports. ? works
         function Invoice_No(callback) {
-           connection.query(" INSERT INTO users_basket  SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {
-             console.log("104xx", results.insertId);
-           });
-          connection.query("SELECT u1.user_id,b1.invoiceNo FROM  users u1 INNER JOIN users_basket b1 ON b1.users_user_id=u1.user_id where u1.user_id=?;", [user_id], function (
-            err,
-            results
-          ) {
-            if (err) throw err;
-            console.log("107xx", results);
-
-            callback(results);
+          connection.query(" INSERT INTO users_basket  SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {});
+          let latest_inoice_new;
+          connection.query("Select max(invoiceNo) AS latest_Invoice from users_basket", function (err, latest_invoice) {
+            console.log("116tty", latest_invoice);
+            latest_inoice_new = latest_invoice[0].latest_Invoice;
+            console.log("116tty", latest_invoice[0].latest_Invoice);
+            callback(latest_invoice[0].latest_Invoice);
           });
+
+         
         }
-        let Invoice_No_Per_Trasaction = Invoice_No(function (results) {
-          console.log("1ytx", results);
 
-          return results;
-        });
-        console.log("117x", Invoice_No_Per_Trasaction);
-        console.log("117dx", Invoice_No_Per_Trasaction);
-        console.log("120x", Invoice_No_Per_Trasaction);
-        let user_details = {
-          user_FirstName: results[0].first_name,
-          user_email: userIdentitiy,
-          Invoice_No: Invoice_No_Per_Trasaction,
-        };
+        //  let user_details = {
+        //    user_FirstName: results[0].first_name,
+        //    user_email: userIdentitiy,
+        //    Invoice_No: result,
+        //  };
+        let Invoice_No_Per_Trasaction = Invoice_No(function(value){
+ return new Promise((resolve, reject) => {
+   connection.query("SELECT u1.user_id,b1.invoiceNo FROM  users u1 INNER JOIN users_basket b1 ON b1.users_user_id=u1.user_id where b1.invoiceNo=?; ", [value], function (
+     err,
+     results
+   ) {
+     if (err) {
+       reject(err);
+     } else {
+       console.log("107", results); //RowDataPacket { invoiceNo: 1 },. ....
+       resolve(results);
+     }
+   });
+ });
 
+
+          
+        })
+
+        // let Invoice_No_Per_Trasaction = Invoice_No(function (results) {
+        //   console.log("1ytxz", results[0].invoiceNo);
+
+        //   return results[0].invoiceNo;
+        // });
+     
         //pdf.create(pdfTemplate([user_FirstName]));
-        console.log("118x1", user_details);
       }
     });
   }
