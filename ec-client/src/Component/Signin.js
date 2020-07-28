@@ -6,10 +6,14 @@ import { savsAs } from "file-saver";
 
 //import cookie from "react-cookies";
 
-function Signin({ userData, userstatus, finalBuy }) {
+function Signin({ userData, userstatus, finalBuy, buyNow, resetBuynow }) {
   //const [siginalready, setifsignedin] = useState(false);
+  console.log(userData);
+  console.log(userstatus);
 
-  if (finalBuy) {
+  console.log(finalBuy);
+
+  if (finalBuy != null && buyNow == true) {
     const headers = new Headers();
     headers.append("content-type", "application/json");
     // let token =localStorage.getItem()
@@ -25,11 +29,22 @@ function Signin({ userData, userstatus, finalBuy }) {
     const newRequest = new Request("http://localhost:5000/api/invoice", options);
 
     (async () => {
-      let invoiceFetch = await fetch(newRequest).then().then().catch();
+      let invoiceFetch = await fetch(newRequest).then(data=>
+        { 
+          console.log("32", data);
+          // let fg= data.json();
+          //           console.log("36", fg);
+          //            console.log("36ccx", fg[0]);
+                     return data.json();
+          }).then(data1=>{ 
+            
+             console.log("41", data1[0]);
+            console.log("41",typeof(data1))}).catch();
     })();
+
+    resetBuynow(false);
   }
   //else {"just fetch the old invoices"}
-
   // //initial userinfo is empty
   // const [userinfonew, setUserinfo] = useState([]);
 
@@ -84,7 +99,7 @@ function Signin({ userData, userstatus, finalBuy }) {
 
   // userinfo1="welcome to the Adam account"
   console.log(userData);
-  return <div>{userstatus ? <Useraccount userinfo={userData} finalBuy={finalBuy} /> : <SigninOptions />}</div>;
+  return <div>{userstatus ? <Useraccount userinfo={userData} userstatus={userstatus} finalBuy={finalBuy} /> : <SigninOptions />}</div>;
 
   // <SigninOptions />
 }

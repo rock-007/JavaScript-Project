@@ -42,6 +42,13 @@ let finalbuyitems = () => {
 
   return z1;
 };
+let buyNowTrue = () => {
+  console.log(window.localStorage.getItem("buyNowTrue"));
+  let z1 = !!JSON.parse(window.localStorage.getItem("buyNowFinal") || "0");
+  console.log(z1);
+
+  return z1;
+};
 console.log(finalbuyitems);
 
 // [...prevItems, { ...product, quantity }]
@@ -52,7 +59,16 @@ function App() {
   console.log(finalbuyitems);
 
   const [finalBuy, setfinalBuy] = useState(finalbuyitems());
+  const [buyNow, setbuyNow] = useState(buyNowTrue());
   console.log("finalbuyitems", finalbuyitems);
+
+  const resetBuynow = (latestState) => {
+    console.log("66", latestState);
+
+    setbuyNow(false);
+    window.localStorage.setItem("buyNowFinal", JSON.stringify(false));
+  };
+
   const resetBasket = (basketItems) => {
     console.log(basketItems);
 
@@ -60,8 +76,10 @@ function App() {
     console.log(finalBuy);
     window.localStorage.setItem("user-final", JSON.stringify(basketItems));
 
-      setBasketItems([]);
-     window.localStorage.setItem("user-basket", JSON.stringify([]));
+    setBasketItems([]);
+    window.localStorage.setItem("user-basket", JSON.stringify([]));
+    setbuyNow(true);
+    window.localStorage.setItem("buyNowFinal", JSON.stringify(true));
   };
   console.log(finalBuy);
 
@@ -202,7 +220,7 @@ function App() {
   };
 
   let verifyifloginalready = new Request(url, options);
-  
+
   useEffect(() => {
     credentailverify();
   }, []);
@@ -228,6 +246,7 @@ function App() {
         .then((data) => {
           setUserData(data.data);
           window.localStorage.setItem("user-status", true);
+          console.log(data.data);
           window.localStorage.setItem("user-data", data.data);
         })
         .catch((err) => console.log("err"));
@@ -264,7 +283,11 @@ function App() {
                 <Basket {...props} userData={userData} userstatus={siginalready} basketItems={basketItems} updatedBasket={updatedBasket} resetBasket={resetBasket} />
               )}
             />
-            <Route path="/signin" exact render={(props) => <Signin {...props} userData={userData} finalBuy={finalBuy} userstatus={siginalready} />} />
+            <Route
+              path="/signin"
+              exact
+              render={(props) => <Signin {...props} buyNow={buyNow} resetBuynow={resetBuynow} userData={userData} finalBuy={finalBuy} userstatus={siginalready} />}
+            />
             <Route path="/accessories" exact render={(props) => <Accessories {...props} userData={userData} userstatus={siginalready} />} />
             {/* <Route path="/phones" exact render={(props) => <Phones {...props} userData={userData} userstatus={siginalready} />} /> */}
           </Switch>

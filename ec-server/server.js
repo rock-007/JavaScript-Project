@@ -142,15 +142,23 @@ app.post("/api/invoice", (req, res) => {
                     console.log(err);
                   } else console.log("143rrt", res, typeof res);
                 });
-console.log("145", user_details.Invoice_No_latest);
-                 connection.query(
-                   "UPDATE users_basket SET invoice_document=? WHERE invoiceNo=?;",
-                   [`${__dirname}/${user_details.Invoice_No_latest}.pdf`, user_details.Invoice_No_latest],
-                   function (err, results) {
-                     if (err) console.log(err);
-                     else console.log(results);
-                   }
-                 );
+                console.log("145", user_details.Invoice_No_latest);
+                connection.query(
+                  "UPDATE users_basket SET invoice_document=? WHERE invoiceNo=?;",
+                  [`${__dirname}/${user_details.Invoice_No_latest}.pdf`, user_details.Invoice_No_latest],
+                  function (err, results) {
+                    if (err) console.log(err);
+                    else console.log("151ddf", results);
+                  }
+                );
+                connection.query("SELECT * FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
+                  if (err) throw err;
+                  else {
+                    console.log("1578", results);
+                    let invoice_Object= JSON.stringify(results)
+                    res.send(invoice_Object);
+                  }
+                });
               }
             }
           );
