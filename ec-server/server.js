@@ -76,6 +76,7 @@ app.post("/api/invoice", (req, res) => {
   console.log("body11x", token);
 
   console.log("data111", req.body.length);
+  console.log("data111body", req.body);
   let decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
   console.log("decodepayload", decodepayload);
 
@@ -155,22 +156,14 @@ app.post("/api/invoice", (req, res) => {
                   if (err) throw err;
                   else {
                     console.log("1578", results);
-                    let invoice_Object= JSON.stringify(results)
-                    res.send(invoice_Object);
+                    //  let invoice_Object = json.stringify(results);
+                    res.json(results);
                   }
                 });
               }
             }
           );
         });
-
-        // let Invoice_No_Per_Trasaction = Invoice_No(function (results) {
-        //   console.log("1ytxz", results[0].invoiceNo);
-
-        //   return results[0].invoiceNo;
-        // });
-
-        //pdf.create(pdfTemplate([user_FirstName]));
       }
     });
   }

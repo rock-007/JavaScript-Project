@@ -65,8 +65,8 @@ function App() {
   const resetBuynow = (latestState) => {
     console.log("66", latestState);
 
-    setbuyNow(false);
-    window.localStorage.setItem("buyNowFinal", JSON.stringify(false));
+    setbuyNow(latestState);
+    window.localStorage.setItem("buyNowFinal", JSON.stringify(latestState));
   };
 
   const resetBasket = (basketItems) => {
