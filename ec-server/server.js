@@ -9,6 +9,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const pdf = require("html-pdf");
 const pdfTemplate = require("./documents/pdfTemplate");
+const fs = require("fs");
 
 // initialise express and bind to app conastant so can be used later in the coding //to create server= we have  to run express as function and resolve inside app variable
 const app = express();
@@ -74,14 +75,24 @@ app.post("/api/invoice-only", (req, res) => {
   let token = req.cookies.access_token;
   if (token) {
     let Invoice_No_Actual = req.body.invoice_Name;
-    res.set("Content-disposition", "attachment; filename=" + `${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
-    res.set("Content-Type", "application/pdf");
+    // res.set("Content-disposition", "attachment; filename=" + `${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
+    // res.set("Content-Type", "application/pdf");
 
-    // res.writeHead(200, {
-    //   //  "Content-Type": "application/octet-stream",
-    //   "Content-disposition": "attachment; filename=",
-    // });
-    res.sendFile(`${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
+    //    res.writeHead(200, {
+    //  "Content-Type": "application/octet-stream",
+    //      "Content-disposition": "attachment; filename=",
+    //    });
+    // res.sendFile(`${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
+
+    fs.readFile(`${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`, (err, data) => {
+      if (err) res.status(500).send(err);
+      else {
+        console.log(data);
+        res.contentType("application/pdf");
+        //("Content-disposition", "attachment; filename=" + `${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
+        res.send(`data:application/pdf;base64,${new Buffer.from(data).toString("base64")}`);
+      }
+    });
   }
 });
 

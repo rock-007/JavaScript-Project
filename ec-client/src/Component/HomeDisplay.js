@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../logo.svg";
 import "../App.css";
 import ProjectLogo from "../Img/logo.svg";
@@ -9,52 +9,20 @@ import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, MenuIte
 
 // props here are arrays of object
 function Home({ props, addBasketitems }) {
-  const initialQuantities = props.reduce((quantities, product) => ({ ...quantities, [product.product_name]: 0 }), {});
-  console.log(props);
-  console.log(initialQuantities);
+  let initialQuantities = props.reduce((quantities, product) => ({ ...quantities, [product.product_name]: 0 }), {});
+  console.log("13hhj", props);
+  console.log("dfsds", initialQuantities);
 
-  // for (let i = 0; i < props.length; i++) {
-
-  //   products[i] = { name:props[i].product_name }
-
-  // }
-
-  // const initialQuantitiy = props.reduce((quantities, product) => ({ ...quantities, [props.product_name]: 0 }, {})) // array of object return
-
-  // const [quantitiyselected, setQuantity] = useState(initialQuantitiy);
-  //quantitiyselected=[{object1},{props.product_name:..},{},...]
-
-  //   const [yogaMatState, setYogaMatState] = useState("---Select Yogamats---");
-  //   const [yogaEquipState, setYogaEquipState] = useState("---Select Equipments---");
-
-  //   const [yogaClothsState, setYogaClothsState] = useState("---Select Cloths---");
-  //   const [accessoriesState, setAccessoriesState] = useState("---Select Accessories---");
-
-  //   function reset() {
-  //     setYogaMatState("---Select Yogamats---");
-  //     setAccessoriesState("---Select Accessories---");
-  //     setYogaClothsState("---Select Cloths---");
-  //     setYogaEquipState("---Select Equipments---");
   console.log("homedisp", props);
 
-  // console.log("26", e);
-  //   console.log("26", e.currentTarget);
-  //   console.log("26", e.currentTarget.textContent);
-  //   console.log("26", e.currentTarget.value);
-  //   console.log("26", e.currentTarget.key);
-
-  // let selectquantity = (e) => {
-  //   if (e.currentTarget.name == "add") {
-  //     let i = quantitiyselected + 1;
-  //     setQuantity(i);
-  //   } else if (e.currentTarget.name == "subtract" && quantitiyselected > 0) {
-  //     let z = quantitiyselected - 1;
-  //     setQuantity(z);
-  //   } else;
-  // };
+  useEffect(() => {
+    if (props) {
+      initialQuantities = props.reduce((quantities, product) => ({ ...quantities, [product.product_name]: 0 }), {});
+    }
+  });
 
   const [quantities, setQuantites] = useState(initialQuantities);
-
+  console.log("2344", quantities);
   const clearselection = (productName) => {
     setQuantites({ ...quantities, [productName]: 0 });
   };
@@ -95,7 +63,7 @@ function Home({ props, addBasketitems }) {
               <li>price:{price}£ </li>
               <li>{desc}</li>
               <li>
-                <ButtonGroup aria-label="quantityofproduct">
+                <ButtonGroup aria-label="quantityofproduct" key={productName}>
                   <Button variant="secondary" name="subtract" value="subtract" onClick={() => decrease(productName)}>
                     -
                   </Button>

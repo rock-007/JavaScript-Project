@@ -7,9 +7,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
   console.log("7yy", allInvoices);
 
   let generateFile = (content, fileName) => {
-    // let content1 = JSON.parse(content);
     console.log("content", content);
-    console.log("contac", content);
 
     const blob = new Blob([content], { type: "application/pdf" });
     console.log(blob);
@@ -33,6 +31,8 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
       headers,
       credentials: "include",
       body: JSON.stringify(invoice_Object),
+
+      // body: "My HTML String",
     };
     const newRequest = new Request("http://localhost:5000/api/invoice-only", options);
 
