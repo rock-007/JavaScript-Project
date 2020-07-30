@@ -68,6 +68,43 @@ app.get("/api/:abc", (req, res) => {
   );
 });
 
+// ! ///////////////// FInal INVOICE(Query only) //////////////////////////////////////////////////////FInal INVOICE(Query only)////////////////////////////////////////////////////////////
+
+app.post("/api/invoice-only", (req, res) => {
+  let token = req.cookies.access_token;
+  if (token) {
+    let Invoice_No_Actual = req.body.invoice_Name;
+    res.set("Content-disposition", "attachment; filename=" + `${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
+    res.set("Content-Type", "application/pdf");
+
+    // res.writeHead(200, {
+    //   //  "Content-Type": "application/octet-stream",
+    //   "Content-disposition": "attachment; filename=",
+    // });
+    res.sendFile(`${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
+  }
+});
+
+///////////////////////////////////////////////////////
+
+app.post("/api/invoice-all", (req, res) => {
+  let token = req.cookies.access_token;
+  let decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
+  let userIdentitiy = decodepayload.email;
+  const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
+    let user_id = results[0].user_id;
+    // let user_email = userIdentitiy;
+
+    connection.query("SELECT * FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
+      if (err) throw err;
+      else {
+        console.log("1578", results);
+        //  let invoice_Object = json.stringify(results);
+        res.json(results);
+      }
+    });
+  });
+});
 // ! ///////////////// FInal INVOICE //////////////////////////////////////////////////////FInal INVOICE////////////////////////////////////////////////////////////
 
 app.post("/api/invoice", (req, res) => {
@@ -79,9 +116,9 @@ app.post("/api/invoice", (req, res) => {
   console.log("data111body", req.body);
   let decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
   console.log("decodepayload", decodepayload);
+  let userIdentitiy = decodepayload.email;
 
-  if (token) {
-    let userIdentitiy = decodepayload.email;
+  if (token && req.body.length > 0) {
     let actaul_Bought_Items = req.body;
 
     console.log("78xx", `${decodepayload.email}`); // confirm the user detail email
@@ -129,6 +166,7 @@ app.post("/api/invoice", (req, res) => {
                   user_FirstName: results[0].first_name,
                   user_email: userIdentitiy,
                   Invoice_No_latest: results[0].invoiceNo,
+                  user_id: results[0].user_id,
                 };
                 let customer_dataand_Itemsbought = [user_details, ...actaul_Bought_Items];
                 console.log("123ddf", user_details);
@@ -138,20 +176,21 @@ app.post("/api/invoice", (req, res) => {
                 console.log("135xc", customer_dataand_Itemsbought);
                 //    options={format:'letter'};
 
-                pdf.create(pdfTemplate(customer_dataand_Itemsbought), {}).toFile(`./${user_details.Invoice_No_latest}.pdf`, function (err, res) {
-                  if (err) {
-                    console.log(err);
-                  } else console.log("143rrt", res, typeof res);
-                });
+                console.log("146xc", user_details);
+                console.log("475xc", user_details.Invoice_No_latest);
+                pdf
+                  .create(pdfTemplate(customer_dataand_Itemsbought), { type: "pdf" })
+                  .toFile(`./${user_details.user_id}` + `_` + `${user_details.Invoice_No_latest}.pdf`, function (err, res) {
+                    if (err) {
+                      console.log(err);
+                    } else console.log("143rrt", res, typeof res);
+                    connection.query("UPDATE users_basket set invoice_document=? WHERE invoiceNo=?;", [res.filename, user_details.Invoice_No_latest], function (err, results) {
+                      if (err) console.log(err);
+                      else console.log("151ddf", results);
+                    });
+                  });
                 console.log("145", user_details.Invoice_No_latest);
-                connection.query(
-                  "UPDATE users_basket SET invoice_document=? WHERE invoiceNo=?;",
-                  [`${__dirname}/${user_details.Invoice_No_latest}.pdf`, user_details.Invoice_No_latest],
-                  function (err, results) {
-                    if (err) console.log(err);
-                    else console.log("151ddf", results);
-                  }
-                );
+
                 connection.query("SELECT * FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
                   if (err) throw err;
                   else {
@@ -166,8 +205,22 @@ app.post("/api/invoice", (req, res) => {
         });
       }
     });
+  } else {
+    const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
+      let user_id = results[0].user_id;
+      connection.query("SELECT * FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
+        if (err) throw err;
+        else {
+          console.log("1578", results);
+          //  let invoice_Object = json.stringify(results);
+          res.json(results);
+        }
+      });
+    });
   }
 });
+
+/////////////////////////////////////
 
 // ! ///////////////// REGISTER //////////////////////////////////////////////////////Register////////////////////////////////////////////////////////////
 

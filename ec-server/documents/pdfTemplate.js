@@ -3,12 +3,14 @@ module.exports = (customer_dataand_Itemsbought) => {
 
   let customer_Name = customer_dataand_Itemsbought[0].user_FirstName;
   let receipt_Id = customer_dataand_Itemsbought[0].Invoice_No_latest;
-  let total_Price;
+  var total_Price = 0;
 
   customer_dataand_Itemsbought.shift();
+  console.log("3xx1z", customer_dataand_Itemsbought);
 
   const today = new Date();
-  return  `
+  let htmlFormat =
+    `
     <!doctype html>
     <html>
        <head>
@@ -116,10 +118,11 @@ module.exports = (customer_dataand_Itemsbought) => {
                          </tr>
                       </table>
                    </td>
-                </tr>`;
-  customer_dataand_Itemsbought.map((eachitem) => {
-    total = total + eachitem.price;
-    return `<tr class="heading">
+                </tr>` +
+    customer_dataand_Itemsbought.map((eachitem) => {
+      total_Price = total_Price + eachitem.price;
+      return `
+                <tr class="heading">
                    <td>Bought items:</td>
                    <td>Price</td>
                 </tr>
@@ -131,7 +134,8 @@ module.exports = (customer_dataand_Itemsbought) => {
                    <td>Second item:</td>
                    <td>${eachitem.price}$</td>
                 </tr>`;
-  })`  Thanks Aditya, i have now updated the code above, i still cant see the remaining items,
+    }) +
+    `  
              </table>
              <br />
              <h1 class="justify-center">Total price: ${total_Price}£</h1>
@@ -139,4 +143,5 @@ module.exports = (customer_dataand_Itemsbought) => {
        </body>
     </html>
     `;
+  return htmlFormat;
 };

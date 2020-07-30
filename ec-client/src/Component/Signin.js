@@ -15,6 +15,39 @@ function Signin({ userData, userstatus, finalBuy, buyNow, resetBuynow }) {
 
   console.log(finalBuy);
 
+  useEffect(() => {
+    console.log("19xxc", finalBuy);
+    resetBuynow(false);
+    const headers = new Headers();
+    headers.append("content-type", "application/json");
+    // let token =localStorage.getItem()
+    // this incase from local storage headers.append("Authorization",bearer"token")
+
+    const options = {
+      method: "POST",
+      headers,
+      credentials: "include",
+      body: JSON.stringify(),
+    };
+
+    const newRequest = new Request("http://localhost:5000/api/invoice-all", options);
+
+    (async () => {
+      const invoiceFetch = await fetch(newRequest)
+        .then((data) => {
+          console.log("32json", data);
+
+          return data.json();
+        })
+        .then((data1) => {
+          console.log("41", data1[110]);
+          console.log("41", typeof data1);
+          setallInvoices(data1);
+        })
+        .catch();
+    })();
+  }, []);
+
   if (finalBuy != null && buyNow === true) {
     console.log("19xxc", finalBuy);
     resetBuynow(false);
