@@ -16,10 +16,9 @@ function Home({ props, addBasketitems }) {
   console.log("homedisp", props);
 
   useEffect(() => {
-    if (props) {
-      initialQuantities = props.reduce((quantities, product) => ({ ...quantities, [product.product_name]: 0 }), {});
-    }
-  });
+    const newQuantities = props.reduce((quantities, product) => ({ ...quantities, [product.product_name]: 0 }), {});
+    setQuantites(newQuantities);
+  }, [props]);
 
   const [quantities, setQuantites] = useState(initialQuantities);
   console.log("2344", quantities);
