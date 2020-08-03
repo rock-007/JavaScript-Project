@@ -88,7 +88,8 @@ app.post("/api/invoice-only", (req, res) => {
       if (err) res.status(500).send(err);
       else {
         console.log(data);
-        res.contentType("application/pdf");
+        res.contentType("buffer");
+        //   res.contentType("arraybuffer");
         //("Content-disposition", "attachment; filename=" + `${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
         res.send(`data:application/pdf;base64,${new Buffer.from(data).toString("base64")}`);
       }

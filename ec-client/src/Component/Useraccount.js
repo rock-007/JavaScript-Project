@@ -8,8 +8,15 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
 
   let generateFile = (content, fileName) => {
     console.log("content", content);
+    // console.log("contentx", typeof content);
+    // let array1 = new Uint8Array(byteNumbers);
+    // console.log("array11", array1);
 
-    const blob = new Blob([content], { type: "application/pdf" });
+    let content1 = content.slice(29);
+    console.log("contentxx", content1);
+
+    const blob = new Blob([content1], { type: "application/pdf" });
+
     console.log(blob);
     const link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
@@ -24,7 +31,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
 
     const headers = new Headers();
     headers.append("content-type", "application/json");
-    headers.append("responseType", "application/pdf");
+    headers.append("responseType", "bufferarray");
     // headers.append("responseType", "blob");
     const options = {
       method: "POST",
@@ -47,11 +54,17 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
           var contentDisposition = res.headers.get("content-disposition");
           console.log("contentDispositionxx", contentDisposition);
           console.log("resxx", res);
-          console.log("resxx", typeof res);
-          const text1 = res.text();
-          return text1;
+          // let byteCharacters = atob(res.data);
+          // console.log("byteCharacters", byteCharacters);
+          // console.log("resxx", typeof res);
+
+          //  const text1 = res.json({ data: decode });
+          return res.text();
+          //  console.log("resxxy", text1);
+          // return res.blob();
         })
         .then((data) => {
+          console.log(typeof data);
           console.log("textxx", data);
           generateFile(data, invoice_Name);
         });
