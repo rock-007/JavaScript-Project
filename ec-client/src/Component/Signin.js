@@ -46,7 +46,7 @@ function Signin({ userData, userstatus, finalBuy, buyNow, resetBuynow }) {
         })
         .catch();
     })();
-  }, []);
+  }, [buyNow === true]);
 
   if (finalBuy != null && buyNow === true) {
     console.log("19xxc", finalBuy);
