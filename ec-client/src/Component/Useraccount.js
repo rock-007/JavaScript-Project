@@ -7,15 +7,21 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
   console.log("7yy", allInvoices);
 
   let generateFile = (content, fileName) => {
-    console.log("content", content);
+    //console.log("content", content);
     // console.log("contentx", typeof content);
     // let array1 = new Uint8Array(byteNumbers);
     // console.log("array11", array1);
-
-    let content1 = content.slice(29);
+    console.log("contentbefore", content);
+    let content1 = content.slice(28);
     console.log("contentxx", content1);
-
-    const blob = new Blob([content1], { type: "application/pdf" });
+    var decodedData = atob(content1);
+    const length = decodedData.length;
+    const arrayBuffer = new ArrayBuffer(length);
+    const uintArray = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < length; i++) {
+      uintArray[i] = decodedData.charCodeAt(i);
+    }
+    const blob = new Blob([uintArray], { type: "application/pdf" });
 
     console.log(blob);
     const link = document.createElement("a");
