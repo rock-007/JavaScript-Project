@@ -7,10 +7,6 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
   console.log("7yy", allInvoices);
 
   let generateFile = (content, fileName) => {
-    //console.log("content", content);
-    // console.log("contentx", typeof content);
-    // let array1 = new Uint8Array(byteNumbers);
-    // console.log("array11", array1);
     console.log("contentbefore", content);
     let content1 = content.slice(28);
     console.log("contentxx", content1);
@@ -38,14 +34,11 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
     const headers = new Headers();
     headers.append("content-type", "application/json");
     headers.append("responseType", "bufferarray");
-    // headers.append("responseType", "blob");
     const options = {
       method: "POST",
       headers,
       credentials: "include",
       body: JSON.stringify(invoice_Object),
-
-      // body: "My HTML String",
     };
     const newRequest = new Request("http://localhost:5000/api/invoice-only", options);
 
