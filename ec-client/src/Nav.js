@@ -2,8 +2,9 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Link } from "react-router-dom";
-import ProjectLogo from "./Img/logo.svg";
+import ProjectLogo from "./Img/Yoga1.png";
 import Search from "./Component/Search";
+import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, DropdownButton, MenuItem, Container } from "react-bootstrap";
 
 function Nav({ userinfo, userstatus }) {
   const navStyle = {
@@ -13,21 +14,17 @@ function Nav({ userinfo, userstatus }) {
   // if cookies are present then signin and change the signin to `${name of account holder}`
 
   return (
-    <nav  className="header">
+    <nav className="header">
       <label className="logo">
         <a href="/">
-          <img src={ProjectLogo} />
-          UmairShop
+          <img className="yoga-image" src={ProjectLogo} />
         </a>
       </label>
 
       <ul>
-        <li className="searchbar">
-          <Search />
-        </li>
         <li>
           <a
-            className="active glyphicon glyphicon-shopping-cart
+            className="glyphicon glyphicon-shopping-cart
 "
             href="./basket"
           ></a>
@@ -50,16 +47,14 @@ function Nav({ userinfo, userstatus }) {
           <a className="active" href="/signin">
             {userstatus ? (
               <a
-                className="glyphicon glyphicon-user	
+                className=" signin-icon glyphicon glyphicon-user	
 "
               ></a>
             ) : (
               <a>SIGNIN</a>
             )}
-
-            {/* {userinfo2 ? <a class="glyphicon glyphicon-log-in">SIGNIN</a> : userinfo1} */}
           </a>
-          <ul>
+          <ul aria-labelledby="dropdownMenu">
             <li>
               <a href="#">link5</a>
             </li>

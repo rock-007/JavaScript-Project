@@ -60,7 +60,7 @@ function Home({ props, addBasketitems }) {
                 Item No:{producNumber}(InStock:{stockQuantity})
               </li>
               <li>price:{price}£ </li>
-              <li>{desc}</li>
+              <li className="description-height">{desc}</li>
               <li>
                 <ButtonGroup aria-label="quantityofproduct" key={productName}>
                   <Button variant="secondary" name="subtract" value="subtract" onClick={() => decrease(productName)}>
