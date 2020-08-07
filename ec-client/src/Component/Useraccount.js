@@ -114,6 +114,30 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
           </Table>
         </TableContainer>
       </div>
+      <div style={{ float: "right", paddingRight: "5rem" }}>
+        <TableContainer
+          className="basket-summary"
+          component={Paper}
+          style={{ float: "right", top: "0", display: "flex", flexDirection: "column", maxHeight: "9vw", maxWidth: "14vw" }}
+        >
+          <Table className="basket-summary-inside">
+            <TableHead>
+              <TableRow>
+                <TableCell>Welcome </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <tr>
+                <td> </td>
+              </tr>
+
+              <tr>
+                <td></td>
+              </tr>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </>
   );
 }
