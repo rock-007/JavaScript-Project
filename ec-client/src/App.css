@@ -432,7 +432,7 @@ label #cancel {
   border-bottom: 0.1rem #c0c0c0 solid;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-  position: relative;
+  position: left;
   display: table;
   /* float:left; */
 }
@@ -451,7 +451,17 @@ label #cancel {
   padding-bottom: 1rem;
   margin-top: 10rem;
   position: relative;
-  max-width: 60vw;
+  width: 60vw;
+}
+.Basketitems {
+  /* min-width: 65rem; */
+  min-height: 15rem;
+}
+.basket-summary {
+  /* max-width: 13rem; */
+  min-height: 15rem;
+  padding-bottom: 1rem;
+  margin-top: 10rem;
 }
 
 .BasketProducts ul {

@@ -32,9 +32,9 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
   const buyNow = (basketItems) => {
     //else we can throw error that not enough porducts in stock
     console.log();
-   
+
     resetBasket(basketItems);
-     window.location.href = "http://localhost:3000/signin";
+    window.location.href = "http://localhost:3000/signin";
   };
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
   return (
     <>
       <div className="BasketProducts" style={{ float: "left" }}>
-        <TableContainer component={Paper}>
+        <TableContainer className="Basketitems" component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
@@ -85,7 +85,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
                       Item No:{producNumber} (InStock:{stockQuantity})
                     </TableCell>
                     <TableCell>
-                      <ul style={{ float: "bottom", display: "flex", flexDirection: "column", maxWidth: "6vw" }}>
+                      <ul style={{ float: "bottom", display: "flex", flexDirection: "column" }}>
                         <li>
                           <span>{boughtQuantitiy} </span>
                         </li>
@@ -113,8 +113,12 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
         </TableContainer>
       </div>
       <div style={{ float: "right", paddingRight: "5rem" }}>
-        <TableContainer component={Paper} style={{ float: "right", top: "0", display: "flex", flexDirection: "column", maxHeight: "9vw", maxWidth: "14vw" }}>
-          <Table>
+        <TableContainer
+          className="basket-summary"
+          component={Paper}
+          style={{ float: "right", top: "0", display: "flex", flexDirection: "column", maxHeight: "9vw", maxWidth: "14vw" }}
+        >
+          <Table className="basket-summary-inside">
             <TableHead>
               <TableRow>
                 <TableCell>Summary </TableCell>
@@ -126,17 +130,16 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
               </tr>
 
               <tr>
-                <td>
-                  <ButtonGroup aria-label="quantityofproduct">
-                    <Button variant="secondary" name="subtract" value="subtract" onClick={() => buyNow(basketItems)}>
-                      Buy Now
-                    </Button>
-                  </ButtonGroup>
-                </td>
+                <td></td>
               </tr>
             </TableBody>
           </Table>
         </TableContainer>
+        <ButtonGroup aria-label="quantityofproduct">
+          <Button variant="secondary" name="subtract" value="subtract" onClick={() => buyNow(basketItems)}>
+            Buy Now
+          </Button>
+        </ButtonGroup>
       </div>
     </>
   );
