@@ -460,13 +460,23 @@ label #cancel {
 .basket-summary {
   /* max-width: 13rem; */
   min-height: 15rem;
+  min-width: 10rem;
   padding-bottom: 1rem;
   margin-top: 10rem;
 }
 
+.signin-welcome {
+  min-height: 15rem;
+  min-width: 21rem;
+  padding-bottom: 1rem;
+  margin-top: 10rem;
+}
+.button-block {
+  width: 18 !important;
+}
+
 .BasketProducts ul {
   display: flex;
-  width: 80%;
 }
 .BasketProducts li {
   list-style-type: none;

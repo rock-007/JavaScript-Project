@@ -136,7 +136,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
           </Table>
         </TableContainer>
         <ButtonGroup aria-label="quantityofproduct">
-          <Button variant="secondary" name="subtract" value="subtract" onClick={() => buyNow(basketItems)}>
+          <Button className=" button-block" variant="primary" name="subtract" value="subtract" onClick={() => buyNow(basketItems)}>
             Buy Now
           </Button>
         </ButtonGroup>
