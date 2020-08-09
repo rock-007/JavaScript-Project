@@ -60,10 +60,21 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
             <TableHead>
               <TableRow>
                 <TableCell> </TableCell>
-                <TableCell>Product Name </TableCell>
-                <TableCell> Item No./Stock Level</TableCell>
-                <TableCell> Quantitiy</TableCell>
-                <TableCell> Total Price</TableCell>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "large", textAlign: "center" }}>
+                  Product Name{" "}
+                </TableCell>
+                <TableCell className="font-weight-bold" style={{ fontSize: "large", textAlign: "center" }}>
+                  {" "}
+                  Item No./Stock Level
+                </TableCell>
+                <TableCell className="font-weight-bold" style={{ fontSize: "large", textAlign: "center", textAlign: "center" }}>
+                  {" "}
+                  Quantitiy
+                </TableCell>
+                <TableCell className="font-weight-bold" style={{ fontSize: "large" }}>
+                  {" "}
+                  Price
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -121,12 +132,14 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
           <Table className="basket-summary-inside">
             <TableHead>
               <TableRow>
-                <TableCell>Summary </TableCell>
+                <TableCell className="font-weight-bold" style={{ fontSize: "large", textAlign: "center", textAlign: "left" }}>
+                  Total Price{" "}
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <tr>
-                <td>SubTotal:{totalPrice}</td>
+                <td>{totalPrice}£</td>
               </tr>
 
               <tr>

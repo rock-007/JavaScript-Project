@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Link } from "react-router-dom";
@@ -7,6 +7,18 @@ import Search from "./Component/Search";
 import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, DropdownButton, MenuItem, Container } from "react-bootstrap";
 
 function Nav({ userinfo, userstatus }) {
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [list, setList] = useState([1, 2, 3]);
+
+  const toggleDropDown = () => {
+    setDropdownOpen (  !isDropdownOpen);
+  };
+  const DropDownlist = () => {
+    list.map((el) =>{ 
+      console.log("123",el)
+      return <div>el</div>});
+  };
+
   const navStyle = {
     color: "White",
   };
@@ -32,28 +44,20 @@ function Nav({ userinfo, userstatus }) {
         <li>
           <a className="active" href="/signin">
             {userstatus ? (
-              <a
+              <button
+                style={{ border: "none", background: "none", outline: "none" }}
                 className=" signin-icon glyphicon glyphicon-user	
-"
-              ></a>
+                "
+                onClick={toggleDropDown}
+              >
+                {isDropdownOpen ? DropDownlist() : false}
+              </button>
             ) : (
-              <a>SIGNIN</a>
+              <button style={{ border: "none", background: "none", outline: "none" }} onClick={toggleDropDown}>
+                SIGNIN
+              </button>
             )}
           </a>
-          <ul aria-labelledby="dropdownMenu">
-            <li>
-              <a href="#">link5</a>
-            </li>
-            <li>
-              <a href="#">link6</a>
-            </li>
-            <li>
-              <a href="#">link7</a>
-            </li>
-            <li>
-              <a href="#">link8</a>
-            </li>
-          </ul>
         </li>
       </ul>
 
