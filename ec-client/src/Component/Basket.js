@@ -98,10 +98,10 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
                     </TableCell>
                     <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>
                       <ul style={{ float: "bottom", display: "flex", flexDirection: "column" }}>
-                        <li style={{ maxWidth: "10rem" }}>
+                        <li style={{ maxWidth: "10rem", borderBottom: "none" }}>
                           <span>{boughtQuantitiy} </span>
                         </li>
-                        <li style={{ maxWidth: "10rem" }}>
+                        <li style={{ maxWidth: "10rem", borderBottom: "none" }}>
                           <ButtonGroup aria-label="quantityofproduct">
                             <Button variant="secondary" name="subtract" value="subtract" onClick={() => decreseQuantity(eachproduct)}>
                               -
