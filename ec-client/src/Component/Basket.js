@@ -91,12 +91,12 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
                     <TableCell>
                       <img className="BasketProducts-image" src={photo} />
                     </TableCell>
-                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB" }}>{productName}</TableCell>
-                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB" }}>
+                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>{productName}</TableCell>
+                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>
                       {/* Item No:{producNumber} (InStock:{stockQuantity}) */}
                       {producNumber}
                     </TableCell>
-                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB" }}>
+                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>
                       <ul style={{ float: "bottom", display: "flex", flexDirection: "column" }}>
                         <li style={{ maxWidth: "10rem" }}>
                           <span>{boughtQuantitiy} </span>
