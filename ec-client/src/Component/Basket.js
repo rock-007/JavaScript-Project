@@ -60,18 +60,18 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
             <TableHead>
               <TableRow>
                 <TableCell> </TableCell>
-                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "large", textAlign: "center" }}>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
                   Product Name{" "}
                 </TableCell>
-                <TableCell className="font-weight-bold" style={{ fontSize: "large", textAlign: "center" }}>
+                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
                   {" "}
                   Item No./Stock Level
                 </TableCell>
-                <TableCell className="font-weight-bold" style={{ fontSize: "large", textAlign: "center", textAlign: "center" }}>
+                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", textAlign: "center" }}>
                   {" "}
                   Quantitiy
                 </TableCell>
-                <TableCell className="font-weight-bold" style={{ fontSize: "large" }}>
+                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique" }}>
                   {" "}
                   Price
                 </TableCell>
@@ -132,14 +132,16 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
           <Table className="basket-summary-inside">
             <TableHead>
               <TableRow>
-                <TableCell className="font-weight-bold" style={{ fontSize: "large", textAlign: "center", textAlign: "left" }}>
+                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", textAlign: "left" }}>
                   Total Price{" "}
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <tr>
-                <td>{totalPrice}£</td>
+                <td className="tex-lg-center font-weight-bold" style={{ paddingTop: "20%", textAlign: "center", alignItems: "center", justifyContent: "center", fontSize: "200%" }}>
+                  {totalPrice}£
+                </td>
               </tr>
 
               <tr>
