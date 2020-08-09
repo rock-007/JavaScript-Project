@@ -464,6 +464,10 @@ label #cancel {
   padding-bottom: 1rem;
   margin-top: 10rem;
 }
+.button-block {
+  min-width: 224%;
+  width: 224%;
+}
 
 .signin-welcome {
   min-height: 15rem;

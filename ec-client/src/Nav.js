@@ -28,20 +28,6 @@ function Nav({ userinfo, userstatus }) {
 "
             href="./basket"
           ></a>
-          <ul>
-            <li>
-              <a href="#">link1</a>
-            </li>
-            <li>
-              <a href="#">link2</a>
-            </li>
-            <li>
-              <a href="#">link3</a>
-            </li>
-            <li>
-              <a href="#">link4</a>
-            </li>
-          </ul>
         </li>
         <li>
           <a className="active" href="/signin">
