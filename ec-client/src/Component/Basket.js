@@ -65,7 +65,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
                 </TableCell>
                 <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
                   {" "}
-                  Item No./Stock Level
+                  Item No.
                 </TableCell>
                 <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", textAlign: "center" }}>
                   {" "}
@@ -91,11 +91,12 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
                     <TableCell>
                       <img className="BasketProducts-image" src={photo} />
                     </TableCell>
-                    <TableCell>{productName}</TableCell>
-                    <TableCell>
-                      Item No:{producNumber} (InStock:{stockQuantity})
+                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB" }}>{productName}</TableCell>
+                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB" }}>
+                      {/* Item No:{producNumber} (InStock:{stockQuantity}) */}
+                      {producNumber}
                     </TableCell>
-                    <TableCell>
+                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB" }}>
                       <ul style={{ float: "bottom", display: "flex", flexDirection: "column" }}>
                         <li style={{ maxWidth: "10rem" }}>
                           <span>{boughtQuantitiy} </span>
