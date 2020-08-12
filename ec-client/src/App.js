@@ -11,6 +11,8 @@ import Accessories from "./Component/Accessories";
 import Signin from "./Component/Signin";
 import Error from "./Error";
 import Home from "./Component/Home";
+// import history from './history';
+import { useHistory } from "react-router-dom";
 
 import Footer from "./Component/Footer";
 
@@ -18,7 +20,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const userAccountData = () => {
   // user info can be loaded after refresh
-  return window.localStorage.getItem("user-data"); // !! : cast to boolean
+  return window.localStorage.getItem("user-data");
 };
 const isLoggedIn = () => {
   // user info can be loaded after refresh
@@ -52,7 +54,13 @@ let buyNowTrue = () => {
 console.log(finalbuyitems);
 
 // [...prevItems, { ...product, quantity }]
+
+const initailDropdownOpen = () => {
+  return window.localStorage.getItem("user-DropdownOpen") || false;
+};
 function App() {
+  const [isDropdownOpen, setDropdownOpen] = useState(initailDropdownOpen);
+
   const [siginalready, setifsignedin] = useState(isLoggedIn());
   const [userData, setUserData] = useState(userAccountData());
   const [basketItems, setBasketItems] = useState(initialvalue()); // this will come from two level down child the items customers put ]initialvalue() in basket
@@ -62,6 +70,15 @@ function App() {
   const [buyNow, setbuyNow] = useState(buyNowTrue());
   console.log("finalbuyitems", finalbuyitems);
 
+  const setDropdownOpenWrapper = () => {
+    console.log("dfd", window.localStorage.getItem("user-DropdownOpen"));
+    console.log("dfdx", isDropdownOpen);
+
+    //
+
+    setDropdownOpen((prevState) => !prevState);
+    localStorage.setItem("user-DropdownOpen", !isDropdownOpen);
+  };
   const resetBuynow = (latestState) => {
     console.log("66", latestState);
 
@@ -256,10 +273,11 @@ function App() {
       return x1;
     })();
   }
+    let history = useHistory();
 
   return (
     // Router,Route,  swtch... that will help us in change pages
-    <Router>
+    <Router history={history}>
       <div className="App">
         <header className="header">
           <Nav userinfo={userData} userstatus={siginalready} />
@@ -307,4 +325,4 @@ function App() {
 //   </div>
 // );
 
-export default App;
+export default  {App,history}  ;

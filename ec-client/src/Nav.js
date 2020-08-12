@@ -1,22 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Link } from "react-router-dom";
 import ProjectLogo from "./Img/Yoga1.png";
 import Search from "./Component/Search";
+import history from "./App.js"
 import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, DropdownButton, MenuItem, Container } from "react-bootstrap";
-
+// const initailDropdownOpen = () => {
+//   return window.localStorage.getItem("user-DropdownOpen") || false;
+// };
 function Nav({ userinfo, userstatus }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [list, setList] = useState([1, 2, 3]);
 
-  const toggleDropDown = () => {
-    setDropdownOpen (  !isDropdownOpen);
+  const [list, setList] = useState([1, 2, 3]);
+  console.log("14xx", isDropdownOpen);
+  // useEffect(() => {
+  //   if (localStorage.getItem("user-DropdownOpen")) {
+  //  //   setDropdownOpen(localStorage.getItem("user-DropdownOpen"));
+  //   }
+  // }, []);
+
+  const toggleDropDown = (e) => {
+    e.preventDefault();
+
+    console.log("18xx", e);
+    // window.localStorage.setItem("user-DropdownOpen", !isDropdownOpen);
+    setDropdownOpen((prevState) => !prevState);
+    history.push("/signin");
   };
+
   const DropDownlist = () => {
-    list.map((el) =>{ 
-      console.log("123",el)
-      return <div>el</div>});
+    function dropDownItem(props) {
+      return (
+        <a href="#" className="menu-item">
+          <span className="icon-button">{props.leftIcon}</span>
+          {props.children}
+          <span className="icon-right">{props.rightIcon}</span>
+        </a>
+      );
+    }
+
+    return (
+      <div className="dropdown1" style={{ height: "50px" }}>
+        <dropDownItem>el</dropDownItem>
+      </div>
+    );
   };
 
   const navStyle = {
@@ -48,27 +76,17 @@ function Nav({ userinfo, userstatus }) {
                 style={{ border: "none", background: "none", outline: "none" }}
                 className=" signin-icon glyphicon glyphicon-user	
                 "
-                onClick={toggleDropDown}
-              >
-                {isDropdownOpen ? DropDownlist() : false}
-              </button>
+                onClick={(e) => toggleDropDown(e)}
+              ></button>
             ) : (
-              <button style={{ border: "none", background: "none", outline: "none" }} onClick={toggleDropDown}>
+              <button style={{ border: "none", background: "none", outline: "none" }} onClick={(e) => toggleDropDown(e)}>
                 SIGNIN
               </button>
             )}
           </a>
         </li>
       </ul>
-
-      {/* <ul className="nav-links">
-        <Link style={navStyle} to="/about">
-          <li> about</li>
-        </Link>
-        <Link style={navStyle} to="/Shop">
-          <li> Shop</li>
-        </Link>
-      </ul> */}
+      {isDropdownOpen && <DropDownlist />}
     </nav>
   );
 }

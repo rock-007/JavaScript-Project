@@ -12,12 +12,13 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "file-saver": "^2.0.2",
+    "history": "^5.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-cookies": "^0.1.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^3.4.3",
     "universal-cookie": "^4.0.3"
   },
   "scripts": {
