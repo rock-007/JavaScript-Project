@@ -4,7 +4,8 @@ import "./App.css";
 import { Link } from "react-router-dom";
 import ProjectLogo from "./Img/Yoga1.png";
 import Search from "./Component/Search";
-import history from "./App.js"
+ import history from "./history"
+// import { useHistory } from "react-router-dom";
 import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, DropdownButton, MenuItem, Container } from "react-bootstrap";
 // const initailDropdownOpen = () => {
 //   return window.localStorage.getItem("user-DropdownOpen") || false;
@@ -19,6 +20,8 @@ function Nav({ userinfo, userstatus }) {
   //  //   setDropdownOpen(localStorage.getItem("user-DropdownOpen"));
   //   }
   // }, []);
+  // let history = useHistory();
+  // let history = useHistory();
 
   const toggleDropDown = (e) => {
     e.preventDefault();

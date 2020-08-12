@@ -12,7 +12,8 @@ import Signin from "./Component/Signin";
 import Error from "./Error";
 import Home from "./Component/Home";
 // import history from './history';
-import { useHistory } from "react-router-dom";
+import history from "./history";
+// import { useHistory } from "react-router-dom";
 
 import Footer from "./Component/Footer";
 
@@ -58,6 +59,7 @@ console.log(finalbuyitems);
 const initailDropdownOpen = () => {
   return window.localStorage.getItem("user-DropdownOpen") || false;
 };
+
 function App() {
   const [isDropdownOpen, setDropdownOpen] = useState(initailDropdownOpen);
 
@@ -273,7 +275,6 @@ function App() {
       return x1;
     })();
   }
-    let history = useHistory();
 
   return (
     // Router,Route,  swtch... that will help us in change pages
@@ -325,4 +326,4 @@ function App() {
 //   </div>
 // );
 
-export default  {App,history}  ;
+export default App;
