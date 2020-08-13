@@ -31,7 +31,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
 
   const buyNow = (basketItems) => {
     //else we can throw error that not enough porducts in stock
-    console.log();
+   // console.log();
 
     resetBasket(basketItems);
     window.location.href = "http://localhost:3000/signin";
@@ -71,7 +71,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
                   {" "}
                   Quantitiy
                 </TableCell>
-                <TableCell className="font-weight-bold" style={{ textAlign: "center",fontSize: "200%", fontStyle: "normal" }}>
+                <TableCell className="font-weight-bold" style={{ textAlign: "center", fontSize: "200%", fontStyle: "normal" }}>
                   {" "}
                   Price
                 </TableCell>
@@ -113,7 +113,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
                     <TableCell
                       style={{ fontSize: "150%", fontStyle: "italic", fontWeight: "550", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
                     >
-                      <ul style={{ alignItems: "center", padding: "5%",marginTop: "30%", listStyleType: "none", float: "bottom", display: "flex", flexDirection: "column" }}>
+                      <ul style={{ alignItems: "center", padding: "5%", marginTop: "30%", listStyleType: "none", float: "bottom", display: "flex", flexDirection: "column" }}>
                         <li style={{ maxWidth: "10rem", borderBottom: "none" }}>
                           <span>{boughtQuantitiy} </span>
                         </li>
@@ -156,7 +156,10 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
             </TableHead>
             <TableBody>
               <tr>
-                <td className="tex-lg-center font-weight-bold" style={{ paddingTop: "20%", textAlign: "center", alignItems: "center", justifyContent: "center", fontSize: "200%" }}>
+                <td
+                  className="tex-lg-center font-weight-bold"
+                  style={{ paddingTop: "20%", textAlign: "center", alignItems: "center", justifyContent: "center", fontSize: "200%", fontStyle: "italic" }}
+                >
                   {totalPrice}£
                 </td>
               </tr>

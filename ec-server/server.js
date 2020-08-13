@@ -310,10 +310,10 @@ app.post("/api/verifyifloginalready", (req, res) => {
       res.status(400).end();
     }
   }
-  // res.send(`Welcome ${decodeemail}!`);
-  res.json({
-    data: `Welcome ${decodepayload.email}!`,
-    // data: "hi",
+  connection.query("SELECT * FROM  users WHERE email=?;", [decodepayload.email], function (err, results) {
+    // res.send(`Welcome ${decodeemail}!`);
+    console.log("fds", results);
+    res.json(results);
   });
 });
 

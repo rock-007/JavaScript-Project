@@ -71,6 +71,7 @@ function App() {
   const [finalBuy, setfinalBuy] = useState(finalbuyitems());
   const [buyNow, setbuyNow] = useState(buyNowTrue());
   console.log("finalbuyitems", finalbuyitems);
+  console.log("userDataxxc", userData);
 
   // const setDropdownOpenWrapper = () => {
   //   console.log("dfd", window.localStorage.getItem("user-DropdownOpen"));
@@ -90,7 +91,7 @@ function App() {
 
   const resetBasket = (basketItems) => {
     console.log(basketItems);
-
+    //setfinalBuy will set to some value and if (finalBuy != null && buyNow === true) is true then it will call the API call
     setfinalBuy(basketItems);
     console.log(finalBuy);
     window.localStorage.setItem("user-final", JSON.stringify(basketItems));
@@ -100,7 +101,7 @@ function App() {
     setbuyNow(true);
     window.localStorage.setItem("buyNowFinal", JSON.stringify(true));
   };
-  console.log(finalBuy);
+  console.log("fgfg",userData);
 
   const updatedBasket = (newProductQty) => {
     console.log(newProductQty);
@@ -248,27 +249,34 @@ function App() {
     (async () => {
       const x1 = await fetch(verifyifloginalready)
         .then((res) => {
+          console.log("253xx", res.status);
           if (res.status == 400 || res.status == 401) {
-            console.log(res.status);
             // to do call delete current  cookies function
             window.localStorage.removeItem("user-data");
 
             return setifsignedin(false);
           } else if (siginalready == false) {
             setifsignedin(true);
-
+            console.log("253xyx", res.json());
             return res.json();
           } else {
-            return;
+            // console.log("263xyx", res.json()); if you do res.json() twice or more you will get error
+            return res.json();
           }
         })
         .then((data) => {
-          setUserData(data.data);
-          window.localStorage.setItem("user-status", true);
-          console.log(data.data);
-          window.localStorage.setItem("user-data", data.data);
-        })
-        .catch((err) => console.log("err"));
+                          console.log("253xx1", data);
+
+                          console.log("253xx1", data[0]);
+
+                          console.log("253xx1", data[0]);
+                          let arrayData = [...data];
+                          setUserData(() => arrayData);
+                          window.localStorage.setItem("user-status", true);
+                          // console.log(data.data);
+                          window.localStorage.setItem("user-data", JSON.stringify(arrayData)); // if i dont JSON.stringify then it will appear as [object object]
+                        })
+        .catch((err) => console.log("ddf", err));
       console.log(userData);
       console.log(siginalready);
 
@@ -279,7 +287,6 @@ function App() {
   return (
     // Router,Route,  swtch... that will help us in change pages
     <Router history={history}>
-      
       <div className="App">
         <header className="header">
           <Nav userinfo={userData} userstatus={siginalready} />
@@ -308,7 +315,7 @@ function App() {
               exact
               render={(props) => <Signin {...props} buyNow={buyNow} resetBuynow={resetBuynow} userData={userData} finalBuy={finalBuy} userstatus={siginalready} />}
             />
-            <Route path="/accessories" exact render={(props) => <Accessories {...props} userData={userData} userstatus={siginalready} />} />
+            <Route path="/accessories" exact render={(props) => <Accessories {...props} userData={userData} />} />
             {/* <Route path="/phones" exact render={(props) => <Phones {...props} userData={userData} userstatus={siginalready} />} /> */}
           </Switch>
         </div>

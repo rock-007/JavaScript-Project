@@ -77,7 +77,7 @@ function Nav({ userinfo, userstatus }) {
           ></a>
         </li>
         <li>
-          <a className="active" href="/signin">
+          <a className="active" href="./signin">
             {userstatus ? (
               <button
                 style={{ border: "none", background: "none", outline: "none" }}

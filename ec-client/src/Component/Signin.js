@@ -10,8 +10,8 @@ function Signin({ userData, userstatus, finalBuy, buyNow, resetBuynow }) {
   //const [siginalready, setifsignedin] = useState(false);
 
   const [allInvoices, setallInvoices] = useState([]);
-  console.log(userData);
-  console.log(userstatus);
+  console.log("13x",userData);
+  console.log("14rt",userstatus);
 
   console.log(finalBuy);
 

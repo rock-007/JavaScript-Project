@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import { makeStyle, Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer } from "@material-ui/core";
 function Useraccount({ userinfo, userstatus, allInvoices }) {
-  console.log("6", userinfo, userstatus);
-  console.log("6yy", userstatus);
+  console.log("6", typeof userinfo, userstatus);
+  console.log("6yy", userinfo);
   console.log("7yy", allInvoices);
 
   let generateFile = (content, fileName) => {
@@ -77,18 +77,18 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   Invoice No
                 </TableCell>
-                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   {" "}
                   Date of Purchase
                 </TableCell>
-                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   {" "}
                   Description
                 </TableCell>
-                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   {" "}
                   Invoice
                 </TableCell>
@@ -106,13 +106,30 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
 
                 return (
                   <TableRow key={invoiceNo}>
-                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>{invoiceNo}</TableCell>
-                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>{date_of_purchase1}</TableCell>
-                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>TBO</TableCell>
-                    <TableCell >
-                      <span role="button" tabIndex="-1" onKeyDown={() => generatePdf(invoice_Name)} onClick={() => generatePdf(invoice_Name)}>
-                        invoiceNo:{invoiceNo}
-                      </span>
+                    <TableCell
+                      className="tex-lg-center font-weight-light"
+                      style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
+                    >
+                      {invoiceNo}
+                    </TableCell>
+                    <TableCell
+                      style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
+                    >
+                      {date_of_purchase1}
+                    </TableCell>
+                    <TableCell
+                      style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
+                    >
+                      TBO
+                    </TableCell>
+                    <TableCell className="tex-lg-center font-weight-bold" style={{ fontFamily: "Myfont", fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                      <span
+                        className="glyphicon glyphicon-cloud-download"
+                        role="button"
+                        tabIndex="-1"
+                        onKeyDown={() => generatePdf(invoice_Name)}
+                        onClick={() => generatePdf(invoice_Name)}
+                      ></span>
 
                       {/* <span role="button" tabIndex="-1" onKeyDown={() => generatePdf(allPdf[index], invoiceNo1)} onClick={() => generatePdf(allPdf[index], invoiceNo1)}>
                         invoiceNo:{invoiceNo1}
@@ -134,18 +151,32 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
           <Table className="basket-summary-inside">
             <TableHead>
               <TableRow>
-                <TableCell>Welcome{} </TableCell>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "Left" }}>
+                  Account Details{" "}
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <tr>
-                <td>Account No:{} </td>
+                <td className="tex-lg-center font-weight-bold" style={{ fontSize: "130%", fontStyle: "normal", textAlign: "Left" }}>
+                  Name:{userinfo[0].first_name}{" "}
+                </td>
               </tr>
               <tr>
-                <td>email:{userinfo} </td>
+                <td className="tex-lg-center font-weight-bold" style={{ fontSize: "130%", fontStyle: "normal", textAlign: "Left" }}>
+                  Account ID:{userinfo[0].user_id}{" "}
+                </td>
               </tr>
               <tr>
-                <td>Contact number:{} </td>
+                <td className="tex-lg-center font-weight-bold" style={{ fontSize: "130%", fontStyle: "normal", textAlign: "Left" }}>
+                  email ID:{userinfo[0].email}{" "}
+                </td>
+              </tr>
+              <tr>
+                <td className="tex-lg-center font-weight-bold" style={{ fontSize: "130%", fontStyle: "normal", textAlign: "Left" }}>
+                  {" "}
+                  Member since:{userinfo[0].create_time}{" "}
+                </td>
               </tr>
               <tr>
                 <td></td>
