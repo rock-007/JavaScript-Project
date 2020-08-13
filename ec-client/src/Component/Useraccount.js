@@ -69,7 +69,8 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
         });
     })();
   };
-
+let creatTime=userinfo[0].create_time || "0-0-0";
+console.log("ewr", creatTime);
   return (
     <>
       <div className="BasketSigninProducts" style={{ float: "left" }}>
@@ -115,7 +116,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
                     <TableCell
                       style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
                     >
-                      {date_of_purchase1}
+                      {date_of_purchase1.split("T", 1)[0]}
                     </TableCell>
                     <TableCell
                       style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
@@ -169,13 +170,13 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
               </tr>
               <tr>
                 <td className="tex-lg-center font-weight-bold" style={{ fontSize: "130%", fontStyle: "normal", textAlign: "Left" }}>
-                  email ID:{userinfo[0].email}{" "}
+                  email:{userinfo[0].email}{" "}
                 </td>
               </tr>
               <tr>
                 <td className="tex-lg-center font-weight-bold" style={{ fontSize: "130%", fontStyle: "normal", textAlign: "Left" }}>
-                  {" "}
-                  Member since:{userinfo[0].create_time}{" "}
+                  
+                   Member since:{creatTime.split("T", 1)[0]} 
                 </td>
               </tr>
               <tr>

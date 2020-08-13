@@ -138,6 +138,19 @@ app.post("/api/invoice", (req, res) => {
     console.log("body11y", req.body);
     let z1 = req.body;
     console.log("hey", z1);
+    // unavailableItems will fill up if any item is unavailable
+    let unavailableItems = [];
+
+    for (let i = 0; i < req.body.length; i++) {
+      let checkQuantity = req.body[i].producNumber;
+      console.log("wwer", checkQuantity);
+      connection.query("UPDATE main_product_info SET stockQuantity=stockQuantity-1 WHERE main_product_info.producNumber=?", [checkQuantity], function (err, result) {
+        if (err) {
+          unavailableItems.push(req.body[i]);
+        } else console.log("ffgt", result);
+      });
+    }
+
     // get the user_user_id
 
     const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
@@ -146,9 +159,9 @@ app.post("/api/invoice", (req, res) => {
 
       console.log("heyc", user_id);
       console.log("heyxx", user_email);
-
+      console.log("2334", unavailableItems);
       // we now got the correct users
-      if (user_id) {
+      if (user_id && unavailableItems[0] == null) {
         //1- delete the   quantitiy from the product info
         // create users_basket(by submitting email and userID ) and generate the inovice number for this Transaction
 
@@ -217,19 +230,20 @@ app.post("/api/invoice", (req, res) => {
         });
       }
     });
-  } else {
-    const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
-      let user_id = results[0].user_id;
-      connection.query("SELECT * FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
-        if (err) throw err;
-        else {
-          console.log("1578", results);
-          //  let invoice_Object = json.stringify(results);
-          res.json(results);
-        }
-      });
-    });
   }
+  // } else {
+  //   const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
+  //     let user_id = results[0].user_id;
+  //     connection.query("SELECT * FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
+  //       if (err) throw err;
+  //       else {
+  //         console.log("1578", results);
+  //         //  let invoice_Object = json.stringify(results);
+  //         res.json(results);
+  //       }
+  //     });
+  //   });
+  // }
 });
 
 /////////////////////////////////////
