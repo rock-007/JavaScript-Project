@@ -72,15 +72,26 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
 
   return (
     <>
-      <div className="BasketProducts" style={{ float: "left" }}>
-        <TableContainer component={Paper}>
+      <div className="BasketSigninProducts" style={{ float: "left" }}>
+        <TableContainer className="BasketSigninItems" component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Invoice No </TableCell>
-                <TableCell> Date of Purchase</TableCell>
-                <TableCell> Description</TableCell>
-                <TableCell> Invoice</TableCell>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                  Invoice No
+                </TableCell>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                  {" "}
+                  Date of Purchase
+                </TableCell>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                  {" "}
+                  Description
+                </TableCell>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                  {" "}
+                  Invoice
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -95,10 +106,10 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
 
                 return (
                   <TableRow key={invoiceNo}>
-                    <TableCell>{invoiceNo}</TableCell>
-                    <TableCell>{date_of_purchase1}</TableCell>
-                    <TableCell>TBO</TableCell>
-                    <TableCell>
+                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>{invoiceNo}</TableCell>
+                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>{date_of_purchase1}</TableCell>
+                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>TBO</TableCell>
+                    <TableCell >
                       <span role="button" tabIndex="-1" onKeyDown={() => generatePdf(invoice_Name)} onClick={() => generatePdf(invoice_Name)}>
                         invoiceNo:{invoiceNo}
                       </span>

@@ -4,7 +4,9 @@ import "./App.css";
 import { Link } from "react-router-dom";
 import ProjectLogo from "./Img/Yoga1.png";
 import Search from "./Component/Search";
-import history from "./history";
+import history from "./History";
+import { withRouter } from "react-router";
+
 // import { useHistory } from "react-router-dom";
 import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, DropdownButton, MenuItem, Container } from "react-bootstrap";
 // const initailDropdownOpen = () => {
@@ -25,8 +27,10 @@ function Nav({ userinfo, userstatus }) {
 
   const toggleDropDown = (e) => {
     e.preventDefault();
+    console.log("22df", history.push("/signin"));
     history.push("/signin");
-history.go(0);
+    //  history.go(0);
+
     console.log("18xx", e);
     // window.localStorage.setItem("user-DropdownOpen", !isDropdownOpen);
     setDropdownOpen((prevState) => !prevState);

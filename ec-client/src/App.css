@@ -444,7 +444,7 @@ label #cancel {
   min-height: 18rem;
 }
 
-.BasketProducts {
+.BasketSigninProducts {
   display: block;
   justify-content: left;
   align-items: left;
@@ -453,7 +453,7 @@ label #cancel {
   position: relative;
   width: 60vw;
 }
-.Basketitems {
+.BasketSigninItems {
   /* min-width: 65rem; */
   min-height: 15rem;
 }

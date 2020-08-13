@@ -12,7 +12,7 @@ import Signin from "./Component/Signin";
 import Error from "./Error";
 import Home from "./Component/Home";
 // import history from './history';
-import history from "./history";
+import history from "./History";
 // import { useHistory } from "react-router-dom";
 
 import Footer from "./Component/Footer";
@@ -56,12 +56,12 @@ console.log(finalbuyitems);
 
 // [...prevItems, { ...product, quantity }]
 
-const initailDropdownOpen = () => {
-  return window.localStorage.getItem("user-DropdownOpen") || false;
-};
+// const initailDropdownOpen = () => {
+//   return window.localStorage.getItem("user-DropdownOpen") || false;
+// };
 
 function App() {
-  const [isDropdownOpen, setDropdownOpen] = useState(initailDropdownOpen);
+  // const [isDropdownOpen, setDropdownOpen] = useState(initailDropdownOpen);
 
   const [siginalready, setifsignedin] = useState(isLoggedIn());
   const [userData, setUserData] = useState(userAccountData());
@@ -72,15 +72,15 @@ function App() {
   const [buyNow, setbuyNow] = useState(buyNowTrue());
   console.log("finalbuyitems", finalbuyitems);
 
-  const setDropdownOpenWrapper = () => {
-    console.log("dfd", window.localStorage.getItem("user-DropdownOpen"));
-    console.log("dfdx", isDropdownOpen);
+  // const setDropdownOpenWrapper = () => {
+  //   console.log("dfd", window.localStorage.getItem("user-DropdownOpen"));
+  //   console.log("dfdx", isDropdownOpen);
 
-    //
+  //   //
 
-    setDropdownOpen((prevState) => !prevState);
-    localStorage.setItem("user-DropdownOpen", !isDropdownOpen);
-  };
+  //   setDropdownOpen((prevState) => !prevState);
+  //   localStorage.setItem("user-DropdownOpen", !isDropdownOpen);
+  // };
   const resetBuynow = (latestState) => {
     console.log("66", latestState);
 
@@ -279,6 +279,7 @@ function App() {
   return (
     // Router,Route,  swtch... that will help us in change pages
     <Router history={history}>
+      
       <div className="App">
         <header className="header">
           <Nav userinfo={userData} userstatus={siginalready} />

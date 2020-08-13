@@ -54,24 +54,24 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
 
   return (
     <>
-      <div className="BasketProducts" style={{ float: "left" }}>
-        <TableContainer className="Basketitems" component={Paper}>
+      <div className="BasketSigninProducts" style={{ float: "left" }}>
+        <TableContainer className="BasketSigninItems" component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell> </TableCell>
-                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   Product Name{" "}
                 </TableCell>
-                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
+                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   {" "}
                   Item No.
                 </TableCell>
-                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", textAlign: "center" }}>
+                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center", textAlign: "center" }}>
                   {" "}
                   Quantitiy
                 </TableCell>
-                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique" }}>
+                <TableCell className="font-weight-bold" style={{ textAlign: "center",fontSize: "200%", fontStyle: "normal" }}>
                   {" "}
                   Price
                 </TableCell>
@@ -91,24 +91,40 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
                     <TableCell>
                       <img className="BasketProducts-image" src={photo} />
                     </TableCell>
-                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>{productName}</TableCell>
-                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>
+                    <TableCell
+                      style={{ fontSize: "150%", fontStyle: "italic", fontWeight: "550", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
+                    >
+                      {productName}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        textAlign: "center",
+                        fontSize: "150%",
+                        fontStyle: "italic",
+                        fontWeight: "550",
+                        borderRightStyle: "solid",
+                        borderRightColor: "#E2DBDB",
+                        borderRightWidth: "thin",
+                      }}
+                    >
                       {/* Item No:{producNumber} (InStock:{stockQuantity}) */}
                       {producNumber}
                     </TableCell>
-                    <TableCell style={{ borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}>
-                      <ul style={{ float: "bottom", display: "flex", flexDirection: "column" }}>
+                    <TableCell
+                      style={{ fontSize: "150%", fontStyle: "italic", fontWeight: "550", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
+                    >
+                      <ul style={{ alignItems: "center", padding: "5%",marginTop: "30%", listStyleType: "none", float: "bottom", display: "flex", flexDirection: "column" }}>
                         <li style={{ maxWidth: "10rem", borderBottom: "none" }}>
                           <span>{boughtQuantitiy} </span>
                         </li>
-                        <li style={{ maxWidth: "10rem", borderBottom: "none" }}>
+                        <li style={{ paddingTop: "15%", maxWidth: "10rem", borderBottom: "none" }}>
                           <ButtonGroup aria-label="quantityofproduct">
                             <Button variant="secondary" name="subtract" value="subtract" onClick={() => decreseQuantity(eachproduct)}>
                               -
                             </Button>
-                            <Button name={productName} variant="secondary">
+                            {/* <Button name={productName} variant="secondary">
                               {eachproduct.quantity}
-                            </Button>
+                            </Button> */}
                             <Button variant="secondary" name="add" value="add" onClick={() => increaseQuantity(eachproduct)}>
                               +
                             </Button>
@@ -116,7 +132,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
                         </li>
                       </ul>
                     </TableCell>
-                    <TableCell>£{boughtQuantitiy * price}</TableCell>
+                    <TableCell style={{ textAlign: "center", fontSize: "150%", fontStyle: "italic", fontWeight: "550" }}>£{boughtQuantitiy * price}</TableCell>
                   </TableRow>
                 );
               })}
@@ -133,7 +149,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
           <Table className="basket-summary-inside">
             <TableHead>
               <TableRow>
-                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", textAlign: "left" }}>
+                <TableCell className="font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   Total Price{" "}
                 </TableCell>
               </TableRow>
