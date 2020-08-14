@@ -101,7 +101,7 @@ function App() {
     setbuyNow(true);
     window.localStorage.setItem("buyNowFinal", JSON.stringify(true));
   };
-  console.log("fgfg",userData);
+  console.log("fgfg", userData);
 
   const updatedBasket = (newProductQty) => {
     console.log(newProductQty);
@@ -257,6 +257,7 @@ function App() {
             return setifsignedin(false);
           } else if (siginalready == false) {
             setifsignedin(true);
+            window.localStorage.setItem("user-status", true);
             console.log("253xyx", res.json());
             return res.json();
           } else {
@@ -265,17 +266,17 @@ function App() {
           }
         })
         .then((data) => {
-                          console.log("253xx1", data);
+          console.log("253xx1", data);
 
-                          console.log("253xx1", data[0]);
+          console.log("253xx1", data[0]);
 
-                          console.log("253xx1", data[0]);
-                          let arrayData = [...data];
-                          setUserData(() => arrayData);
-                          window.localStorage.setItem("user-status", true);
-                          // console.log(data.data);
-                          window.localStorage.setItem("user-data", JSON.stringify(arrayData)); // if i dont JSON.stringify then it will appear as [object object]
-                        })
+          console.log("253xx1", data[0]);
+          let arrayData = [...data];
+          setUserData(() => arrayData);
+          // window.localStorage.setItem("user-status", true);
+          // console.log(data.data);
+          window.localStorage.setItem("user-data", JSON.stringify(arrayData)); // if i dont JSON.stringify then it will appear as [object object]
+        })
         .catch((err) => console.log("ddf", err));
       console.log(userData);
       console.log(siginalready);

@@ -77,11 +77,11 @@ function Nav({ userinfo, userstatus }) {
           ></a>
         </li>
         <li>
-          <Dropdown as={ButtonGroup}>
-            <Button variant="success" href="./signin">
+          <Dropdown as={ButtonGroup} style={{ marginTop: "5px", position: "relative", float: "left", top: "13px" }}>
+            <Button variant="success" href="./signin" style={{ background: "none", borderStyle: "none", outline: "none !important" }}>
               {userstatus ? (
                 <button
-                  style={{ border: "none", background: "none", outline: "none" }}
+                  style={{ border: "none", background: "none",outline: "none" }}
                   className=" signin-icon glyphicon glyphicon-user	
                 "
                 ></button>
@@ -90,7 +90,13 @@ function Nav({ userinfo, userstatus }) {
               )}
             </Button>
 
-            <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+            <Dropdown.Toggle
+              className="signinDropdown"
+              split
+              variant="success"
+              id="dropdown-split-basic"
+              style={{  background: "none", borderStyle: "none", outline: "none !important" }}
+            />
 
             <Dropdown.Menu>
               <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
