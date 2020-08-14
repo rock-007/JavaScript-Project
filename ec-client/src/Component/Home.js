@@ -3,6 +3,7 @@ import logo from "../logo.svg";
 import "../App.css";
 import ProjectLogo from "../Img/logo.svg";
 import HomeDisplay from "./HomeDisplay";
+import SwipeableHome from "./SwipeableHome";
 
 // import Button from 'react-bootstrap/Button'; this will only  bring the button module and not whole library if bootstrap
 
@@ -83,8 +84,9 @@ function Home({ userData, userstatus, addBasketitems }) {
           console.log(data1[0]); //object
           console.log(data1[0].price); // value from the object
           setHomepage(data1);
-        }).catch(err => setHomepage(undefined)) // if not data comes then it will turn page to default 
-        
+        })
+        .catch((err) => setHomepage(undefined)); // if not data comes then it will turn page to default
+
       setShowPage(1);
     })();
   }
@@ -170,10 +172,7 @@ function Home({ userData, userstatus, addBasketitems }) {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item
-                    href="#/Travelsize-SkinCare"
-                    onClick={accessoriesselected}
-                  >
+                  <Dropdown.Item href="#/Travelsize-SkinCare" onClick={accessoriesselected}>
                     Travelsize-SkinCare
                   </Dropdown.Item>
                   <Dropdown.Item href="#/Bath&Body" onClick={accessoriesselected}>
@@ -191,7 +190,7 @@ function Home({ userData, userstatus, addBasketitems }) {
       </div>
       <Container>
         {/* // in place of null we can set a slider window for default page */}
-        {showPage ? <HomeDisplay props={homePage} addBasketitems={addBasketitems} /> : null}
+        {showPage ? <HomeDisplay props={homePage} addBasketitems={addBasketitems} /> : <SwipeableHome />}
         {/* // this will be the body of
         home page will display items that will be selected from the menue
         {`The user is looged in ${userstatus}and the email is ${userData}`} */}

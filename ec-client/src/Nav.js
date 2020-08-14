@@ -77,23 +77,71 @@ function Nav({ userinfo, userstatus }) {
           ></a>
         </li>
         <li>
+          <Dropdown as={ButtonGroup}>
+            <Button variant="success" href="./signin">
+              {userstatus ? (
+                <button
+                  style={{ border: "none", background: "none", outline: "none" }}
+                  className=" signin-icon glyphicon glyphicon-user	
+                "
+                ></button>
+              ) : (
+                <button style={{ border: "none", background: "none", outline: "none" }}>SIGNIN</button>
+              )}
+            </Button>
+
+            <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+          {/* <Dropdown>
+            <Dropdown.Toggle
+              variant="success"
+              id="dropdown-basic"
+              className="active"
+              onclick={(e) => {
+                console.log("85cc", window.location.href);
+                if (window.location.href != "./signin") {
+                  return (window.location.href = "./signin");
+                }
+              }}
+            >
+              {userstatus ? (
+                <button
+                  style={{ border: "none", background: "none", outline: "none" }}
+                  className=" signin-icon glyphicon glyphicon-user	
+                "
+                ></button>
+              ) : (
+                <button style={{ border: "none", background: "none", outline: "none" }}>SIGNIN</button>
+              )}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item>Action</Dropdown.Item>
+              <Dropdown.Item>Another action</Dropdown.Item>
+              <Dropdown.Item>Something else</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown> */}
+          {/* 
           <a className="active" href="./signin">
             {userstatus ? (
               <button
                 style={{ border: "none", background: "none", outline: "none" }}
                 className=" signin-icon glyphicon glyphicon-user	
                 "
-                onClick={(e) => toggleDropDown(e)}
               ></button>
             ) : (
-              <button style={{ border: "none", background: "none", outline: "none" }} onClick={(e) => toggleDropDown(e)}>
-                SIGNIN
-              </button>
+              <button style={{ border: "none", background: "none", outline: "none" }}>SIGNIN</button>
             )}
-          </a>
+          </a> */}
         </li>
       </ul>
-      {isDropdownOpen && <DropDownlist />}
     </nav>
   );
 }
