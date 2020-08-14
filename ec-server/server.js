@@ -131,7 +131,8 @@ app.post("/api/invoice", (req, res) => {
   let userIdentitiy = decodepayload.email;
 
   if (token && req.body.length > 0) {
-    let actaul_Bought_Items = req.body[0].quantity;
+    let actaul_Bought_Items = req.body;
+    let actaul_Bought_Items_Num = req.body[0].quantity;
 
     console.log("78xx", `${decodepayload.email}`); // confirm the user detail email
     console.log("83xx", userIdentitiy);
@@ -144,15 +145,14 @@ app.post("/api/invoice", (req, res) => {
     for (let i = 0; i < req.body.length; i++) {
       let checkQuantity = req.body[i].producNumber;
       console.log("wwer", checkQuantity);
-      console.log("wwerx", actaul_Bought_Items);
-      connection.query("UPDATE main_product_info SET stockQuantity=stockQuantity-actaul_Bought_Items WHERE main_product_info.producNumber=?", [checkQuantity], function (
-        err,
-        result
-      ) {
-        if (err) {
-          unavailableItems.push(req.body[i]);
-        } else console.log("ffgt", result);
-      });
+      console.log("wwerx", actaul_Bought_Items_Num);
+      for (let i = 0; i < actaul_Bought_Items_Num; i++) {
+        connection.query("UPDATE main_product_info SET stockQuantity=stockQuantity-1 WHERE main_product_info.producNumber=?", [checkQuantity], function (err, result) {
+          if (err) {
+            unavailableItems.push(req.body[i]);
+          } else console.log("ffgt", result);
+        });
+      }
     }
 
     // get the user_user_id
