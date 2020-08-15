@@ -72,7 +72,7 @@ app.get("/api/:abc", (req, res) => {
 // ! ///////////////// FInal INVOICE(Query only) //////////////////////////////////////////////////////FInal INVOICE(Query only)////////////////////////////////////////////////////////////
 
 app.post("/api/invoice-only", (req, res) => {
-  let token = req.cookies.access_token;
+  let token = req.cookies.yogaoutlet_access_token;
   if (token) {
     let Invoice_No_Actual = req.body.invoice_Name;
     // res.set("Content-disposition", "attachment; filename=" + `${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
@@ -100,7 +100,7 @@ app.post("/api/invoice-only", (req, res) => {
 ///////////////////////////////////////////////////////
 
 app.post("/api/invoice-all", (req, res) => {
-  let token = req.cookies.access_token;
+  let token = req.cookies.yogaoutlet_access_token;
   let decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
   let userIdentitiy = decodepayload.email;
   const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
@@ -120,7 +120,7 @@ app.post("/api/invoice-all", (req, res) => {
 // ! ///////////////// FInal INVOICE //////////////////////////////////////////////////////FInal INVOICE////////////////////////////////////////////////////////////
 
 app.post("/api/invoice", (req, res) => {
-  let token = req.cookies.access_token;
+  let token = req.cookies.yogaoutlet_access_token;
   let selectedProducts = req.body.length;
   console.log("body11x", token);
 
@@ -304,7 +304,7 @@ app.post("/api/customers", (req, res) => {
 //?  when clicked on signin page/////////////////////////////////////////////////////////////////
 
 app.post("/api/verifyifloginalready", (req, res) => {
-  let token = req.cookies.access_token;
+  let token = req.cookies.yogaoutlet_access_token;
   //
 
   if (!token) {
@@ -346,52 +346,107 @@ app.post("/api/newuser", (req, res) => {
   // };
   console.log("144", x1);
 
-  connection.query("SELECT * FROM  users WHERE email=?;", [x1.Email], function (err, results) {
-    console.log(results);
-    console.log("150new", results[0].email);
-    console.log("151", results[0].email);
-    // const token =JWT.sign(payload,secret)
-    // console.log("74", results, err);console.log("92", results[0].email);console.log("93", JSON.stringify(results)); ///console.log("93", JSON.parse(JSON.stringify(results)));console.log("94", JSON.parse(JSON.stringify(results))[0]);
-    // console.log("95", JSON.parse(JSON.stringify(results))[0].email);
+  if (req.body.logout === false) {
+    connection.query("SELECT * FROM  users WHERE email=?;", [x1.email], function (err, results) {
+      console.log(results);
+      console.log("150new", results[0].email);
+      console.log("151", results[0].email);
+      // const token =JWT.sign(payload,secret)
+      // console.log("74", results, err);console.log("92", results[0].email);console.log("93", JSON.stringify(results)); ///console.log("93", JSON.parse(JSON.stringify(results)));console.log("94", JSON.parse(JSON.stringify(results))[0]);
+      // console.log("95", JSON.parse(JSON.stringify(results))[0].email);
 
-    if (err) throw err;
-    else {
-      if (results[0].email && results[0].password) {
-        //  console.log("79", results[0].email);
+      if (err) throw err;
+      else {
+        if (results[0].email && results[0].password) {
+          //  console.log("79", results[0].email);
 
-        //below if the user and paswword is correct == to do user is not already logedin
-        if (results[0].password == x1.password && results[0].userloginStatus == false) {
-          //TODO: send user account details it like update the basket and user purchaee history
-          const payload = { email: results[0].email };
-          console.log(payload);
-          //res.header("auth-token", token).send(token);
-          const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");
-          res.cookie("access_token", token, {
-            maxAge: 5 * 24 * 60 * 60 * 1000,
-            httpOnly: true, // it will enable on frotend-javascript to not have access to cokkies
-            // secure:true ................. when in production
-          });
+          //below if the user and paswword is correct == to do user is not already logedin
+          if (results[0].password == x1.password && results[0].userloginStatus == false) {
+            //TODO: send user account details it like update the basket and user purchaee history
+            const payload = { email: results[0].email };
+            console.log("payloods", payload);
+            //res.header("auth-token", token).send(token);
+            const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");
+            //below are the cookies sent to user first time when he logsin
+            res.cookie("yogaoutlet_access_token", token, {
+              maxAge: 25 * 24 * 60 * 60 * 1000,
+              httpOnly: true, // it will enable on frotend-javascript to not have access to cokkies
+              // secure:true ................. when in production
+            });
 
-          res.status(200).end();
+            res.status(200).end();
 
-          // update the userloginStatus to true for this user
-          connection.query(
-            "UPDATE  users SET userloginStatus=? WHERE email=?",
-            // hardcoding userloginStatus=1 to show the use is loggedin
-            ["0", results[0].email],
-            function (err, results) {
-              if (err) throw err;
-              console.log(results);
-            }
-          );
-        } else {
-          res.json({
-            data: "invalid  password",
-          });
-        }
-      } else res.redirect("http://localhost:3000/about");
-    }
-  });
+            // update the userloginStatus to true for this user
+            connection.query(
+              "UPDATE  users SET userloginStatus=? WHERE email=?",
+              // hardcoding userloginStatus=1 to show the use is loggedin
+              ["0", results[0].email],
+              function (err, results) {
+                if (err) throw err;
+                console.log(results);
+              }
+            );
+          } else {
+            res.json({
+              data: "invalid  password",
+            });
+          }
+        } else res.redirect("http://localhost:3000/about");
+      }
+    });
+  } else {
+    console.log("339d", req);
+
+    console.log("339f", req.body);
+
+    const payload = { email: req.body.email };
+    console.log("339x", payload);
+    const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");
+    // Logout function is executed
+    // res.cookie("yogaoutlet_access_token", token, {
+    //   maxAge: 0,
+    //   httpOnly: true, // it will enable on frotend-javascript to not have access to cokkies
+    //   // secure:true ................. when in production
+    // });
+
+    //cookies.set("yogaoutlet_access_token", { maxAge: 0 });
+    //  res.cookie.set("token", { maxAge: 0 });
+    //  res.status(200).json("User Logged out");
+    //res.setHeader("Content-Type", "application/json");
+
+    // res.cookie("key", "yogaoutlet_access_token", { expires: new Date(0), domain: "localhost", path: "/" });
+    //  res.cookie("token", "", { expires: new Date(0), domain: "localhost", path: "/" });
+    // res.json({
+    //   data: "user logged out",
+    // });
+    // res.setHeader("Content-Type", "application/json")
+    // res.clearCookie("yogaoutlet_access_token", {path:"/api/newuser"}).sendStatus(200);
+    res.clearCookie("yogaoutlet_access_token");
+    // res.cookie("token", "", { maxAge: 2 });
+    res
+      .json({
+        data: "invalid  password",
+      })
+      .end();
+    // res.clearCookie("token");
+    //  res.sendStatus(200);
+    // res.status(200).clearCookie("yogaoutlet_access_token", {
+    //   path: "/",
+    //   secure: false,
+    //   httpOnly: false,
+    //   domain: "localhost",
+    //   sameSite: true,
+    // });
+    //res.clearCookie("yogaoutlet_access_token", { path: "http://localhost:3000/signin", domain: `localhost` });
+
+    // res.redirect(200, "http://localhost:3000/");
+
+    // //res.status(200).end();
+    // const cookie = req.cookies;
+    // res.cookie(token, "", { expires: new Date(0), httpOnly: true });
+    // res.end();
+    // res.redirect(200, "http://localhost:3000/");
+  }
 });
 
 //connection.end();

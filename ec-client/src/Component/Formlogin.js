@@ -5,7 +5,7 @@ import logo from "../logo.svg";
 import "../App.css";
 
 function Forlogin() {
-  const [Email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [items, setItems] = useState([]);
 
@@ -23,7 +23,7 @@ function Forlogin() {
     console.log("event");
 
     //post construction, after the set name nad set password updated it will get send here
-    const dataSend = { Email: Email, password: password };
+    const dataSend = { email: email, password: password, logout: false };
     // creating header to make sure we are sending the JSON format
     const headers = new Headers();
     headers.append("content-type", "application/json");
@@ -36,7 +36,7 @@ function Forlogin() {
       // we need to include credentails if not then the cookies will not be recieved or sent
       credentials: "include",
     };
-    console.log(Email);
+    console.log(email);
 
     const request = new Request("http://localhost:5000/api/newuser", options);
 
@@ -74,7 +74,7 @@ function Forlogin() {
     <div>
       {
         <form method="POST" className="formstyle" onSubmit={credentialVerify}>
-          <input type="text" placeholder="Email" name="Email" value={Email} onChange={updateEmail} />
+          <input type="text" placeholder="email" name="email" value={email} onChange={updateEmail} />
 
           <input type="text" placeholder="Password" name="password" value={password} onChange={updatePassword} />
           <button type="submit">Submit</button>

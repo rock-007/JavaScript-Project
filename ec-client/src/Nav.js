@@ -57,8 +57,50 @@ function Nav({ userinfo, userstatus }) {
   const navStyle = {
     color: "White",
   };
-
+  console.log("eedr1", userinfo);
+  let y111;
   // if cookies are present then signin and change the signin to `${name of account holder}`
+  const delete_cookie = (e, callback) => {
+    console.log("eedrxc", userinfo);
+    const dataSend = { email: userinfo[0].email || null, password: userinfo[0].password || null, logout: true };
+    const headers = new Headers();
+    headers.append("content-type", "application/json");
+    const options = {
+      method: "POST",
+      headers,
+      body: JSON.stringify(dataSend),
+      credentials: "include",
+    };
+    console.log("deleet", dataSend);
+
+    const request = new Request("http://localhost:5000/api/newuser", options);
+
+    (async () => {
+      const incomingdata = await fetch(request)
+        .then((res) => {
+          console.log("1112s", res);
+
+          if (res.status > 200 && res.status < 400) {
+            // window.location.href = "http://localhost:3000/";
+            console.log("jhhg", res);
+          } else {
+            console.log("2345", res);
+
+            console.log(res.status);
+            //console.log(res.json());
+            console.log(res.location);
+            console.log("fgghj", res.header);
+            return res.json();
+            //return res;
+          }
+        })
+        .then((body) => {
+          console.log("sddf2", body);
+          return body;
+        });
+    })();
+    callback();
+  };
 
   return (
     <nav className="header">
@@ -81,7 +123,7 @@ function Nav({ userinfo, userstatus }) {
             <Button variant="success" href="./signin" style={{ background: "none", borderStyle: "none", outline: "none !important" }}>
               {userstatus ? (
                 <button
-                  style={{ border: "none", background: "none",outline: "none" }}
+                  style={{ border: "none", background: "none", outline: "none" }}
                   className=" signin-icon glyphicon glyphicon-user	
                 "
                 ></button>
@@ -95,13 +137,29 @@ function Nav({ userinfo, userstatus }) {
               split
               variant="success"
               id="dropdown-split-basic"
-              style={{  background: "none", borderStyle: "none", outline: "none !important" }}
+              style={{ background: "none", borderStyle: "none", outline: "none !important" }}
             />
 
             <Dropdown.Menu>
               <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
               <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+              <Dropdown.Item
+                style={{ backgroundColor: "none" }}
+                // href="/signin"
+                onClick={(e) => {
+                  console.log("123x1");
+
+                  delete_cookie(e, () => {
+                    console.log("dffg5667");
+                    // window.localStorage.removeItem("user-data");
+                    //                 window.localStorage.removeItem("user-status");
+                    //                 window.localStorage.removeItem("user-basket");
+                    //                 window.localStorage.removeItem("buyNowFinal");
+                  });
+                }}
+              >
+                Log Out
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
