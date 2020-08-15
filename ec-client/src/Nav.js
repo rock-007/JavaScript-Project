@@ -60,7 +60,7 @@ function Nav({ userinfo, userstatus }) {
   console.log("eedr1", userinfo);
   let y111;
   // if cookies are present then signin and change the signin to `${name of account holder}`
-  const delete_cookie = (e, callback) => {
+  const delete_cookie = () => {
     console.log("eedrxc", userinfo);
     const dataSend = { email: userinfo[0].email || null, password: userinfo[0].password || null, logout: true };
     const headers = new Headers();
@@ -81,7 +81,7 @@ function Nav({ userinfo, userstatus }) {
           console.log("1112s", res);
 
           if (res.status > 200 && res.status < 400) {
-            // window.location.href = "http://localhost:3000/";
+            
             console.log("jhhg", res);
           } else {
             console.log("2345", res);
@@ -96,10 +96,15 @@ function Nav({ userinfo, userstatus }) {
         })
         .then((body) => {
           console.log("sddf2", body);
+          window.localStorage.removeItem("user-status");
+           window.localStorage.removeItem("user-data");
+           window.localStorage.removeItem("buyNowFinal");
+            window.location.href = "http://localhost:3000/";
           return body;
         });
     })();
-    callback();
+    // window.location.href = "http://localhost:3000/";
+   
   };
 
   return (
@@ -148,14 +153,15 @@ function Nav({ userinfo, userstatus }) {
                 // href="/signin"
                 onClick={(e) => {
                   console.log("123x1");
-
-                  delete_cookie(e, () => {
-                    console.log("dffg5667");
-                    // window.localStorage.removeItem("user-data");
-                    //                 window.localStorage.removeItem("user-status");
-                    //                 window.localStorage.removeItem("user-basket");
-                    //                 window.localStorage.removeItem("buyNowFinal");
-                  });
+delete_cookie()
+                  // delete_cookie(, () => {
+                  //   console.log("dffg5667");
+                  //   //                   window.localStorage.removeItem("buyNowFinal");
+                  //   //              //      window.localStorage.removeItem("user-data");
+                  //   //                                 window.localStorage.removeItem("user-status");
+                  //   //                                 window.localStorage.removeItem("user-basket");
+                  //   //
+                  // });
                 }}
               >
                 Log Out
