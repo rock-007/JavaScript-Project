@@ -27,9 +27,13 @@ app.use(
   })
 );
 let connection = mysqlx.createConnection({
-  host: "localhost",
+  host: "root.cjnxyreiymo1.eu-west-2.rds.amazonaws.com",
   user: "root",
-  password: "password",
+  password: "Skyliner007!",
+
+  // host: "localhost",
+  // user: "root",
+  // password: "password",
   database: "join_us",
   insecureAuth: true,
 });
