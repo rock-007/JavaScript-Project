@@ -59,7 +59,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell> </TableCell>
+                <TableCell> </TableCell> 
                 <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   Product Name{" "}
                 </TableCell>
