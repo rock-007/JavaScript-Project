@@ -4,7 +4,6 @@ const mysqlx = require("mysql");
 const jwt = require("jsonwebtoken");
 const auth = require("./verifyTokenExisting");
 const authNew = require("./verifyTokenNew");
-// const searchrequest = require("./searchrequest");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const pdf = require("html-pdf");
