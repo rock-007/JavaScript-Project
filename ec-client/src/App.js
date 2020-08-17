@@ -245,6 +245,13 @@ function App() {
     credentailverify();
   }, []);
 
+const userDataRefresh=()=>{
+
+credentailverify();
+
+}
+
+
   function credentailverify() {
     (async () => {
       const x1 = await fetch(verifyifloginalready)
@@ -300,7 +307,7 @@ function App() {
             <Route
               path="/"
               exact
-              render={(props) => <Home {...props} userData={userData} userstatus={siginalready} addBasketitems={addBasketitems} />}
+              render={(props) => <Home {...props} userData={userData} userstatus={siginalready} addBasketitems={addBasketitems} userDataRefresh={userDataRefresh} />}
               //  why we pass all pros {...props} here
             />
             // render here work for passing the ste into the child component // from router {/* render={props=>(<newComponent}/> )} */}

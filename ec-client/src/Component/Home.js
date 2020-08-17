@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../logo.svg";
 import "../App.css";
 import ProjectLogo from "../Img/logo.svg";
@@ -9,7 +9,7 @@ import SwipeableHome from "./SwipeableHome";
 
 import { Button, ButtonGroup, Dropdown, MenuItem, Container } from "react-bootstrap";
 
-function Home({ userData, userstatus, addBasketitems }) {
+function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
   const [yogaMatState, setYogaMatState] = useState("---Select Yogamats---");
   const [yogaEquipState, setYogaEquipState] = useState("---Select Equipments---");
 
@@ -18,6 +18,10 @@ function Home({ userData, userstatus, addBasketitems }) {
   const [showPage, setShowPage] = useState(undefined);
 
   const [homePage, setHomepage] = useState(undefined);
+  // useEffect here when after first time it redirect from ligin page to home page so need to have user data call too
+  useEffect(() => {
+    userDataRefresh();
+  }, [userstatus]);
 
   function reset() {
     setYogaMatState("---Select Yogamats---");

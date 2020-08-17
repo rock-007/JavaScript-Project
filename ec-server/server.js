@@ -4,6 +4,7 @@ const mysqlx = require("mysql");
 const jwt = require("jsonwebtoken");
 const auth = require("./verifyTokenExisting");
 const authNew = require("./verifyTokenNew");
+// const searchrequest = require("./searchrequest");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const pdf = require("html-pdf");
@@ -26,19 +27,18 @@ app.use(
   })
 );
 let connection = mysqlx.createConnection({
-  // host: "root.cjnxyreiymo1.eu-west-2.rds.amazonaws.com",
-  // user: "root",
-  // password: "Skyliner007!",
+  host: "root.cjnxyreiymo1.eu-west-2.rds.amazonaws.com",
+  user: "root",
+  password: "Skyliner007!",
 
-   host: "localhost",
-   user: "root",
-   password: "password",
+  // host: "localhost",
+  // user: "root",
+  // password: "password",
   database: "join_us",
   insecureAuth: true,
 });
-//!:TODO if he get request at   http://localhost:5000/signin then it will response to it
-
-//searcg each item 
+// if he get request at :TODO  http://localhost:5000/signin then it will response to it
+//? 1
 app.get("/api/:abc", (req, res) => {
   const decoded = { key1: req.params.abc }; //decode
   console.log(typeof decoded);
@@ -53,7 +53,7 @@ app.get("/api/:abc", (req, res) => {
   console.log("47new", typeof decoded_refine);
   console.log("48new", decoded_refine[0]);
   // Eco-YogaMats,.... decoded_refine[0]
-  
+  // var sql=
 
   connection.query(
     "SELECT product_name,producNumber,price,productDescription,image_URL,stockQuantity FROM main_Products_sub_category  INNER JOIN main_Product_Info INNER JOIN images ON main_Products_sub_category.main_Products_sub_category_id= main_Product_Info.main_Products_sub_category_main_Products_sub_category_id AND main_Product_Info.producInfoId=images.main_Product_Info_producInfoId WHERE main_Products_sub_category.main_Products_sub_category_name= ?",
@@ -74,7 +74,7 @@ app.get("/api/:abc", (req, res) => {
 });
 
 ////!   FInal INVOICE(Query only)
-
+//?2
 app.post("/api/invoice-only", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
   if (token) {
@@ -92,8 +92,8 @@ app.post("/api/invoice-only", (req, res) => {
   }
 });
 
-///////////////////////////////////////////////////////
-
+//! when refresh signin page
+//?3
 app.post("/api/invoice-all", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
   let decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
@@ -265,7 +265,10 @@ app.post("/api/customers", (req, res) => {
   res.json("results");
 });
 
-//!  when clicked on signin page/
+//!  when clicked on signin page to verify after signin/
+
+
+
 
 app.post("/api/verifyifloginalready", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
@@ -297,7 +300,7 @@ app.post("/api/verifyifloginalready", (req, res) => {
   });
 });
 
-////*  LOGIN
+////!  LOGIN & LOGOUT
 
 app.post("/api/newuser", (req, res) => {
   let x1 = req.body;
@@ -314,8 +317,9 @@ app.post("/api/newuser", (req, res) => {
           //  console.log("79", results[0].email);
 
           //below if the user and paswword is correct == to do user is not already logedin
-          //TODO chage the default userloginStatus to false rather null
-          if ((results[0].password == x1.password && results[0].userloginStatus == false) || (results[0].password == x1.password && results[0].userloginStatus == null)) {
+          //TODO chage the default userloginStatus to false rather null & on logout change to flase flag
+
+          if ((results[0].password == x1.password && results[0].userloginStatus == true) || (results[0].password == x1.password && results[0].userloginStatus == null)) {
             //TODO: send user account details it like update the basket and user purchaee history
             const payload = { email: results[0].email };
             console.log("payloods", payload);
@@ -368,5 +372,5 @@ app.post("/api/newuser", (req, res) => {
 });
 
 //connection.end();
-const port = 5000;
-app.listen(port, "localhost", "localhost", () => console.log(`server started on port${port}`));
+// const port = 5000;
+// app.listen(port, "localhost", "localhost", () => console.log(`server started on port${port}`));
