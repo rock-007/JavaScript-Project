@@ -27,18 +27,19 @@ app.use(
   })
 );
 let connection = mysqlx.createConnection({
-  host: "root.cjnxyreiymo1.eu-west-2.rds.amazonaws.com",
-  user: "root",
-  password: "Skyliner007!",
-
-  // host: "localhost",
+  // host: "root.cjnxyreiymo1.eu-west-2.rds.amazonaws.com",
   // user: "root",
-  // password: "password",
+  // password: "Skyliner007!",
+
+   host: "localhost",
+   user: "root",
+   password: "password",
   database: "join_us",
   insecureAuth: true,
 });
-// if he get request at :TODO  http://localhost:5000/signin then it will response to it
+//!:TODO if he get request at   http://localhost:5000/signin then it will response to it
 
+//searcg each item 
 app.get("/api/:abc", (req, res) => {
   const decoded = { key1: req.params.abc }; //decode
   console.log(typeof decoded);
@@ -53,7 +54,7 @@ app.get("/api/:abc", (req, res) => {
   console.log("47new", typeof decoded_refine);
   console.log("48new", decoded_refine[0]);
   // Eco-YogaMats,.... decoded_refine[0]
-  // var sql=
+  
 
   connection.query(
     "SELECT product_name,producNumber,price,productDescription,image_URL,stockQuantity FROM main_Products_sub_category  INNER JOIN main_Product_Info INNER JOIN images ON main_Products_sub_category.main_Products_sub_category_id= main_Product_Info.main_Products_sub_category_main_Products_sub_category_id AND main_Product_Info.producInfoId=images.main_Product_Info_producInfoId WHERE main_Products_sub_category.main_Products_sub_category_name= ?",
@@ -73,21 +74,12 @@ app.get("/api/:abc", (req, res) => {
   );
 });
 
-// ! ///////////////// FInal INVOICE(Query only) //////////////////////////////////////////////////////FInal INVOICE(Query only)////////////////////////////////////////////////////////////
+////!   FInal INVOICE(Query only)
 
 app.post("/api/invoice-only", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
   if (token) {
     let Invoice_No_Actual = req.body.invoice_Name;
-    // res.set("Content-disposition", "attachment; filename=" + `${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
-    // res.set("Content-Type", "application/pdf");
-
-    //    res.writeHead(200, {
-    //  "Content-Type": "application/octet-stream",
-    //      "Content-disposition": "attachment; filename=",
-    //    });
-    // res.sendFile(`${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`);
-
     fs.readFile(`${__dirname}\\` + `${Invoice_No_Actual}` + `.pdf`, (err, data) => {
       if (err) res.status(500).send(err);
       else {
@@ -121,7 +113,7 @@ app.post("/api/invoice-all", (req, res) => {
     });
   });
 });
-// ! ///////////////// FInal INVOICE //////////////////////////////////////////////////////FInal INVOICE////////////////////////////////////////////////////////////
+////!  FInal INVOICE
 
 app.post("/api/invoice", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
@@ -254,9 +246,7 @@ app.post("/api/invoice", (req, res) => {
   // }
 });
 
-/////////////////////////////////////
-
-// ! ///////////////// REGISTER //////////////////////////////////////////////////////Register////////////////////////////////////////////////////////////
+//// ! REGISTER
 
 app.post("/api/customers", (req, res) => {
   let x1 = req.body;
@@ -269,43 +259,14 @@ app.post("/api/customers", (req, res) => {
   };
 
   connection.query("INSERT INTO users SET ?", person, function (err, results) {
-    if (err) console.log(err);
+    if (err) throw err;
     console.log("46", results);
   });
 
-  //query
-  //  let q = "SELECT * from users";
-  // connection.query(q, function (err, results) {
-  //   if (err) throw err;
   res.json("results");
-  //res.send("sadsdas");
-  //  res.redirect("http://localhost:3000/signin");
-  //});
 });
 
-// app.get("api/#/Eco-YogaMats", (req, res) => {
-//   // const userSelection = req.params.selection; // can also be params.[selection].split if multiple together
-
-//   console.log(38, " userSelection");
-//   res.end();
-// });
-//   // in real life it will usually come froma database like mysql,mongodb...
-//   // const cusotmers = [
-//   //   { id: 1, xxxe: "cccccccccccccccccccccJohn", Lahhhstname: "Don" },
-//   //   { id: 2, firstName: "Umair", Lasgfgdftname: "Ashraf" },
-//   //   { id: 3, firstName: "Owais", Lasfdtname: "Aslam" },
-//   // ];
-//   // let q = "SELECT * from users";
-//   // connection.query(q, function (err, results) {
-//   //   //if (err) throw err;
-//   //   // console.log(results);
-//   //   // send the jason formt to the font end
-//   //   res.json(results);
-//   // });
-// });
-// // port where it can be listen on local host , dont use 3000 as it is default picked up by react
-
-//?  when clicked on signin page/////////////////////////////////////////////////////////////////
+//!  when clicked on signin page/
 
 app.post("/api/verifyifloginalready", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
@@ -325,29 +286,22 @@ app.post("/api/verifyifloginalready", (req, res) => {
     console.log("94", `${decodepayload.email}`);
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
-      //https://www.sohamkamani.com/blog/javascript/2019-03-29-node-jwt-authentication/
-      // invalid token
+      //?https://www.sohamkamani.com/blog/javascript/2019-03-29-node-jwt-authentication/
+      // if invalid token
       res.status(401).end();
     } else {
       res.status(400).end();
     }
   }
   connection.query("SELECT * FROM  users WHERE email=?;", [decodepayload.email], function (err, results) {
-    // res.send(`Welcome ${decodeemail}!`);
-    console.log("fds", results);
     res.json(results);
   });
 });
 
-//* /////////////////LOGIN//////////////////////////////////////////////////////Login////////////////////////////////////////////////////////////
+////*  LOGIN
 
 app.post("/api/newuser", (req, res) => {
   let x1 = req.body;
-
-  // var person = {
-  //   email: x1.Email,
-  //   //  password: x1.password,
-  // };
   console.log("144", x1);
 
   if (req.body.logout === false) {
@@ -355,10 +309,6 @@ app.post("/api/newuser", (req, res) => {
       console.log(results);
       console.log("150new", results[0].email);
       console.log("151", results[0].email);
-      // const token =JWT.sign(payload,secret)
-      // console.log("74", results, err);console.log("92", results[0].email);console.log("93", JSON.stringify(results)); ///console.log("93", JSON.parse(JSON.stringify(results)));console.log("94", JSON.parse(JSON.stringify(results))[0]);
-      // console.log("95", JSON.parse(JSON.stringify(results))[0].email);
-
       if (err) throw err;
       else {
         if (results[0].email && results[0].password) {
@@ -407,50 +357,14 @@ app.post("/api/newuser", (req, res) => {
     const payload = { email: req.body.email };
     console.log("339x", payload);
     const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");
-    // Logout function is executed
-    // res.cookie("yogaoutlet_access_token", token, {
-    //   maxAge: 0,
-    //   httpOnly: true, // it will enable on frotend-javascript to not have access to cokkies
-    //   // secure:true ................. when in production
-    // });
 
-    //cookies.set("yogaoutlet_access_token", { maxAge: 0 });
-    //  res.cookie.set("token", { maxAge: 0 });
-    //  res.status(200).json("User Logged out");
-    //res.setHeader("Content-Type", "application/json");
-
-    // res.cookie("key", "yogaoutlet_access_token", { expires: new Date(0), domain: "localhost", path: "/" });
-    //  res.cookie("token", "", { expires: new Date(0), domain: "localhost", path: "/" });
-    // res.json({
-    //   data: "user logged out",
-    // });
-    // res.setHeader("Content-Type", "application/json")
-    // res.clearCookie("yogaoutlet_access_token", {path:"/api/newuser"}).sendStatus(200);
     res.clearCookie("yogaoutlet_access_token");
-    // res.cookie("token", "", { maxAge: 2 });
+
     res
       .json({
-        data: "invalid  password",
+        data: "User Logged out",
       })
       .end();
-    // res.clearCookie("token");
-    //  res.sendStatus(200);
-    // res.status(200).clearCookie("yogaoutlet_access_token", {
-    //   path: "/",
-    //   secure: false,
-    //   httpOnly: false,
-    //   domain: "localhost",
-    //   sameSite: true,
-    // });
-    //res.clearCookie("yogaoutlet_access_token", { path: "http://localhost:3000/signin", domain: `localhost` });
-
-    // res.redirect(200, "http://localhost:3000/");
-
-    // //res.status(200).end();
-    // const cookie = req.cookies;
-    // res.cookie(token, "", { expires: new Date(0), httpOnly: true });
-    // res.end();
-    // res.redirect(200, "http://localhost:3000/");
   }
 });
 
