@@ -4,7 +4,6 @@ const mysqlx = require("mysql");
 const jwt = require("jsonwebtoken");
 const auth = require("./verifyTokenExisting");
 const authNew = require("./verifyTokenNew");
-// const searchrequest = require("./searchrequest");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const pdf = require("html-pdf");
@@ -27,13 +26,14 @@ app.use(
   })
 );
 let connection = mysqlx.createConnection({
-  host: "root.cjnxyreiymo1.eu-west-2.rds.amazonaws.com",
+  host: "database-1.cjnxyreiymo1.eu-west-2.rds.amazonaws.com",
   user: "root",
   password: "Skyliner007!",
 
-  // host: "localhost",
-  // user: "root",
-  // password: "password",
+  //  host: "localhost",
+  //  user: "root",
+  //  password: "password",
+
   database: "join_us",
   insecureAuth: true,
 });
@@ -60,7 +60,7 @@ app.get("/api/:abc", (req, res) => {
     [decoded_refine[0]],
     function (err, results) {
       // console.log(results);
-      console.log(typeof results);
+      console.log("typess", typeof results);
       console.log("57namne", results);
       if (err) {
         throw err;
@@ -102,8 +102,8 @@ app.post("/api/invoice-all", (req, res) => {
     let user_id = results[0].user_id;
     // let user_email = userIdentitiy;
 
-    connection.query("SELECT * FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
-      if (err) throw err;
+    connection.query("SELECT * FROM  users_Basket WHERE users_user_id=?;", [user_id], function (err, results) {
+      if (err) console.log("Error", err);
       else {
         console.log("1578", results);
         //  let invoice_Object = json.stringify(results);
@@ -142,8 +142,9 @@ app.post("/api/invoice", (req, res) => {
       console.log("wwer", checkQuantity);
       console.log("wwerx", actaul_Bought_Items_Num);
       for (let i = 0; i < actaul_Bought_Items_Num; i++) {
-        connection.query("UPDATE main_product_info SET stockQuantity=stockQuantity-1 WHERE main_product_info.producNumber=?", [checkQuantity], function (err, result) {
+        connection.query("UPDATE main_Product_Info SET stockQuantity=stockQuantity-1 WHERE main_Product_Info.producNumber=?", [checkQuantity], function (err, result) {
           if (err) {
+            console.log("3345", err);
             unavailableItems.push(req.body[i]);
           } else console.log("ffgt", result);
         });
@@ -162,13 +163,13 @@ app.post("/api/invoice", (req, res) => {
       // we now got the correct users
       if (user_id && unavailableItems[0] == null) {
         //1- delete the   quantitiy from the product info
-        // create users_basket(by submitting email and userID ) and generate the inovice number for this Transaction
+        // create users_Basket(by submitting email and userID ) and generate the inovice number for this Transaction
 
         // how exports. ? works
         function Invoice_No(callback) {
-          connection.query(" INSERT INTO users_basket  SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {});
+          connection.query(" INSERT INTO users_Basket  SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {});
           let latest_inoice_new;
-          connection.query("Select max(invoiceNo) AS latest_Invoice from users_basket", function (err, latest_invoice) {
+          connection.query("Select max(invoiceNo) AS latest_Invoice from users_Basket", function (err, latest_invoice) {
             console.log("116tty", latest_invoice);
             latest_inoice_new = latest_invoice[0].latest_Invoice;
             console.log("116tty", latest_invoice[0].latest_Invoice);
@@ -178,7 +179,7 @@ app.post("/api/invoice", (req, res) => {
 
         let Invoice_No_Per_Trasaction = Invoice_No(function (value) {
           connection.query(
-            "SELECT u1.first_name,u1.user_id,b1.invoiceNo FROM  users u1 INNER JOIN users_basket b1 ON b1.users_user_id=u1.user_id where b1.invoiceNo=?; ",
+            "SELECT u1.first_name,u1.user_id,b1.invoiceNo FROM  users u1 INNER JOIN users_Basket b1 ON b1.users_user_id=u1.user_id where b1.invoiceNo=?; ",
             [value],
             function (err, results) {
               if (err) {
@@ -206,16 +207,16 @@ app.post("/api/invoice", (req, res) => {
                   .create(pdfTemplate(customer_dataand_Itemsbought), { type: "pdf" })
                   .toFile(`./${user_details.user_id}` + `_` + `${user_details.Invoice_No_latest}.pdf`, function (err, res) {
                     if (err) {
-                      console.log(err);
+                      console.log("5667", err);
                     } else console.log("143rrt", res, typeof res);
-                    connection.query("UPDATE users_basket set invoice_document=? WHERE invoiceNo=?;", [res.filename, user_details.Invoice_No_latest], function (err, results) {
-                      if (err) console.log(err);
+                    connection.query("UPDATE users_Basket set invoice_document=? WHERE invoiceNo=?;", [res.filename, user_details.Invoice_No_latest], function (err, results) {
+                      if (err) console.log("tty", err);
                       else console.log("151ddf", results);
                     });
                   });
                 console.log("145", user_details.Invoice_No_latest);
 
-                connection.query("SELECT * FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
+                connection.query("SELECT * FROM  users_Basket WHERE users_user_id=?;", [user_id], function (err, results) {
                   if (err) throw err;
                   else {
                     console.log("1578", results);
@@ -233,7 +234,7 @@ app.post("/api/invoice", (req, res) => {
   // } else {
   //   const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
   //     let user_id = results[0].user_id;
-  //     connection.query("SELECT * FROM  users_basket WHERE users_user_id=?;", [user_id], function (err, results) {
+  //     connection.query("SELECT * FROM  users_Basket WHERE users_user_id=?;", [user_id], function (err, results) {
   //       if (err) throw err;
   //       else {
   //         console.log("1578", results);
@@ -267,9 +268,6 @@ app.post("/api/customers", (req, res) => {
 
 //!  when clicked on signin page to verify after signin/
 
-
-
-
 app.post("/api/verifyifloginalready", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
   //
@@ -283,13 +281,14 @@ app.post("/api/verifyifloginalready", (req, res) => {
   try {
     decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
 
-    console.log(decodepayload);
+    console.log("gffd", decodepayload);
     console.log(decodepayload.email);
-    console.log("94", `${decodepayload.email}`);
+    console.log("w94", `${decodepayload.email}`);
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
       //?https://www.sohamkamani.com/blog/javascript/2019-03-29-node-jwt-authentication/
       // if invalid token
+      Console.log("22234");
       res.status(401).end();
     } else {
       res.status(400).end();
@@ -311,7 +310,7 @@ app.post("/api/newuser", (req, res) => {
       console.log(results);
       console.log("150new", results[0].email);
       console.log("151", results[0].email);
-      if (err) throw err;
+      if (err) console.log("13333", err);
       else {
         if (results[0].email && results[0].password) {
           //  console.log("79", results[0].email);
@@ -341,7 +340,7 @@ app.post("/api/newuser", (req, res) => {
               ["1", results[0].email],
               function (err, results) {
                 if (err) throw err;
-                console.log(results);
+                console.log("233er", results);
               }
             );
           } else {
@@ -372,5 +371,5 @@ app.post("/api/newuser", (req, res) => {
 });
 
 //connection.end();
-// const port = 5000;
-// app.listen(port, "localhost", "localhost", () => console.log(`server started on port${port}`));
+const port = 5000;
+app.listen(port, "localhost", "localhost", () => console.log(`server started on port${port}`));

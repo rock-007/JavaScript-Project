@@ -4,6 +4,7 @@
   "description": "Boilerplate for React and Express",
   "main": "server.js",
   "dependencies": {
+    "aws-sdk": "^2.735.0",
     "concurrently": "^5.2.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
