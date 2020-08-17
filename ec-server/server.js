@@ -68,6 +68,7 @@ app.get("/api/:abc", (req, res) => {
         let results1 = JSON.stringify(results);
         console.log(results); // showing the table
         res.send(results1);
+        process.exit(); // to finihs the connection otherwise it will wait forever
       }
     }
   );
