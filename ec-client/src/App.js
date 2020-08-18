@@ -232,7 +232,8 @@ function App() {
   console.log(typeof basketItems);
   console.log(basketItems);
 
-  let url = "http://localhost:5000/api/verifyifloginalready";
+  // let url = "https://t5a40d1b2d.execute-api.eu-west-2.amazonaws.com/Dev";
+  let url = "https:/yogaoutlet.herokuapp.com/api/verifyifloginalready";
 
   let options = {
     credentials: "include",
@@ -245,12 +246,9 @@ function App() {
     credentailverify();
   }, []);
 
-const userDataRefresh=()=>{
-
-credentailverify();
-
-}
-
+  const userDataRefresh = () => {
+    credentailverify();
+  };
 
   function credentailverify() {
     (async () => {

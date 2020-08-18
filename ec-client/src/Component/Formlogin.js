@@ -38,7 +38,8 @@ function Forlogin() {
     };
     console.log(email);
 
-    const request = new Request("http://localhost:5000/api/newuser", options);
+    // const request = new Request("https://lid36d8wya.execute-api.eu-west-2.amazonaws.com/devopl", options);
+    const request = new Request("https:/yogaoutlet.herokuapp.com/api/newuser", options);
 
     (async () => {
       const incomingdata = await fetch(request)

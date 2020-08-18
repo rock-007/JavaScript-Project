@@ -10,8 +10,8 @@ function Signin({ userData, userstatus, finalBuy, buyNow, resetBuynow }) {
   //const [siginalready, setifsignedin] = useState(false);
 
   const [allInvoices, setallInvoices] = useState([]);
-  console.log("13x",userData);
-  console.log("14rt",userstatus);
+  console.log("13x", userData);
+  console.log("14rt", userstatus);
 
   console.log(finalBuy);
 
@@ -30,7 +30,7 @@ function Signin({ userData, userstatus, finalBuy, buyNow, resetBuynow }) {
       body: JSON.stringify(),
     };
 
-    const newRequest = new Request("http://localhost:5000/api/invoice-all", options);
+    const newRequest = new Request("https:/yogaoutlet.herokuapp.com/api/invoice-all", options);
 
     (async () => {
       const invoiceFetch = await fetch(newRequest)

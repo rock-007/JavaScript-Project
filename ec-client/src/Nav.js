@@ -73,7 +73,8 @@ function Nav({ userinfo, userstatus }) {
     };
     console.log("deleet", dataSend);
 
-    const request = new Request("http://localhost:5000/api/newuser", options);
+    // const request = new Request(" https://lid36d8wya.execute-api.eu-west-2.amazonaws.com/devopl", options);
+    const request = new Request("https:/yogaoutlet.herokuapp.com/api/newuser", options);
 
     (async () => {
       const incomingdata = await fetch(request)
@@ -81,7 +82,6 @@ function Nav({ userinfo, userstatus }) {
           console.log("1112s", res);
 
           if (res.status > 200 && res.status < 400) {
-            
             console.log("jhhg", res);
           } else {
             console.log("2345", res);
@@ -97,14 +97,13 @@ function Nav({ userinfo, userstatus }) {
         .then((body) => {
           console.log("sddf2", body);
           window.localStorage.removeItem("user-status");
-           window.localStorage.removeItem("user-data");
-           window.localStorage.removeItem("buyNowFinal");
-            window.location.href = "http://localhost:3000/";
+          window.localStorage.removeItem("user-data");
+          window.localStorage.removeItem("buyNowFinal");
+          window.location.href = "http://localhost:3000/";
           return body;
         });
     })();
     // window.location.href = "http://localhost:3000/";
-   
   };
 
   return (
@@ -153,7 +152,7 @@ function Nav({ userinfo, userstatus }) {
                 // href="/signin"
                 onClick={(e) => {
                   console.log("123x1");
-delete_cookie()
+                  delete_cookie();
                   // delete_cookie(, () => {
                   //   console.log("dffg5667");
                   //   //                   window.localStorage.removeItem("buyNowFinal");

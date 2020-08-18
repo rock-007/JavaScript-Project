@@ -49,7 +49,7 @@ function Formregister() {
       redirect: "follow",
     };
 
-    const request = new Request("http://localhost:5000/api/customers", options);
+    const request = new Request("https:/yogaoutlet.herokuapp.com/api/customers", options);
 
     (async () => {
       const incomingdata = await fetch(request)
@@ -75,36 +75,12 @@ function Formregister() {
     <div>
       {
         <form method="POST" className="formstyle" onSubmit={credentialVerify}>
-          <input
-            type="text"
-            placeholder="email"
-            name="email"
-            value={email}
-            onChange={updateEmail}
-          />
+          <input type="text" placeholder="email" name="email" value={email} onChange={updateEmail} />
 
-          <input
-            type="text"
-            placeholder="firstname"
-            name="FirstName"
-            value={FirstName}
-            onChange={updateFirstName}
-          />
-          <input
-            type="text"
-            placeholder="lastname"
-            name="LastName"
-            value={LastName}
-            onChange={updateLastName}
-          />
+          <input type="text" placeholder="firstname" name="FirstName" value={FirstName} onChange={updateFirstName} />
+          <input type="text" placeholder="lastname" name="LastName" value={LastName} onChange={updateLastName} />
 
-          <input
-            type="text"
-            placeholder="Password"
-            name="password"
-            value={password}
-            onChange={updatePassword}
-          />
+          <input type="text" placeholder="Password" name="password" value={password} onChange={updatePassword} />
           <button type="submit">Submit</button>
         </form>
       }
