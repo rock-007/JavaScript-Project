@@ -372,5 +372,5 @@ app.post("/api/newuser", (req, res) => {
 });
 
 //connection.end();
-const port = 5000;
-app.listen(port, "localhost", "localhost", () => console.log(`server started on port${port}`));
+const port = process.env.PORT || 5000;
+app.listen(port, "localhost", "localhost", () => console.log("port number",`server started on port${port}`));
