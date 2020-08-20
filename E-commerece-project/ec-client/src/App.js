@@ -295,7 +295,7 @@ function App() {
     <Router history={history}>
       <div className="App">
         <header className="header">
-          <Nav userinfo={userData} userstatus={siginalready} />
+          <Nav userinfo={userData} userstatus={siginalready} finalBuy={finalBuy} />
         </header>
 
         <div className="main">

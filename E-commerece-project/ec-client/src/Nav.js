@@ -12,8 +12,10 @@ import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, Dropdow
 // const initailDropdownOpen = () => {
 //   return window.localStorage.getItem("user-DropdownOpen") || false;
 // };
-function Nav({ userinfo, userstatus }) {
+function Nav({ userinfo, userstatus, finalBuy }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  let productItemInCart = finalBuy.length;
 
   const [list, setList] = useState([1, 2, 3]);
   console.log("14xx", isDropdownOpen);
@@ -116,23 +118,38 @@ function Nav({ userinfo, userstatus }) {
 
       <ul>
         <li>
-          <a
-            className="glyphicon glyphicon-shopping-cart
-"
-            href="./basket"
-          ></a>
+          <a href="./basket">
+            <i className="fa" style={{ "font-size": "24px" }} href="./basket">
+              &#xf07a;
+            </i>
+            <span class="badge badge-warning" id="lblCartCount">
+              {productItemInCart}
+            </span>
+          </a>
         </li>
         <li>
           <Dropdown as={ButtonGroup} style={{ marginTop: "5px", position: "relative", float: "left", top: "13px" }}>
             <Button variant="success" href="./signin" style={{ background: "none", borderStyle: "none", outline: "none !important" }}>
               {userstatus ? (
-                <button
+                <i
                   style={{ border: "none", background: "none", outline: "none" }}
-                  className=" signin-icon glyphicon glyphicon-user	
+                  className=" fas fa-user-circle	
                 "
-                ></button>
+                ></i>
               ) : (
-                <button style={{ border: "none", background: "none", outline: "none" }}>SIGNIN</button>
+                <i
+                  style={{
+                    "border": "none",
+                    "background": "none",
+                    "outline": "none",
+                    "font-size": "1.8rem",
+                    "fontFamily": "Roboto",
+                    "textTransform": "none",
+                    "marginLeft": "-3rem",
+                  }}
+                >
+                  Sign in/ Register
+                </i>
               )}
             </Button>
 
