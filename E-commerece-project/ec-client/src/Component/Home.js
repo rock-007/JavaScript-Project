@@ -103,15 +103,15 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
       <div className="homestyle">
         <h3>
           <hr />
-          <ul className="homebarstyle">
+          <ul className="homebarstyle" size="lg">
             <li>
               {/* <Button variant="primary">Primary</Button> */}
-              <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+              <Dropdown  >
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
                   {yogaMatState}
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu className="dropdownMenuSubItems">
                   {/* // whe delete the # it will not dispaly anything? why */}
                   {/* // we dont use yogaMatSelected() here as it will fire right away and we
                   dont want that we want when it get executed by onclick event */}
@@ -130,11 +130,11 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
             </li>
             <li>
               <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
                   {yogaEquipState}
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu className="dropdownMenuSubItems">
                   <Dropdown.Item href="#/yoga-Block&Bricks" onClick={equipmentSelected}>
                     Yoga-Block&Bricks
                   </Dropdown.Item>
@@ -152,11 +152,11 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
             </li>
             <li>
               <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
                   {yogaClothsState}
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu className="dropdownMenuSubItems">
                   <Dropdown.Item href="#/Bottoms" onClick={Clothsselected}>
                     Bottoms
                   </Dropdown.Item>
@@ -171,11 +171,11 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
             </li>
             <li>
               <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
                   {accessoriesState}
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu>
+                <Dropdown.Menu className="dropdownMenuSubItems">
                   <Dropdown.Item href="#/Travelsize-SkinCare" onClick={accessoriesselected}>
                     Travelsize-SkinCare
                   </Dropdown.Item>
