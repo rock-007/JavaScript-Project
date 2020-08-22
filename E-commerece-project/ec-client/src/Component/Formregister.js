@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import logo from "../logo.svg";
 import "../App.css";
+import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, MenuItem, Container } from "react-bootstrap";
 
 function Formregister() {
   const [email, setEmail] = useState("");
@@ -72,16 +73,46 @@ function Formregister() {
   };
 
   return (
-    <div>
+    <div style={{ Height: "34rem", width: "32rem", marginLeft: "0px", justifyContent: "left" }}>
       {
-        <form method="POST" className="formstyle" onSubmit={credentialVerify}>
-          <input type="text" placeholder="email" name="email" value={email} onChange={updateEmail} />
+        <form style={{ width: "100%" }} method="POST" className="formstyle" onSubmit={credentialVerify}>
+          <div className="form-group">
+            <label for="enterEmail" style={{ fontSize: "1.9rem" }}>
+              Email address
+            </label>
+            <input class="form-control" style={{ width: "40rem" }} type="text" placeholder="email" id="enterEmail" name="email" value={email} onChange={updateEmail} />
+          </div>
+          <label for="firstName" style={{ fontSize: "1.9rem" }}>
+            First Name
+          </label>
+          <input class="form-control" style={{ width: "40rem" }} type="text" placeholder="firstname" id="firstName" name="FirstName" value={FirstName} onChange={updateFirstName} />
+          <label for="lastName" style={{ fontSize: "1.9rem" }}>
+            Last Name
+          </label>
+          <input
+            for="passwordRis"
+            class="form-control"
+            style={{ width: "40rem" }}
+            type="text"
+            placeholder="lastname"
+            to="lastName"
+            name="LastName"
+            value={LastName}
+            onChange={updateLastName}
+          />
+          <label for="password" style={{ fontSize: "1.9rem" }}>
+            Password
+          </label>
 
-          <input type="text" placeholder="firstname" name="FirstName" value={FirstName} onChange={updateFirstName} />
-          <input type="text" placeholder="lastname" name="LastName" value={LastName} onChange={updateLastName} />
-
-          <input type="text" placeholder="Password" name="password" value={password} onChange={updatePassword} />
-          <button type="submit">Submit</button>
+          <input class="form-control" style={{ width: "40rem" }} type="text" placeholder="Password" to="password" name="password" value={password} onChange={updatePassword} />
+          <small id="passwordRis" class="form-text text-muted">
+            We'll never share your email with anyone else.
+          </small>
+          <ButtonGroup style={{ paddingTop: "3rem" }}>
+            <Button className=" buttonBlock" variant="primary" type="submit" style={{ height: "3rem", width: "40rem", marginLeft: "0px", justifyContent: "left" }}>
+              Submit
+            </Button>
+          </ButtonGroup>
         </form>
       }
     </div>

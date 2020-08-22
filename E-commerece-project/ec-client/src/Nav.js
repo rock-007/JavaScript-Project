@@ -128,8 +128,20 @@ function Nav({ userinfo, userstatus, finalBuy }) {
           </a>
         </li>
         <li>
-          <Dropdown as={ButtonGroup} style={{ marginTop: "5px", position: "relative", float: "left", top: "13px" }}>
-            <Button variant="success" href="./signin" style={{ background: "none", borderStyle: "none", outline: "none !important" }}>
+          <Dropdown
+            as={ButtonGroup}
+            style={{
+              marginTop: "5px",
+              position: "relative",
+              float: "left",
+              top: "13px",
+              height: "3rem",
+              outline: "none !important",
+              borderStyle: "none",
+              border: "none !important",
+            }}
+          >
+            <Button variant="success" href="./signin" style={{ background: "none", borderStyle: "none", borderStyle: "none", outline: "none  " }}>
               {userstatus ? (
                 <i
                   style={{ border: "none", background: "none", outline: "none" }}
@@ -153,17 +165,11 @@ function Nav({ userinfo, userstatus, finalBuy }) {
               )}
             </Button>
 
-            <Dropdown.Toggle
-              className="signinDropdown"
-              split
-              variant="success"
-              id="dropdown-split-basic"
-              style={{ background: "none", borderStyle: "none", outline: "none !important" }}
-            />
+            <Dropdown.Toggle variant="success" aria-expanded="true" style={{ marginTop: "0.4rem", background: "none", borderStyle: "none", outline: "none  " }} />
 
             <Dropdown.Menu>
               <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Account details</Dropdown.Item>
               <Dropdown.Item
                 style={{ backgroundColor: "none" }}
                 // href="/signin"

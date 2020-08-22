@@ -140,7 +140,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
           </Table>
         </TableContainer>
       </div>
-      <div style={{ float: "right", paddingRight: "5rem" }}>
+      <div style={{ width:"25rem", float: "right", paddingRight: "6.5rem" }}>
         <TableContainer
           className="basket-summary"
           component={Paper}
@@ -170,8 +170,8 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
             </TableBody>
           </Table>
         </TableContainer>
-        <ButtonGroup aria-label="quantityofproduct">
-          <Button className=" button-block" variant="primary" name="subtract" value="subtract" onClick={() => buyNow(basketItems)}>
+        <ButtonGroup >
+          <Button className=" buttonBlock" variant="primary" style={{width:"19rem"}} name="subtract" value="subtract" onClick={() => buyNow(basketItems)}>
             Buy Now
           </Button>
         </ButtonGroup>

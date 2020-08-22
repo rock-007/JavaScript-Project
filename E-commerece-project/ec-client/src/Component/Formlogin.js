@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, MenuItem, Container } from "react-bootstrap";
 
 import logo from "../logo.svg";
 import "../App.css";
@@ -72,13 +73,47 @@ function Forlogin() {
   };
 
   return (
-    <div>
+    <div style={{ width: "32rem", paddingTop: "5rem", marginLeft: "0px", justifyContent: "left" }}>
       {
-        <form method="POST" className="formstyle" onSubmit={credentialVerify}>
-          <input type="text" placeholder="email" name="email" value={email} onChange={updateEmail} />
+        // <form method="POST" className="formstyle" onSubmit={credentialVerify}>
 
-          <input type="text" placeholder="Password" name="password" value={password} onChange={updatePassword} />
-          <button type="submit">Submit</button>
+        <form method="POST" onSubmit={credentialVerify}>
+          <div style={{ paddingLeft: "0.75rem", padding: "0.75rem" }} className="form-group">
+            <label for="enterEmail">Email address</label>
+
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder="email"
+              id="enterEmail"
+              name="email"
+              value={email}
+              onChange={updateEmail}
+              style={{ width: "40rem" }}
+            />
+          </div>
+          <div style={{ paddingLeft: "0.75rem" }} className="form-group ">
+            <label for="enterPassword " class="form-check-label">
+              Password
+            </label>
+
+            <input
+              style={{ width: "40rem" }}
+              type="text"
+              placeholder="Password"
+              class="form-control"
+              name="password"
+              id="enterPassword"
+              value={password}
+              onChange={updatePassword}
+            />
+            <ButtonGroup style={{ paddingTop: "3rem" }}>
+              <Button className=" buttonBlock" variant="primary" type="submit" style={{ height: "3rem", width: "40rem", marginLeft: "0px", justifyContent: "left" }}>
+                Submit
+              </Button>
+            </ButtonGroup>
+          </div>
         </form>
       }
     </div>
