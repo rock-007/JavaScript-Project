@@ -475,6 +475,9 @@ label #cancel {
   margin-bottom: 1rem;
   position: left;
   display: table;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: "Font Awesome\ 5 Free";
   /* float:left; */
 }
 .products-image {
@@ -680,12 +683,7 @@ signinDropdown.focus {
   font-size: 2%;
 }
 
-
 .products ul li {
-
   font-weight: "bold";
-
-
-
-
+  height: "10rem";
 }

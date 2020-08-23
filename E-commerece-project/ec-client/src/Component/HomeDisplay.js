@@ -55,11 +55,11 @@ function Home({ props, addBasketitems }) {
               <li>
                 <img className="products-image" src={photo} />
               </li>
-              <li>{productName} </li>
+              <li style={{ fontWeight: "900", fontSize: "20px", height: "8rem" }}>{productName} </li>
               <li>
-                Item No:{producNumber}(InStock:{stockQuantity})
+                Item No:&nbsp; &nbsp;{producNumber}&nbsp;(InStock:&nbsp;{stockQuantity})
               </li>
-              <li>price:{price}£ </li>
+              <li>price:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{price}£ </li>
               <li className="description-height">{desc}</li>
               <li>
                 <ButtonGroup aria-label="quantityofproduct" key={productName}>
