@@ -24,8 +24,21 @@
       discovered that It can do more than that. The skeleton of the reduce function can be defined as it has one variable(accumulator) and a function in which it will iterate to
       each element of the array starting from the first and updating the accumulator value before moving to every next element in an array.<br> The interesting thing comes into play
       when the inner function is executed and updating the accumulator as it will determine the kind of output that this reduce function will produce and that’s where it is very
-      useful.</p>
-    </div>
+      useful.,br>
+    The below are some of the useful case that can be achieved using the. reducer method
+    </p>
+<br><br>
+<h2>1-	Adding all elements of an array </h2>
+<p style="font-family: octicons-link; font-size:24px">  That’s the most simplest form of reduce function and it will be useful when we need to get the total of all the array elements.
+<pre style="background-color:rgb(211, 218, 219)">  <code > 
+const array1 = [1, 2, 3, 4];
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+// 1 + 2 + 3 + 4
+console.log(array1.reduce(reducer));
+// expected output: 10
+</code></pre></p> 
+     </div>
     ;
   </body>
 </html>
