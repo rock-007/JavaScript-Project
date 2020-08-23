@@ -127,7 +127,7 @@ function Nav({ userinfo, userstatus, finalBuy }) {
             </span>
           </a>
         </li>
-        <li>
+        <li className="myList">
           <Dropdown
             as={ButtonGroup}
             style={{
@@ -139,6 +139,7 @@ function Nav({ userinfo, userstatus, finalBuy }) {
               outline: "none !important",
               borderStyle: "none",
               border: "none !important",
+              background: "none",
             }}
           >
             <Button variant="success" href="./signin" style={{ background: "none", borderStyle: "none", borderStyle: "none", outline: "none  " }}>
@@ -167,11 +168,11 @@ function Nav({ userinfo, userstatus, finalBuy }) {
 
             <Dropdown.Toggle variant="success" aria-expanded="true" style={{ marginTop: "0.4rem", background: "none", borderStyle: "none", outline: "none  " }} />
 
-            <Dropdown.Menu>
+            <Dropdown.Menu style={{ background: "white" }}>
               <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
               <Dropdown.Item href="#/action-2">Account details</Dropdown.Item>
               <Dropdown.Item
-                style={{ backgroundColor: "none" }}
+                style={{ backgroundColor: "white" }}
                 // href="/signin"
                 onClick={(e) => {
                   console.log("123x1");
@@ -213,7 +214,6 @@ function Nav({ userinfo, userstatus, finalBuy }) {
                 <button style={{ border: "none", background: "none", outline: "none" }}>SIGNIN</button>
               )}
             </Dropdown.Toggle>
-
             <Dropdown.Menu>
               <Dropdown.Item>Action</Dropdown.Item>
               <Dropdown.Item>Another action</Dropdown.Item>
