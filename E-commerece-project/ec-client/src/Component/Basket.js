@@ -31,7 +31,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
 
   const buyNow = (basketItems) => {
     //else we can throw error that not enough porducts in stock
-   // console.log();
+    // console.log();
 
     resetBasket(basketItems);
     window.location.href = "http://localhost:3000/signin";
@@ -59,7 +59,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell> </TableCell> 
+                <TableCell> </TableCell>
                 <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   Product Name{" "}
                 </TableCell>
@@ -140,7 +140,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
           </Table>
         </TableContainer>
       </div>
-      <div style={{ width:"25rem", float: "right", paddingRight: "6.5rem" }}>
+      <div style={{ width: "25rem", float: "right", paddingRight: "6.5rem" }}>
         <TableContainer
           className="basket-summary"
           component={Paper}
@@ -170,8 +170,15 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
             </TableBody>
           </Table>
         </TableContainer>
-        <ButtonGroup >
-          <Button className=" buttonBlock" variant="primary" style={{width:"19rem"}} name="subtract" value="subtract" onClick={() => buyNow(basketItems)}>
+        <ButtonGroup>
+          <Button
+            className=" buttonBlock"
+            variant="primary"
+            style={{ width: "18.5rem", position: "relative", float: "right" }}
+            name="subtract"
+            value="subtract"
+            onClick={() => buyNow(basketItems)}
+          >
             Buy Now
           </Button>
         </ButtonGroup>
