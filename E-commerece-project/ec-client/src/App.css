@@ -119,6 +119,7 @@ font-size: 2rem; */
   border-radius: 3px;
 }
 
+
 nav ul li.searchbar {
   /* width: calc(100%-180px); */
   /* padding:10px 15px;
@@ -251,22 +252,38 @@ nav ul li ul:after {
   align-items: center;
   border: none;
 }
-
+/* TOdo  */
 .footer {
-  padding: 1rem;
+  padding-top : 1rem;
 
   grid-area: footer;
   background: rgb(73, 79, 82);
   color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
+    position: fixed;
+  /* display: flex; */
   bottom: 0;
-  height: 7px;
+  height: 12rem;
 
   width: 100%;
 }
+.container1{
+
+
+display:flex;
+flex-direction:column;
+min-height:100vh;
+padding-bottom: 1rem;
+
+}
+
+ 
+
+
+
+
+/* .container1-wrap{
+  flex:1;
+} */
 /* 
 /* .nav-links {
   width: 50%;
@@ -377,6 +394,7 @@ label #cancel {
 #check:checked ~ label #cancel {
   left: 140px;
 }
+
 
 .root-container {
   height: 100%;
