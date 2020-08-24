@@ -119,7 +119,6 @@ font-size: 2rem; */
   border-radius: 3px;
 }
 
-
 nav ul li.searchbar {
   /* width: calc(100%-180px); */
   /* padding:10px 15px;
@@ -254,32 +253,24 @@ nav ul li ul:after {
 }
 /* TOdo  */
 .footer {
-  padding-top : 1rem;
+  margin-top: 1rem;
 
   grid-area: footer;
   background: rgb(73, 79, 82);
   color: #ffffff;
-    position: fixed;
+  position: fixed;
   /* display: flex; */
   bottom: 0;
-  height: 12rem;
+  height: 14rem;
 
   width: 100%;
 }
-.container1{
-
-
-display:flex;
-flex-direction:column;
-min-height:100vh;
-padding-bottom: 1rem;
-
+.container1 {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 1rem;
 }
-
- 
-
-
-
 
 /* .container1-wrap{
   flex:1;
@@ -394,7 +385,6 @@ label #cancel {
 #check:checked ~ label #cancel {
   left: 140px;
 }
-
 
 .root-container {
   height: 100%;
