@@ -170,11 +170,11 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
             </TableBody>
           </Table>
         </TableContainer>
-        <ButtonGroup>
+        <ButtonGroup >
           <Button
-            className=" buttonBlock"
+            className="btn buttonBlock"
             variant="primary"
-            style={{ width: "18.5rem", position: "relative", float: "right" }}
+            style={{ width: "18.5rem",maxWidth:"11vw", position: "relative", float: "right" }}
             name="subtract"
             value="subtract"
             onClick={() => buyNow(basketItems)}

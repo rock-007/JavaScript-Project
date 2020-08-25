@@ -71,9 +71,9 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <hr  style={{padding:"0",margin:"0"}}/>
+        <hr  style={{paddingBottom:"2em",margin:"0"}}/>
 
-        <div className="row" style={{ marginBottom: "4rem" }}>
+        <div className="row" style={{ marginBottom: "4rem", height:"100vh" }}>
           <p className="col-sm">@copy;{new Date().getFullYear()} Yogaoutlet Ltd | ALL right reserved | Terms of Service | Privacy</p>
         </div>
       </div>
