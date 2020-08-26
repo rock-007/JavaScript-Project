@@ -73,43 +73,56 @@ function Forlogin() {
   };
 
   return (
-    <div style={{ width: "32rem", paddingTop: "5rem", marginLeft: "0px", justifyContent: "left" }}>
+    <div style={{ paddingTop: "15%", marginLeft: "0px", justifyContent: "left" }}>
       {
         // <form method="POST" className="formstyle" onSubmit={credentialVerify}>
 
-        <form method="POST" onSubmit={credentialVerify}>
-          <div style={{ paddingLeft: "0.75rem", padding: "0.75rem" }} className="form-group">
-            <label for="enterEmail">Email address</label>
-
-            <input
-              type="text"
-              class="form-control"
-              aria-describedby="emailHelp"
-              placeholder="email"
-              id="enterEmail"
-              name="email"
-              value={email}
-              onChange={updateEmail}
-              style={{ width: "40rem" }}
-            />
+        <form method="POST" onSubmit={credentialVerify} className="form" role="form">
+          <div style={{ paddingLeft: "5%", padding: "5%" }} className="form-group row">
+            <label style={{ paddingRight: "22%", display: "flex", whiteSpace: "nowrap" }} className="col-lg-3 col-form-label form-check-label" for="enterEmail">
+              Email address
+            </label>
+            <div class="col-md-9">
+              <input
+                type="text"
+                class="form-control"
+                aria-describedby="emailHelp"
+                placeholder="email"
+                id="enterEmail"
+                name="email"
+                value={email}
+                onChange={updateEmail}
+                style={{ width: "140%" }}
+              />
+            </div>
           </div>
-          <div style={{ paddingLeft: "0.75rem" }} className="form-group ">
-            <label for="enterPassword " class="form-check-label">
+
+          <div style={{ paddingLeft: "5%", padding: "5%" }} className="form-group row">
+            <label style={{ paddingRight: "22%" }} className="col-lg-3 col-form-label form-check-label" for="enterPassword ">
               Password
             </label>
-
-            <input
-              style={{ width: "40rem" }}
-              type="text"
-              placeholder="Password"
-              class="form-control"
-              name="password"
-              id="enterPassword"
-              value={password}
-              onChange={updatePassword}
-            />
+            <div class="col-md-9">
+              <input
+                style={{}}
+                type="text"
+                placeholder="Password"
+                class="form-control"
+                name="password"
+                id="enterPassword"
+                value={password}
+                onChange={updatePassword}
+                style={{ width: "140%" }}
+              />
+            </div>
+          </div>
+          <div class="col-md-9" style={{ paddingLeft: "36%" }}>
             <ButtonGroup style={{ paddingTop: "3rem" }}>
-              <Button className=" buttonBlock" variant="primary" type="submit" style={{ height: "3rem", width: "40rem", marginLeft: "0px", justifyContent: "left" }}>
+              <Button
+                className=" buttonBlock"
+                variant="primary"
+                type="submit"
+                style={{ height: "3rem", paddingLeft: "16%", marginLeft: "0px", width: "12rem", justifyContent: "left" }}
+              >
                 Submit
               </Button>
             </ButtonGroup>

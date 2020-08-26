@@ -135,7 +135,7 @@ function Signin({ userData, userstatus, finalBuy, buyNow, resetBuynow }) {
 
   // userinfo1="welcome to the Adam account"
   console.log(userData);
-  return <div>{userstatus ? <Useraccount userinfo={userData} userstatus={userstatus} finalBuy={finalBuy} allInvoices={allInvoices} /> : <SigninOptions />}</div>;
+  return <div style={{marginLeft:"0px"}}>{userstatus ? <Useraccount userinfo={userData} userstatus={userstatus} finalBuy={finalBuy} allInvoices={allInvoices} /> : <SigninOptions />}</div>;
 
   // <SigninOptions />
 }

@@ -145,7 +145,7 @@ function Nav({ userinfo, userstatus, finalBuy }) {
             <Button variant="success" href="./signin" style={{ background: "none", borderStyle: "none", borderStyle: "none", outline: "none  " }}>
               {userstatus ? (
                 <i
-                  style={{ border: "none", background: "none", outline: "none" }}
+                  style={{ fontSize: "24px", border: "none", color: "white", background: "none", outline: "none" }}
                   className=" fas fa-user-circle	
                 "
                 ></i>
@@ -153,6 +153,7 @@ function Nav({ userinfo, userstatus, finalBuy }) {
                 <i
                   style={{
                     "border": "none",
+                    "color": "white",
                     "background": "none",
                     "outline": "none",
                     "font-size": "1.8rem",

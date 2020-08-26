@@ -21,8 +21,8 @@ function SigninOptions({ userinfo2 }) {
   console.log("userinfo2 21 at SIGNINOPTIONS", userinfo2);
   // TO Do check the login input and ifusers put worng info or empty filed then pop up error using Rejex
   return (
-    <div>
-      <div className="root-container" style={{ paddingRight: "10%", maxWidth: "165rem" }}>
+    <div >
+      <div className="root-container" style={{ paddingRight: "10%", maxWidth: "165%" }}>
         <div className="box-controller">
           <div style={{ borderRight: "1px solid grey" }} onClick={loginclicked}>
             <i>
@@ -35,7 +35,7 @@ function SigninOptions({ userinfo2 }) {
           </div>
         </div>
 
-        <div className="box-controller-input" style={{ paddingTop: "0px", marginTop: "0px" }}>
+        <div className="box-controller-input" style={{   paddingTop: "0px", marginTop: "0px" }}>
           <div style={{ maxHeight: "55rem", minHeight: "39rem", justifyContent: "left" }}>
             {/* //it will be either  {login && <Formlogin />} or {register && <Formregister />} */}
             {login && <Formlogin />} {register && <Formregister />}
