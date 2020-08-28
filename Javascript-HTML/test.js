@@ -1,49 +1,14 @@
-const array1 = [1, 2, 3, 4];
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-console.log(array1.reduce(reducer));
-
-const reducer1 = (accumulator, currentValue) => accumulator * currentValue;
-
-// 1 * 2 * 3 * 4
-console.log(array1.reduce(reducer1));
-// expected output: 24
-
-
-const array12 = [1, 2, 3, 4];
-const reducer2 = (accumulator, currentValue) => accumulator + currentValue;
-
-console.log(array12.reduce(reducer2, 0) / array12.length);
-
-
-
 ////////////////////?
 
+const array17 = [1, 2, 3, 4];
 
-
-
-
-
-
-
-
-
-
- array41.reduce(addMultiplyAverageArrayValues,{
-sum:0,
-product:1,
-average:0
+function Evenodd(acc, element) {
+  if (element % 2 == 0) return `${acc}is even1`;
+  else if (element % 3 == 0 && element % 2 != 0) {
+    return `${acc}is odd2`;
+  } else if (element   == 1) {
+    return `${acc}is odd2x \n`;
+  }
 }
-Function addMultiplyAverageArrayValues(accumulator,currentvalue,index){
-If(index === array1.length-1){
-Average= accumulator.average/array1.length
-}else Average= accumulator.average+currentvalue
 
-
-abc={
-Sum :accumulator.sum+currentvalue,
-product ;accumulator.product*currentvalue,
-Average: Average;
-
-}
-Return abc
+console.log(array17.reduce(Evenodd, "hello"));
