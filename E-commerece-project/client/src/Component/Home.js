@@ -5,8 +5,6 @@ import ProjectLogo from "../Img/logo.svg";
 import HomeDisplay from "./HomeDisplay";
 import SwipeableHome from "./SwipeableHome";
 
- 
-
 import { Button, ButtonGroup, Dropdown, MenuItem, Container } from "react-bootstrap";
 
 function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
@@ -18,7 +16,7 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
   const [showPage, setShowPage] = useState(undefined);
 
   const [homePage, setHomepage] = useState(undefined);
-   useEffect(() => {
+  useEffect(() => {
     userDataRefresh();
   }, [userstatus]);
 
@@ -30,7 +28,6 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
   }
 
   function yogaMatSelected(e) {
- 
     reset();
     setYogaMatState(e.currentTarget.textContent);
     console.log(e.currentTarget.textContent);
@@ -53,8 +50,6 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
   }
 
   function tabsearch(selection) {
- 
-
     const headers = new Headers();
     headers.append("content-type", "application/json");
     let datasent1 = { selection: selection };
@@ -65,46 +60,41 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
       body: JSON.stringify(datasent1),
     };
 
-     let selection1 = `/#/${selection}`;
+    let selection1 = `/#/${selection}`;
     let customerSelection = encodeURIComponent(selection1);
- 
 
     let url = `/api/x1`;
- 
+
     let request = new Request(url);
 
     (async () => {
       let tabsearchback = await fetch(request, options)
         .then((res) => {
-         
           return res.json(res);
-           
         })
         .then((data1) => {
-           setHomepage(data1);
+          setHomepage(data1);
           setShowPage(1);
         })
         .catch((err) => {
-           setHomepage(undefined);
+          setHomepage(undefined);
         }); // if not data comes then it will turn page to default
     })();
   }
   return (
-  
     <React.Fragment>
       <div className="homestyle" style={{}}>
         <h3>
           <hr />
-          <ul className="homebarstyle">
+          <ul className="homebarstyle" style={{ textAlign: "center" }}>
             <li>
               {/* <Button variant="primary">Primary</Button> */}
               <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ height: "3em", width: "24em" }}>
                   {yogaMatState}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="dropdownMenuSubItems">
-                 
                   <Dropdown.Item href="#/Eco-YogaMats" onClick={yogaMatSelected}>
                     {/* //TODO: we can later take off the href as it doesnt seems to have any effect here */}
                     Eco-YogaMats
@@ -120,7 +110,7 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
             </li>
             <li>
               <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ height: "3em", width: "24em" }}>
                   {yogaEquipState}
                 </Dropdown.Toggle>
 
@@ -142,7 +132,7 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
             </li>
             <li>
               <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ height: "3em", width: "24em" }}>
                   {yogaClothsState}
                 </Dropdown.Toggle>
 
@@ -161,7 +151,7 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
             </li>
             <li>
               <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ height: "3em", width: "24em" }}>
                   {accessoriesState}
                 </Dropdown.Toggle>
 
@@ -182,10 +172,8 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
           <hr />
         </h3>
       </div>
-      <Container style={{ justifyContent: "left", marginBottom: "122px" }}>
-        
+      <Container style={{ justifyContent: "left", marginBottom: "8em" }}>
         {showPage ? <HomeDisplay props={homePage} addBasketitems={addBasketitems} /> : <SwipeableHome />}
-      
       </Container>
     </React.Fragment>
   );

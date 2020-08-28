@@ -29,15 +29,14 @@ function Formregister() {
   //? Credentialverify  function is called when user submit the button
   const credentialVerify = (event) => {
     event.preventDefault();
-    
 
-     const dataSend = {
+    const dataSend = {
       email: email,
       FirstName: FirstName,
       LastName: LastName,
       password: password,
     };
-     const headers = new Headers();
+    const headers = new Headers();
     headers.append("content-type", "application/json");
 
     const options = {
@@ -46,7 +45,7 @@ function Formregister() {
       body: JSON.stringify(dataSend),
       redirect: "follow",
     };
-     const request = new Request("https://yogaoutlet.herokuapp.com/api/customers", options);
+    const request = new Request("https://yogaoutlet.herokuapp.com/api/customers", options);
 
     (async () => {
       const incomingdata = await fetch(request)
@@ -55,14 +54,13 @@ function Formregister() {
           window.location.href = "https://yogaoutlet.herokuapp.com/signin";
         })
         .then.catch((err) => console.log(err));
-      
 
       setItems(incomingdata);
       setEmail("");
       setFirstName("");
       setLastName("");
       setPassword("");
-     })();
+    })();
   };
 
   return (
@@ -71,22 +69,39 @@ function Formregister() {
         <form style={{ width: "100% " }} method="POST" className="formstyle" onSubmit={credentialVerify}>
           <div style={{ paddingLeft: "0%", paddingRight: "5%", marginLeft: "0", marginRight: "2%" }} className="form-group row">
             {" "}
-            <label style={{ paddingRight: "22%", display: "flex", whiteSpace: "nowrap", fontSize: "1.9rem" }} className="col-lg-3 col-form-label form-check-label" for="enterEmail">
+            <label
+              style={{ paddingRight: "22rem", display: "flex", whiteSpace: "nowrap", fontSize: "1.9rem" }}
+              className="col-lg-3 col-form-label form-check-label"
+              for="enterEmail"
+            >
               Email address
             </label>
             <div class="col-md-9">
-              <input class="form-control" style={{ width: "25vw" }} type="text" placeholder="email" id="enterEmail" name="email" value={email} onChange={updateEmail} />
+              <input
+                class="form-control"
+                style={{ width: "25vw", minWidth: "19rem" }}
+                type="text"
+                placeholder="email"
+                id="enterEmail"
+                name="email"
+                value={email}
+                onChange={updateEmail}
+              />
             </div>
           </div>
 
           <div style={{ paddingLeft: "0%", paddingRight: "5%", marginLeft: "0", marginRight: "2%" }} className="form-group row">
-            <label for="firstName" style={{ paddingRight: "22%", display: "flex", whiteSpace: "nowrap", fontSize: "1.9rem" }} className="col-lg-3 col-form-label form-check-label">
+            <label
+              for="firstName"
+              style={{ paddingRight: "222rem", display: "flex", whiteSpace: "nowrap", fontSize: "1.9rem" }}
+              className="col-lg-3 col-form-label form-check-label"
+            >
               First Name
             </label>
             <div class="col-md-9">
               <input
                 class="form-control"
-                style={{ width: "25vw" }}
+                style={{ width: "25vw", minWidth: "19rem" }}
                 type="text"
                 placeholder="firstname"
                 id="firstName"
@@ -98,14 +113,14 @@ function Formregister() {
           </div>
 
           <div style={{ paddingLeft: "0%", paddingRight: "5%", marginLeft: "0", marginRight: "2%" }} className="form-group row">
-            <label for="lastName" style={{ paddingRight: "22%", display: "flex", whiteSpace: "nowrap", fontSize: "1.9rem" }} className="col-lg-3 col-form-label form-check-label">
+            <label for="lastName" style={{ paddingRight: "22rem", display: "flex", whiteSpace: "nowrap", fontSize: "1.9rem" }} className="col-lg-3 col-form-label form-check-label">
               Last Name
             </label>
             <div class="col-md-9">
               <input
                 for="passwordRis"
                 class="form-control"
-                style={{ width: "25vw" }}
+                style={{ width: "25vw", minWidth: "19rem" }}
                 type="text"
                 placeholder="lastname"
                 to="lastName"
@@ -116,15 +131,24 @@ function Formregister() {
             </div>
           </div>
           <div style={{ paddingLeft: "0%", paddingRight: "5%", marginLeft: "0", marginRight: "2%" }} className="form-group row">
-            <label for="password" style={{ paddingRight: "22%", display: "flex", whiteSpace: "nowrap", fontSize: "1.9rem" }} className="col-lg-3 col-form-label form-check-label">
+            <label for="password" style={{ paddingRight: "22rem", display: "flex", whiteSpace: "nowrap", fontSize: "1.9rem" }} className="col-lg-3 col-form-label form-check-label">
               Password
             </label>
             <div class="col-md-9">
-              <input class="form-control" style={{ width: "25vw" }} type="text" placeholder="Password" to="password" name="password" value={password} onChange={updatePassword} />
+              <input
+                class="form-control"
+                style={{ width: "25vw", minWidth: "19rem" }}
+                type="text"
+                placeholder="Password"
+                to="password"
+                name="password"
+                value={password}
+                onChange={updatePassword}
+              />
             </div>
           </div>
 
-          <small id="passwordRis" class="form-text text-muted" style={{ paddingRight: "22%", display: "flex" }}>
+          <small id="passwordRis" class="form-text text-muted" style={{ paddingRight: "22%", paddingLeft: "3.3%", fontSize: "115%", display: "flex" }}>
             Password must contains atleast an alphabast, a number and sepeical charter in it
           </small>
           <div class="col-md-9" style={{ paddingLeft: "25%" }}>

@@ -71,7 +71,7 @@ function Forlogin() {
 
           <form method="POST" onSubmit={credentialVerify} className="form" role="form">
             <div style={{ paddingLeft: "5%", padding: "5%" }} className="form-group row">
-              <label style={{ paddingRight: "22%", display: "flex", whiteSpace: "nowrap" }} className="col-lg-3 col-form-label form-check-label" for="enterEmail">
+              <label style={{ paddingRight: "22rem", display: "flex", whiteSpace: "nowrap" }} className="col-lg-3 col-form-label form-check-label" for="enterEmail">
                 Email address
               </label>
               <div class="col-md-9">
@@ -84,13 +84,13 @@ function Forlogin() {
                   name="email"
                   value={email}
                   onChange={updateEmail}
-                  style={{ width: "25vw" }}
+                  style={{ width: "25vw", minWidth: "19rem" }}
                 />
               </div>
             </div>
 
             <div style={{ paddingLeft: "5%", padding: "5%" }} className="form-group row">
-              <label style={{ paddingRight: "22%" }} className="col-lg-3 col-form-label form-check-label" for="enterPassword ">
+              <label style={{ paddingRight: "22rem" }} className="col-lg-3 col-form-label form-check-label" for="enterPassword ">
                 Password
               </label>
               <div class="col-md-9">
@@ -103,7 +103,7 @@ function Forlogin() {
                   id="enterPassword"
                   value={password}
                   onChange={updatePassword}
-                  style={{ width: "25vw" }}
+                  style={{ width: "25vw", minWidth: "19rem" }}
                 />
               </div>
             </div>

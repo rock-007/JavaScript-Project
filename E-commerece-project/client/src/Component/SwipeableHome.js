@@ -23,26 +23,28 @@ function SwipeableHome() {
   };
   return (
     <>
-      <AutoPlaySwipeableViews>
-        <div style={Object.assign({}, styles.slide, styles.slide1)}>
-          <img
-            src="https://res.cloudinary.com/umair007/image/upload/v1598221232/ecommerece%20project/Slids/slid1_n8tth1.png"
-            style={{ maxWidth: "100%", maxHeight: "100%", margin: "auto" }}
-          />
-        </div>
-        <div style={Object.assign({}, styles.slide, styles.slide2)}>
-          <img
-            src="https://res.cloudinary.com/umair007/image/upload/v1598221230/ecommerece%20project/Slids/slide3_nfu8hl.jpg"
-            style={{ maxWidth: "100%", maxHeight: "100%", margin: "auto" }}
-          />
-        </div>
-        <div style={Object.assign({}, styles.slide, styles.slide3)}>
-          <img
-            src="https://res.cloudinary.com/umair007/image/upload/v1598221228/ecommerece%20project/Slids/slide2_vzp0qn.png"
-            style={{ maxWidth: "100vh", maxHeight: "100vh", margin: "auto" }}
-          />
-        </div>
-      </AutoPlaySwipeableViews>
+      <div style={{ paddingLeft: "7em", paddingTop: "7em", maxHeight: "73em", textAlign: "center" }}>
+        <AutoPlaySwipeableViews>
+          <div style={Object.assign({}, styles.slide, styles.slide1)} style={{ padding: "0" }}>
+            <img
+              src="https://res.cloudinary.com/umair007/image/upload/v1598520396/ecommerece%20project/Slids/slide3_nfu8hl_b3bebs.webp"
+              style={{ maxWidth: "100%", maxHeight: "100%", margin: "auto" }}
+            />
+          </div>
+          <div style={Object.assign({}, styles.slide, styles.slide2)} style={{ padding: "0" }}>
+            <img
+              src="https://res.cloudinary.com/umair007/image/upload/v1598520396/ecommerece%20project/Slids/slid1_n8tth1_1_cihe87.webp"
+              style={{ maxWidth: "100%", maxHeight: "100%", margin: "auto" }}
+            />
+          </div>
+          <div style={Object.assign({}, styles.slide, styles.slide3)} style={{ padding: "0" }}>
+            <img
+              src="https://res.cloudinary.com/umair007/image/upload/v1598520396/ecommerece%20project/Slids/slid1_n8tth1_1_cihe87.webp"
+              style={{ maxWidth: "100vh", maxHeight: "100vh", margin: "auto" }}
+            />
+          </div>
+        </AutoPlaySwipeableViews>
+      </div>
     </>
   );
 }

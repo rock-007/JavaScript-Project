@@ -50,30 +50,17 @@ let connection = mysqlx.createConnection({
   insecureAuth: true,
 });
 // if he get request at :TODO  http://localhost:5000/signin then it will response to it
-//? 1
+//? 1 TabSearch
 app.post("/api/x1", (req, res) => {
   console.log("NEwwwww");
-  let Newww1 = req.body.selection;
+  let tabSearch = req.body.selection;
 
   console.log("NEwwwww1", req.body);
   const decoded = { key1: req.params.abc }; //decode
-  // console.log(typeof decoded);
-  // console.log("38new", decoded);
-  // console.log(typeof decoded.key1);
-  // console.log("41new", decoded.key1);
-  //RegExp using positive lookbehind (?<=^...) it is checking that the match is after the three characters from the begin.
-  // let re = /(?<=^...)(.*)/;
-  // let decoded_refine = re.remove(decoded.key1);
-  // let decoded_refine = decoded.key1.match(re);
-  // console.log("46new", decoded_refine);
-  // console.log("47new", typeof decoded_refine);
-  // console.log("48new", decoded_refine[0]);
-  // Eco-YogaMats,.... decoded_refine[0]
-  // var sql=
-  //let decoded_refine1 = decoded_refine[0];
+
   connection.query(
     "SELECT product_name,producNumber,price,productDescription,image_URL,stockQuantity FROM main_Products_sub_category  INNER JOIN main_Product_Info INNER JOIN images ON main_Products_sub_category.main_Products_sub_category_id= main_Product_Info.main_Products_sub_category_main_Products_sub_category_id AND main_Product_Info.producInfoId=images.main_Product_Info_producInfoId WHERE main_Products_sub_category.main_Products_sub_category_name=?;",
-    [Newww1],
+    [tabSearch],
     function (err, results) {
       // console.log(results);
       console.log("typess", typeof results);
@@ -93,8 +80,28 @@ app.post("/api/x1", (req, res) => {
   );
 });
 
+////! Signup email only
+app.post("/api/newsignupemail", (req, res) => {
+  let token = req.cookies.yogaoutlet_access_token;
+  let decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
+  let userIdentitiy = decodepayload.email;
+
+  //? to do update in the users account in mysql.
+  // if user account exist then it will add to mailing list
+  connection.query("UPDATE users SET signup_offers=? WHERE email=?", ["1", userIdentitiy], function (err, result) {
+    if (err) {
+      console.log("tta", err);
+      res.send(err);
+    } else {
+      console.log("151ddfa", result);
+      let results1 = JSON.stringify(result);
+      res.send(results1);
+    }
+  });
+});
+
 ////!   FInal INVOICE(Query only)
-//?2
+
 app.post("/api/invoice-only", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
   if (token) {
@@ -140,7 +147,6 @@ app.post("/api/invoice-all", (req, res) => {
   });
 });
 ////!  FInal INVOICE
-
 app.post("/api/invoice", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
   let selectedProducts = req.body.length;

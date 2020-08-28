@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import { makeStyle, Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer } from "@material-ui/core";
-
 function Useraccount({ userinfo, userstatus, allInvoices }) {
-  
+  console.log("6", typeof userinfo, userstatus);
+  console.log("6yy", userinfo);
+  console.log("7yy", allInvoices);
 
   let generateFile = (content, fileName) => {
-     let content1 = content.slice(28);
-     var decodedData = atob(content1);
+    console.log("contentbefore", content);
+    let content1 = content.slice(28);
+    console.log("contentxx", content1);
+    var decodedData = atob(content1);
     const length = decodedData.length;
     const arrayBuffer = new ArrayBuffer(length);
     const uintArray = new Uint8Array(arrayBuffer);
@@ -16,7 +19,8 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
     }
     const blob = new Blob([uintArray], { type: "application/pdf" });
 
-     const link = document.createElement("a");
+    console.log(blob);
+    const link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
     link.download = fileName;
     link.click();
@@ -42,25 +46,34 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
       const invoice_Call = await fetch(newRequest)
         .then((res) => {
           var headers = res.headers;
- 
+          console.log("headersxx", headers);
+
           const contentType = res.headers.get("Content-Type");
-           var contentDisposition = res.headers.get("content-disposition");
-           
+          console.log("contenttype", contentType);
+          var contentDisposition = res.headers.get("content-disposition");
+          console.log("contentDispositionxx", contentDisposition);
+          console.log("resxx", res);
+          // let byteCharacters = atob(res.data);
+          // console.log("byteCharacters", byteCharacters);
+          // console.log("resxx", typeof res);
+
+          //  const text1 = res.json({ data: decode });
+          return res.text();
+          //  console.log("resxxy", text1);
+          // return res.blob();
         })
         .then((data) => {
-         
+          console.log(typeof data);
+          console.log("textxx", data);
           generateFile(data, invoice_Name);
-        })
-        .catch((err) => {
-         });
+        });
     })();
   };
-  //
   let creatTime = userinfo[0].create_time || "0-0-0";
   console.log("ewr", creatTime);
   return (
     <>
-      <div className="BasketSigninProducts," style={{ float: "left", marginTop: "50px", marginLeft: "30px", width: "130vh", marginBottom: "122px" }}>
+      <div className="BasketSigninProducts" style={{ float: "left" }}>
         <TableContainer className="BasketSigninItems" component={Paper}>
           <Table>
             <TableHead>
@@ -74,7 +87,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
                 </TableCell>
                 <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   {" "}
-                  Price Paid
+                  Description
                 </TableCell>
                 <TableCell className="tex-lg-center font-weight-bold" style={{ fontSize: "200%", fontStyle: "normal", textAlign: "center" }}>
                   {" "}
@@ -87,12 +100,12 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
                 console.log("fdsg", eachInvoice);
                 //   console.log("29oop", eachInvoice[index].invoice_document.data);
                 let invoiceNo = eachInvoice.invoiceNo;
-                let TBO1 = eachInvoice.totalprice;
                 let date_of_purchase1 = eachInvoice.date_of_purchase;
                 let users_user_id = eachInvoice.users_user_id;
                 let invoice_Name = `${users_user_id}` + `_` + `${invoiceNo}`;
+                let products_summary = eachInvoice.products_summary;
                 console.log("fdsxg", invoice_Name);
-                console.log("fdsxg", invoice_Name);
+
                 return (
                   <TableRow key={invoiceNo}>
                     <TableCell
@@ -109,7 +122,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
                     <TableCell
                       style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
                     >
-                      {TBO1}
+                      {products_summary}
                     </TableCell>
                     <TableCell className="tex-lg-center font-weight-bold" style={{ fontFamily: "Myfont", fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
                       <span
@@ -120,7 +133,9 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
                         onClick={() => generatePdf(invoice_Name)}
                       ></span>
 
-                      
+                      {/* <span role="button" tabIndex="-1" onKeyDown={() => generatePdf(allPdf[index], invoiceNo1)} onClick={() => generatePdf(allPdf[index], invoiceNo1)}>
+                        invoiceNo:{invoiceNo1}
+                      </span> */}
                     </TableCell>
                   </TableRow>
                 );
