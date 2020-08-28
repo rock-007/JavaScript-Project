@@ -100,13 +100,16 @@ Return abc
 <pre style="background-color:rgb(211, 218, 219)">  <code > 
  const array1 = [1, 2, 3, 4];
 
-function Evenodd(acc,elemet){
-if(element %2 ==0) return `${acc}is even` \n,
-if(element %3 ==0 && element %2 !=0) return `${acc}is odd` \n,
+function Evenodd(acc, element) {
+  if (element % 2 == 0) return `${acc}is even \n`;
+  else if (element % 3 == 0 && element % 2 != 0) {
+    return `${acc}is odd \n`;
+  } else if (element == 1) {
+    return `${acc}is odd \n`;
+  }
 }
 
-
-Array1.reduce(Evenodd, ‘’);
+console.log(array1.reduce(Evenodd, "hello"));
 
 
 
