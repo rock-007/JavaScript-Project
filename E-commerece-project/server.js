@@ -162,20 +162,18 @@ app.post("/api/invoice", (req, res) => {
     let actaul_Bought_Items = req.body;
     let actaul_Bought_Items_Num = req.body[0].quantity;
 
-    console.log("78xx", `${decodepayload.email}`); // confirm the user detail email
-    console.log("83xx", userIdentitiy);
-    console.log("body11y", req.body);
     let z1 = req.body;
     console.log("hey", z1);
     // unavailableItems will fill up if any item is unavailable
     let unavailableItems = [];
     let totalAmountPaidPerInvoice;
-
+    let actaul_Bought_Items_names = [];
     for (let i = 0; i < req.body.length; i++) {
       let checkQuantity = req.body[i].producNumber;
       totalAmountPaidPerInvoice = totalAmountPaidPerInvoice + req.body[i].price;
       console.log("wwer", checkQuantity);
       console.log("wwerx", actaul_Bought_Items_Num);
+      actaul_Bought_Items_names.push(actaul_Bought_Items[i].product_name);
       for (let i = 0; i < actaul_Bought_Items_Num; i++) {
         connection.query("UPDATE main_Product_Info SET stockQuantity=stockQuantity-1 WHERE main_Product_Info.producNumber=?", [checkQuantity], function (err, result) {
           if (err) {
@@ -193,9 +191,6 @@ app.post("/api/invoice", (req, res) => {
       let user_id = results[0].user_id;
       let user_email = userIdentitiy;
 
-      console.log("heyc", user_id);
-      console.log("heyxx", user_email);
-      console.log("2334", unavailableItems);
       // we now got the correct users
       if (user_id && unavailableItems[0] == null) {
         //1- delete the   quantitiy from the product info
@@ -207,9 +202,7 @@ app.post("/api/invoice", (req, res) => {
           connection.query(" INSERT INTO users_Basket  SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {});
           let latest_inoice_new;
           connection.query("Select max(invoiceNo) AS latest_Invoice from users_Basket", function (err, latest_invoice) {
-            console.log("116tty", latest_invoice);
             latest_inoice_new = latest_invoice[0].latest_Invoice;
-            console.log("116tty", latest_invoice[0].latest_Invoice);
             callback(latest_invoice[0].latest_Invoice);
           });
         }
@@ -219,6 +212,7 @@ app.post("/api/invoice", (req, res) => {
             "SELECT u1.first_name,u1.user_id,b1.invoiceNo FROM  users u1 INNER JOIN users_Basket b1 ON b1.users_user_id=u1.user_id where b1.invoiceNo=?; ",
             [value],
             function (err, results) {
+              const products_summary1 = actaul_Bought_Items_names.toString();
               if (err) {
                 console.log("133", err);
               } else {
@@ -232,38 +226,47 @@ app.post("/api/invoice", (req, res) => {
                 };
                 //
                 let customer_dataand_Itemsbought = [user_details, ...actaul_Bought_Items];
-                console.log("123ddf", user_details);
-                console.log("123ddf", typeof user_details);
-                console.log("133", actaul_Bought_Items);
-                console.log("133", typeof actaul_Bought_Items);
-                console.log("135xc", customer_dataand_Itemsbought);
-                //    options={format:'letter'};
-
-                console.log("146xc", user_details);
-                console.log("475xc", user_details.Invoice_No_latest);
+                let pdfCreated = false;
                 pdf
                   .create(pdfTemplate(customer_dataand_Itemsbought), { type: "pdf" })
                   .toFile(`./${user_details.user_id}` + `_` + `${user_details.Invoice_No_latest}.pdf`, function (err, res) {
                     if (err) {
                       console.log("5667", err);
-                    } else console.log("143rrt", res, typeof res);
-                    connection.query("UPDATE users_Basket set invoice_document=? WHERE invoiceNo=?;", [res.filename, user_details.Invoice_No_latest], function (err, results) {
-                      if (err) console.log("tty", err);
-                      else console.log("151ddf", results);
-                    });
-                  });
-                console.log("145", user_details.Invoice_No_latest);
+                    } else {
+                      console.log("143rrt", res, typeof res);
 
-                connection.query("SELECT * FROM  users_Basket WHERE users_user_id=?;", [user_id], function (err, results) {
-                  if (err) throw err;
-                  else {
-                    console.log("1578", results);
-                    //  let invoice_Object = json.stringify(results);
-                    console.log("ddddgf", totalAmountPaidPerInvoice);
-                    //  results = [...results, { totalprice: `${totalAmountPaidPerInvoice}` }];
-                    res.json(results);
-                  }
-                });
+                      pdfCreated = true;
+                    }
+                  });
+                if ((pdfCreated = true)) {
+                  connection.query(
+                    "UPDATE users_Basket set invoice_document=?,products_summary=? WHERE invoiceNo=?;",
+                    [res.filename, products_summary1, user_details.Invoice_No_latest],
+                    function (err, results) {
+                      if (err) console.log("tty", err);
+                      else {
+                        connection.query("SELECT * FROM  users_Basket WHERE users_user_id=?;", [user_id], function (err, results) {
+                          if (err) {
+                            pdfCreated = false;
+
+                            throw err;
+                          } else {
+                            console.log("1578", results);
+                            //  let invoice_Object = json.stringify(results);
+
+                            //  results = [...results, { totalprice: `${totalAmountPaidPerInvoice}` }];
+                            pdfCreated = false;
+                            res.json(results);
+                          }
+                        });
+
+                        console.log("151ddf", results);
+                      }
+                    }
+                  );
+                }
+
+                console.log("145", user_details.Invoice_No_latest);
               }
             }
           );
@@ -271,19 +274,6 @@ app.post("/api/invoice", (req, res) => {
       }
     });
   }
-  // } else {
-  //   const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
-  //     let user_id = results[0].user_id;
-  //     connection.query("SELECT * FROM  users_Basket WHERE users_user_id=?;", [user_id], function (err, results) {
-  //       if (err) throw err;
-  //       else {
-  //         console.log("1578", results);
-  //         //  let invoice_Object = json.stringify(results);
-  //         res.json(results);
-  //       }
-  //     });
-  //   });
-  // }
 });
 
 //// ! REGISTER
