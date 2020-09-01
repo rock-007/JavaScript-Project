@@ -45,12 +45,12 @@ console.log(array1.reduce(reducer));
 <h2>2-	Multiplying all the elements of an array </h2>
 <p style="font-family: octicons-link; font-size:24px">  That’s also similar  to addition as the only thing we adding here is the multiplication operator
 <pre style="background-color:rgb(211, 218, 219)">  <code > 
-	const array1 = [1, 2, 3, 4];
-	const reducer = (accumulator, currentValue) => accumulator * currentValue;
+const array1 = [1, 2, 3, 4];
+const reducer = (accumulator, currentValue) => accumulator * currentValue;
 	
-	// 1 * 2 * 3 * 4
-	console.log(array1.reduce(reducer));
-	// expected output: 24
+// 1 * 2 * 3 * 4
+console.log(array1.reduce(reducer));
+// expected output: 24
 
 </code></pre></p> 
 
@@ -58,12 +58,10 @@ console.log(array1.reduce(reducer));
 <h2>3-  Average of all the numbers in an array </h2>
 <p style="font-family: octicons-link; font-size:24px">   This is similar to add all the elements of an array and then divide it with the length of the array to get the average of all the elements of an array.
 <pre style="background-color:rgb(211, 218, 219)">  <code > 
- 	const array1 = [1, 2, 3, 4];
- 	const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-
-	console.log(array1.reduce(reduce,0)/arr.length);
-       // expected output is 2.5
+const array1 = [1, 2, 3, 4];
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+console.log(array1.reduce(reduce,0)/arr.length);
+// expected output is 2.5
 
 
 </code></pre></p> 
@@ -74,7 +72,7 @@ console.log(array1.reduce(reducer));
 let array1=[1,2,3,4];
  
 let addMultiplyAverageArrayValues = function (accumulator, currentvalue, index) {
-  if (index === array1.length - 1) {
+if (index === array1.length - 1) {
     accumulator.average = accumulator.average + currentvalue;
     Average = accumulator.average / array1.length;
   } else {
@@ -88,8 +86,7 @@ let addMultiplyAverageArrayValues = function (accumulator, currentvalue, index) 
   return endresult;
 };
 
-
-    console.log( array1.reduce(addMultiplyAverageArrayValues,{sum:0,product:1,average:0}))
+console.log( array1.reduce(addMultiplyAverageArrayValues,{sum:0,product:1,average:0}))
 
 
 
@@ -98,7 +95,7 @@ let addMultiplyAverageArrayValues = function (accumulator, currentvalue, index) 
 <h2>5- 	Flexibility  of  having different type of Accumulator and elements</h2>
 <p style="font-family: octicons-link; font-size:24px">   	we have flexibility of having accumulator and elements of an array of different type, like array can be numbers and accumulator can be strings.
 <pre style="background-color:rgb(211, 218, 219)">  <code > 
- const array1 = [1, 2, 3, 4];
+const array1 = [1, 2, 3, 4];
 
 function Evenodd(acc, element) {
   if (element % 2 == 0) return `${acc}is even \n`;
