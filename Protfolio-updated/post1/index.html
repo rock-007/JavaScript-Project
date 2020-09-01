@@ -72,23 +72,31 @@ console.log(array1.reduce(reducer));
 <p style="font-family: octicons-link; font-size:24px">  That’s also similar to addition as the only thing we adding here is the multiplication operator
 <pre style="background-color:rgb(211, 218, 219)">  <code > 
 let array1=[1,2,3,4];
-  // to calculate the average after it iterating thorugh last elemnt of array
+ 
+let addMultiplyAverageArrayValues = function (accumulator, currentvalue, index) {
+  if (index === array1.length - 1) {
+    accumulator.average = accumulator.average + currentvalue;
+    Average = accumulator.average / array1.length;
+  } else {
+    Average = accumulator.average + currentvalue;
+  }
+  let endresult = {
+    sum: accumulator.sum + currentvalue,
+    product: accumulator.product * currentvalue,
+    average: Average,
+  };
+  return endresult;
+};
 
-  let addMultiplyAverageArrayValues=function  (accumulator,currentvalue,index){
-    If(index === array1.length-1){
-      accumulator.average=accumulator.average+currentvalue
-    Average= accumulator.average/array1.length
-    } else {Average= accumulator.average+currentvalue};
-    let endresult={
-      Sum :accumulator.sum+currentvalue,
-      product :accumulator.product*currentvalue,
-      Average: Average
-      
-      }
-      Return endresult;  
-    
-    
-    };
+console.log(array1.reduce(addMultiplyAverageArrayValues, { sum: 0, product: 1, average: 0 }));
+
+
+
+
+
+
+
+
     
     console.log( array1.reduce(addMultiplyAverageArrayValues,{sum:0,product:1,average:0}))
 
