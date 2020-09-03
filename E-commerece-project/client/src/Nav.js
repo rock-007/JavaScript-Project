@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Link } from "react-router-dom";
 import ProjectLogo from "./Img/Yoga1.png";
+import GithubLogo from "./Img/GithubLogo1.png";
 import history from "./History";
 import { withRouter } from "react-router";
 
@@ -88,6 +89,10 @@ function Nav({ userinfo, userstatus, basketItems }) {
           <img className="yoga-image" src={ProjectLogo} />
         </a>
       </label>
+      {/* //div */}
+      <a href="https://github.com/rock-007/JavaScript-Project/tree/master/E-commerece-project">
+        <img style={{ width: "149", height: "149", position: "absolute", top: "0", left: "0" }} src={GithubLogo} className="attachment-full size-full"></img>
+      </a>
 
       <ul>
         <li>

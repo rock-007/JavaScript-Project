@@ -84,7 +84,11 @@ function Forlogin() {
                   name="email"
                   value={email}
                   onChange={updateEmail}
+<<<<<<< HEAD
                   style={{ width: "25vw", minWidth: "19rem" }}
+=======
+                  style={{ width: "25vw", minWidth: "19rem", fontSize: "1.7rem" }}
+>>>>>>> 3aa2f162263d58ca7555717fe695fdd043964746
                 />
               </div>
             </div>
@@ -103,7 +107,11 @@ function Forlogin() {
                   id="enterPassword"
                   value={password}
                   onChange={updatePassword}
+<<<<<<< HEAD
                   style={{ width: "25vw", minWidth: "19rem" }}
+=======
+                  style={{ width: "25vw", minWidth: "19rem", fontSize: "1.7rem" }}
+>>>>>>> 3aa2f162263d58ca7555717fe695fdd043964746
                 />
               </div>
             </div>
@@ -113,7 +121,7 @@ function Forlogin() {
                   className=" buttonBlock"
                   variant="primary"
                   type="submit"
-                  style={{ height: "3rem", paddingLeft: "16%", marginLeft: "0px", width: "12rem", justifyContent: "left" }}
+                  style={{ height: "3rem", paddingLeft: "16%", marginLeft: "0px", width: "12rem", justifyContent: "left", fontSize: "1.5rem"}}
                 >
                   Submit
                 </Button>

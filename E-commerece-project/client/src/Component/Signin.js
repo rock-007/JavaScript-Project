@@ -31,7 +31,7 @@ function Signin({ userData, userstatus, finalBuy, buyNow, resetBuynow }) {
         })
         .catch();
     })();
-  }, [finalBuy == null && buyNow === true]);
+  }, [finalBuy == null && buyNow === false]);
   // here if the log says the customer clicked the buy now button and items in it, it call API
   if (finalBuy !== null && buyNow === true) {
     resetBuynow(false);

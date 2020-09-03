@@ -15,7 +15,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const userAccountData = () => {
   // user info can be loaded after refresh
-  return window.localStorage.getItem("user-data");
+  return JSON.parse(window.localStorage.getItem("user-data"));
 };
 const isLoggedIn = () => {
   return !!window.localStorage.getItem("user-status"); // !! : cast to boolean
@@ -26,7 +26,7 @@ let initialvalue = () => {
   return y1;
 };
 let finalbuyitems = () => {
-  console.log(window.localStorage.getItem("user-final"));
+  // console.log(window.localStorage.getItem("user-final"));
   let z1 = JSON.parse(window.localStorage.getItem("user-final") || "[]");
   return z1;
 };
@@ -49,7 +49,7 @@ function App() {
   };
 
   const resetBasket = (basketItems) => {
-    console.log("basket556", basketItems);
+    // console.log("basket556", basketItems);
     //setfinalBuy will set to some value and if (finalBuy != null && buyNow === true) is true then it will call the API call
     setfinalBuy(basketItems);
     window.localStorage.setItem("user-final", JSON.stringify(basketItems));
@@ -64,11 +64,11 @@ function App() {
     setBasketItems((prevItems) => {
       let updatedQuantityArray = [];
       for (let z = 0; z < basketItems.length; z++) {
-        console.log(basketItems[z].producNumber);
-        console.log(newProductQty.producNumber);
+        // console.log(basketItems[z].producNumber);
+        // console.log(newProductQty.producNumber);
         if (newProductQty.producNumber !== basketItems[z].producNumber) {
-          console.log(newProductQty.producNumber);
-          console.log(basketItems[z].producNumber);
+          // console.log(newProductQty.producNumber);
+          // console.log(basketItems[z].producNumber);
           updatedQuantityArray.push(basketItems[z]);
         } else {
           if (newProductQty.quantity == 0) {
@@ -158,7 +158,6 @@ function App() {
       return x1;
     })();
   }
-
   return (
     <Router history={history}>
       <div className="App">

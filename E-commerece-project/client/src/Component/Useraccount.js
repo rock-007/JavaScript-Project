@@ -6,6 +6,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
   console.log("6yy", userinfo);
   console.log("7yy", allInvoices);
 
+  //console.log("9", namex);
   let generateFile = (content, fileName) => {
     console.log("contentbefore", content);
     let content1 = content.slice(28);
@@ -14,6 +15,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
     const length = decodedData.length;
     const arrayBuffer = new ArrayBuffer(length);
     const uintArray = new Uint8Array(arrayBuffer);
+
     for (let i = 0; i < length; i++) {
       uintArray[i] = decodedData.charCodeAt(i);
     }
@@ -70,7 +72,31 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
     })();
   };
   let creatTime = userinfo[0].create_time || "0-0-0";
+
   console.log("ewr", creatTime);
+
+  const initails1 = (name1) => {
+    console.log(name1);
+    // console.log(name1[0]);
+    // didnt get why the name is comes here as a JSON object when chencked with console
+
+    // console.log(nameUpdate);
+
+    let firstNameOnly = name1[0].first_name;
+
+    console.log(firstNameOnly);
+    console.log(typeof firstNameOnly);
+    let string1array = firstNameOnly.split("");
+
+    let newarray1 = [];
+    newarray1.push(string1array[0]);
+    newarray1.push(string1array[1]);
+
+    let new1 = newarray1.join("");
+    console.log("41xxx", new1);
+
+    return new1;
+  };
   return (
     <>
       <div className="BasketSigninProducts" style={{ float: "left" }}>
@@ -144,7 +170,49 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
           </Table>
         </TableContainer>
       </div>
-      <div style={{ float: "right", paddingRight: "5rem" }}>
+      <div class="col-md-2 pb-5" style={{ minWidth: "22em", float: "right", paddingRight: "5rem" }}>
+        {" "}
+        <div class="author-card pb-3">
+          <div
+            class="author-card-cover"
+            style={{
+              backgroundImage:
+                "url(https://res.cloudinary.com/umair007/image/upload/v1598715776/ecommerece%20project/dynamic_yoga_mat_grip_5mm_-_grey_domyos_by_decathlon_8500978_1411207_atozth.jpg)",
+            }}
+          ></div>
+          <div class="author-card-profile">
+            <div class="avatar">
+              <span
+                class="avatar-text avatar-text-primary rounded-circle"
+                style={{ backgroundColor: "#176BB5", border: "3px solid #191919", borderRadius: "18px", boxShadow: "0 0 2px #888", fontSize: "1.8em" }}
+              >
+                <span class="initial-wrap">
+                  <span>{initails1(userinfo)}</span>
+                </span>
+              </span>
+            </div>
+
+            <div class="author-card-details " style={{ paddingTop: "2em" }}>
+              <h5 class="author-card-name text-lg" style={{ fontSize: "142%", width: "2em" }}>
+                {userinfo[0].first_name}
+                {userinfo[0].last_name}
+              </h5>
+              <span class="author-card-position">Joined {creatTime.split("T", 1)[0]}</span>
+            </div>
+          </div>
+        </div>
+        <div class="wizard">
+          <nav class="list-group list-group-flush">
+            <div class="list-group-item" href="#" style={{ borderTop: "1px solid rgba(0,0,0,.125)" }}>
+              <i class="fe-icon-map-pin text-muted"></i>Account ID:{userinfo[0].user_id}
+            </div>
+            <div class="list-group-item" href="#" style={{ borderTop: "1px solid rgba(0,0,0,.125)" }}>
+              <i class="fe-icon-map-pin text-muted"></i>Email:{userinfo[0].email}
+            </div>
+          </nav>
+        </div>
+      </div>
+      {/* <div style={{ float: "right", paddingRight: "5rem" }}>
         <TableContainer
           className="signin-welcome"
           component={Paper}
@@ -185,7 +253,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
+      </div> */}
     </>
   );
 }

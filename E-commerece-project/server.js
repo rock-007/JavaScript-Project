@@ -3,8 +3,6 @@ const fs = require("fs");
 const express = require("express");
 const mysqlx = require("mysql");
 const jwt = require("jsonwebtoken");
-const auth = require("./verifyTokenExisting");
-const authNew = require("./verifyTokenNew");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const pdf = require("html-pdf");
@@ -12,14 +10,12 @@ const pdfTemplate = require("./documents/pdfTemplate");
 // const fs = require("fs");
 const path = require("path");
 
-// initialise express and bind to app conastant so can be used later in the coding //to create server= we have  to run express as function and resolve inside app variable
+ 
 const app = express();
-// add the route to the server , when called from the react Frontend page at port 5000 when it is listening
-app.use(express.json());
+ app.use(express.json());
 app.use(cookieParser());
 
-// // Use Route to client.App
-// app.use('/',items)
+ 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
@@ -31,9 +27,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(
   cors({
     credentials: true, // for cookies
-    // origin: "http://localhost:3000",
-
-    origin: true,
+     origin: true,
     optionsSuccessStatus: 200,
   })
 );
@@ -41,16 +35,15 @@ let connection = mysqlx.createConnection({
   host: "database-1.cjnxyreiymo1.eu-west-2.rds.amazonaws.com",
   user: "root",
   password: "Skyliner007!",
-
-  //  host: "localhost",
-  //  user: "root",
-  //  password: "password",
-
-  database: "join_us",
+   database: "join_us",
   insecureAuth: true,
 });
+<<<<<<< HEAD
 // if he get request at :TODO  http://localhost:5000/signin then it will response to it
 //? 1 TabSearch
+=======
+ //? 1 TabSearch
+>>>>>>> 3aa2f162263d58ca7555717fe695fdd043964746
 app.post("/api/x1", (req, res) => {
   console.log("NEwwwww");
   let tabSearch = req.body.selection;

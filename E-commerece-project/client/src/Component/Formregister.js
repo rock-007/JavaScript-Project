@@ -79,7 +79,11 @@ function Formregister() {
             <div class="col-md-9">
               <input
                 class="form-control"
+<<<<<<< HEAD
                 style={{ width: "25vw", minWidth: "19rem" }}
+=======
+                style={{ width: "25vw", minWidth: "19rem", fontSize: "1.7rem" }}
+>>>>>>> 3aa2f162263d58ca7555717fe695fdd043964746
                 type="text"
                 placeholder="email"
                 id="enterEmail"
@@ -93,7 +97,11 @@ function Formregister() {
           <div style={{ paddingLeft: "0%", paddingRight: "5%", marginLeft: "0", marginRight: "2%" }} className="form-group row">
             <label
               for="firstName"
+<<<<<<< HEAD
               style={{ paddingRight: "222rem", display: "flex", whiteSpace: "nowrap", fontSize: "1.9rem" }}
+=======
+              style={{ paddingRight: "22rem", display: "flex", whiteSpace: "nowrap", fontSize: "1.9rem" }}
+>>>>>>> 3aa2f162263d58ca7555717fe695fdd043964746
               className="col-lg-3 col-form-label form-check-label"
             >
               First Name
@@ -101,7 +109,11 @@ function Formregister() {
             <div class="col-md-9">
               <input
                 class="form-control"
+<<<<<<< HEAD
                 style={{ width: "25vw", minWidth: "19rem" }}
+=======
+                style={{ width: "25vw", minWidth: "19rem", fontSize: "1.7rem" }}
+>>>>>>> 3aa2f162263d58ca7555717fe695fdd043964746
                 type="text"
                 placeholder="firstname"
                 id="firstName"
@@ -120,7 +132,11 @@ function Formregister() {
               <input
                 for="passwordRis"
                 class="form-control"
+<<<<<<< HEAD
                 style={{ width: "25vw", minWidth: "19rem" }}
+=======
+                style={{ width: "25vw", minWidth: "19rem", fontSize: "1.7rem" }}
+>>>>>>> 3aa2f162263d58ca7555717fe695fdd043964746
                 type="text"
                 placeholder="lastname"
                 to="lastName"
@@ -137,7 +153,11 @@ function Formregister() {
             <div class="col-md-9">
               <input
                 class="form-control"
+<<<<<<< HEAD
                 style={{ width: "25vw", minWidth: "19rem" }}
+=======
+                style={{ width: "25vw", minWidth: "19rem", fontSize: "1.7rem" }}
+>>>>>>> 3aa2f162263d58ca7555717fe695fdd043964746
                 type="text"
                 placeholder="Password"
                 to="password"
@@ -149,15 +169,19 @@ function Formregister() {
           </div>
 
           <small id="passwordRis" class="form-text text-muted" style={{ paddingRight: "22%", paddingLeft: "3.3%", fontSize: "115%", display: "flex" }}>
+<<<<<<< HEAD
             Password must contains atleast an alphabast, a number and sepeical charter in it
+=======
+            Password must contains atleast an alphabast, a number and sepeical character in it
+>>>>>>> 3aa2f162263d58ca7555717fe695fdd043964746
           </small>
-          <div class="col-md-9" style={{ paddingLeft: "25%" }}>
+          <div class="col-md-9" style={{ paddingLeft: "33%" }}>
             <ButtonGroup style={{ paddingTop: "3rem" }}>
               <Button
                 className=" buttonBlock"
                 variant="primary"
                 type="submit"
-                style={{ height: "3rem", paddingLeft: "16%", marginLeft: "0px", width: "12rem", justifyContent: "left" }}
+                style={{ height: "3rem", paddingLeft: "16%", marginLeft: "0px", width: "12rem", justifyContent: "left", fontSize: "1.5rem" }}
               >
                 Submit
               </Button>

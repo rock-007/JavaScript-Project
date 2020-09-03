@@ -406,7 +406,7 @@ label #cancel {
   max-height: 34rem;
 }
 .description-height {
-  min-height: 18rem;
+  min-height: 21rem;
 }
 
 .BasketSigninProducts {
@@ -548,4 +548,49 @@ signinDropdown.focus {
   vertical-align: top;
   margin-left: -1rem;
   margin-top: 2.7rem;
+}
+
+.author-card {
+  position: relative;
+  padding-bottom: 48px;
+  background-color: #fff;
+  box-shadow: 0 12px 20px 1px rgba(64, 64, 64, 0.09);
+}
+.author-card .author-card-cover {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.author-card .author-card-profile {
+  display: table;
+  position: relative;
+  margin-top: -9px;
+  padding-right: 15px;
+  padding-bottom: 16px;
+  padding-left: 20px;
+  z-index: 5;
+}
+.author-card .author-card-profile .author-card-avatar,
+.author-card .author-card-profile .author-card-details {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.author-card .author-card-profile .author-card-avatar {
+  width: 85px;
+  border-radius: 50%;
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.avatar {
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+  width: 3.875rem;
+  height: 3.875rem;
 }

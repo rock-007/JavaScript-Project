@@ -53,11 +53,11 @@ import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, MenuIte
               <li>price:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{price}£ </li>
               <li className="description-height">{desc}</li>
               <li>
-                <ButtonGroup aria-label="quantityofproduct" key={productName}>
+                <ButtonGroup aria-label="quantityofproduct" key={productName} >
                   <Button variant="secondary" name="subtract" value="subtract" onClick={() => decrease(productName)}>
                     -
                   </Button>
-                  <Button name={productName} variant="secondary">
+                  <Button name={productName} variant="secondary" style={{height:"3.7em",width:"4.6em"}}>
                     {quantities[productName]}
                   </Button>
                   <Button variant="secondary" name="add" value="add" onClick={() => increase(productName)}>
@@ -70,6 +70,7 @@ import { Button, ButtonGroup, ToggleButtonGroup, ToggleButton, Dropdown, MenuIte
                   name={producNumber}
                   value={quantities[productName]}
                   variant="primary"
+                  style={{width:"8em",height:"3.1em",fontSize:"0.8em"}}
                   onClick={() => {
                     addBasketitems(eachproduct, quantities[productName]);
                     clearselection(productName);
