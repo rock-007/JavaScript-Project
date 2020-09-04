@@ -10,12 +10,10 @@ const pdfTemplate = require("./documents/pdfTemplate");
 // const fs = require("fs");
 const path = require("path");
 
- 
 const app = express();
- app.use(express.json());
+app.use(express.json());
 app.use(cookieParser());
 
- 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
@@ -27,7 +25,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(
   cors({
     credentials: true, // for cookies
-     origin: true,
+    origin: true,
     optionsSuccessStatus: 200,
   })
 );
@@ -35,39 +33,26 @@ let connection = mysqlx.createConnection({
   host: "database-1.cjnxyreiymo1.eu-west-2.rds.amazonaws.com",
   user: "root",
   password: "Skyliner007!",
-   database: "join_us",
+  database: "join_us",
   insecureAuth: true,
 });
-<<<<<<< HEAD
-// if he get request at :TODO  http://localhost:5000/signin then it will response to it
-//? 1 TabSearch
-=======
- //? 1 TabSearch
->>>>>>> 3aa2f162263d58ca7555717fe695fdd043964746
+
+///! 1 TabSearch
 app.post("/api/x1", (req, res) => {
-  console.log("NEwwwww");
   let tabSearch = req.body.selection;
 
-  console.log("NEwwwww1", req.body);
   const decoded = { key1: req.params.abc }; //decode
 
   connection.query(
     "SELECT product_name,producNumber,price,productDescription,image_URL,stockQuantity FROM main_Products_sub_category  INNER JOIN main_Product_Info INNER JOIN images ON main_Products_sub_category.main_Products_sub_category_id= main_Product_Info.main_Products_sub_category_main_Products_sub_category_id AND main_Product_Info.producInfoId=images.main_Product_Info_producInfoId WHERE main_Products_sub_category.main_Products_sub_category_name=?;",
     [tabSearch],
     function (err, results) {
-      // console.log(results);
-      console.log("typess", typeof results);
-      console.log("57namne", results);
       if (err) {
         let new1 = new Error("Doesnt exist");
         res.send(new1);
       } else {
         let results1 = JSON.stringify(results);
-        //let result2 = JSON.stringify();
-        console.log("3324x", results1); // showing the table
         res.send(results1);
-        //res.json(results);
-        //  process.exit(); // to finihs the connection otherwise it will wait forever
       }
     }
   );
@@ -143,12 +128,9 @@ app.post("/api/invoice-all", (req, res) => {
 app.post("/api/invoice", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
   let selectedProducts = req.body.length;
-  console.log("body11x", token);
 
-  console.log("data111", req.body.length);
-  console.log("data111body", req.body);
   let decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
-  console.log("decodepayload", decodepayload);
+
   let userIdentitiy = decodepayload.email;
 
   if (token && req.body.length > 0) {
@@ -156,7 +138,6 @@ app.post("/api/invoice", (req, res) => {
     let actaul_Bought_Items_Num = req.body[0].quantity;
 
     let z1 = req.body;
-    console.log("hey", z1);
     // unavailableItems will fill up if any item is unavailable
     let unavailableItems = [];
     let totalAmountPaidPerInvoice;
@@ -164,21 +145,16 @@ app.post("/api/invoice", (req, res) => {
     for (let i = 0; i < req.body.length; i++) {
       let checkQuantity = req.body[i].producNumber;
       totalAmountPaidPerInvoice = totalAmountPaidPerInvoice + req.body[i].price;
-      console.log("wwer", checkQuantity);
-      console.log("wwerx", actaul_Bought_Items_Num);
+
       actaul_Bought_Items_names.push(actaul_Bought_Items[i].product_name);
       for (let i = 0; i < actaul_Bought_Items_Num; i++) {
         connection.query("UPDATE main_Product_Info SET stockQuantity=stockQuantity-1 WHERE main_Product_Info.producNumber=?", [checkQuantity], function (err, result) {
           if (err) {
-            console.log("3345", err);
             unavailableItems.push(req.body[i]);
           } else console.log("ffgt", result);
         });
       }
     }
-
-    // get the user_user_id
-    console.log("emailcc", userIdentitiy);
 
     const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
       let user_id = results[0].user_id;
@@ -186,10 +162,6 @@ app.post("/api/invoice", (req, res) => {
 
       // we now got the correct users
       if (user_id && unavailableItems[0] == null) {
-        //1- delete the   quantitiy from the product info
-        // create users_Basket(by submitting email and userID ) and generate the inovice number for this Transaction
-        console.log("usrid2334", user_id);
-
         // how exports. ? works
         function Invoice_No(callback) {
           connection.query(" INSERT INTO users_Basket  SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {});
@@ -244,22 +216,14 @@ app.post("/api/invoice", (req, res) => {
 
                             throw err;
                           } else {
-                            console.log("1578", results);
-                            //  let invoice_Object = json.stringify(results);
-
-                            //  results = [...results, { totalprice: `${totalAmountPaidPerInvoice}` }];
                             pdfCreated = false;
                             res.json(results);
                           }
                         });
-
-                        console.log("151ddf", results);
                       }
                     }
                   );
                 }
-
-                console.log("145", user_details.Invoice_No_latest);
               }
             }
           );
@@ -283,7 +247,6 @@ app.post("/api/customers", (req, res) => {
 
   connection.query("INSERT INTO users SET ?", person, function (err, results) {
     if (err) throw err;
-    console.log("46", results);
   });
 
   res.json("results");
@@ -303,15 +266,10 @@ app.post("/api/verifyifloginalready", (req, res) => {
 
   try {
     decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
-
-    console.log("gffd", decodepayload);
-    console.log(decodepayload.email);
-    console.log("w94", `${decodepayload.email}`);
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
       //?https://www.sohamkamani.com/blog/javascript/2019-03-29-node-jwt-authentication/
       // if invalid token
-      Console.log("22234");
       res.status(401).end();
     } else {
       res.status(400).end();
@@ -330,28 +288,16 @@ app.post("/api/newuser", (req, res) => {
 
   if (req.body.logout === false) {
     connection.query("SELECT * FROM  users WHERE email=?;", [x1.email], function (err, results) {
-      console.log(results);
-      console.log("150new", results[0].email);
-      console.log("151", results[0].email);
       if (err) console.log("13333", err);
       else {
         if (results[0].email && results[0].password) {
-          //  console.log("79", results[0].email);
-
-          //below if the user and paswword is correct == to do user is not already logedin
-          //TODO chage the default userloginStatus to false rather null & on logout change to flase flag
-
           if ((results[0].password == x1.password && results[0].userloginStatus == false) || (results[0].password == x1.password && results[0].userloginStatus == null)) {
-            //TODO: send user account details it like update the basket and user purchaee history
             const payload = { email: results[0].email };
-            console.log("payloods", payload);
-            //res.header("auth-token", token).send(token);
+
             const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");
-            //below are the cookies sent to user first time when he logsin
             res.cookie("yogaoutlet_access_token", token, {
               maxAge: 25 * 24 * 60 * 60 * 1000,
               httpOnly: true, // it will enable on frotend-javascript to not have access to cokkies
-              // secure:true ................. when in production
             });
 
             res.status(200).end();
@@ -377,19 +323,15 @@ app.post("/api/newuser", (req, res) => {
   } else {
     connection.query(
       "UPDATE  users SET userloginStatus=? WHERE email=?",
-      // hardcoding userloginStatus=1 to show the use is loggedin
+      // hardcoding userloginStatus=0 to show the use is loggedout
       ["0", x1.email],
       function (err, results) {
         if (err) throw err;
         console.log("23x3er", results);
       }
     );
-    console.log("339d", req);
-
-    console.log("339f", req.body);
 
     const payload = { email: req.body.email };
-    console.log("339x", payload);
     const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");
 
     res.clearCookie("yogaoutlet_access_token");
