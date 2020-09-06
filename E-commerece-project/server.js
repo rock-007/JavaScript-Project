@@ -20,7 +20,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //connection.query(sql, function (error, results, fields) sample https://github.com/mysqljs/mysql#performing-queries
-// it gives the ability to app to read json data
 app.use(
   cors({
     credentials: true, // for cookies
@@ -126,42 +125,37 @@ app.post("/api/invoice-all", (req, res) => {
 app.post("/api/invoice", (req, res) => {
   let token = req.cookies.yogaoutlet_access_token;
   let selectedProducts = req.body.length;
-  console.log("body11x", token);
 
-  console.log("data111", req.body.length);
-  console.log("data111body", req.body);
   let decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
-  console.log("decodepayload", decodepayload);
   let userIdentitiy = decodepayload.email;
 
   if (token && req.body.length > 0) {
     let actaul_Bought_Items = req.body;
     let actaul_Bought_Items_Num = req.body[0].quantity;
 
-    let z1 = req.body;
-    console.log("hey", z1);
+    let ProductInfoForInvoice = req.body;
     // unavailableItems will fill up if any item is unavailable
     let unavailableItems = [];
-    let totalAmountPaidPerInvoice;
+    let totalAmountPaidPerInvoice = 0;
     let actaul_Bought_Items_names = [];
-    for (let i = 0; i < req.body.length; i++) {
-      let checkQuantity = req.body[i].producNumber;
-      totalAmountPaidPerInvoice = totalAmountPaidPerInvoice + req.body[i].price;
-      console.log("wwer", checkQuantity);
-      console.log("wwerx", actaul_Bought_Items_Num);
-      actaul_Bought_Items_names.push(actaul_Bought_Items[i].product_name);
+
+    ProductInfoForInvoice.map((eachProduct) => {
+      let checkQuantity = eachProduct.producNumber;
+
+      totalAmountPaidPerInvoice = Number(totalAmountPaidPerInvoice) + Number(eachProduct.price);
+
+      actaul_Bought_Items_names.push(eachProduct.product_name);
       for (let i = 0; i < actaul_Bought_Items_Num; i++) {
         connection.query("UPDATE main_Product_Info SET stockQuantity=stockQuantity-1 WHERE main_Product_Info.producNumber=?", [checkQuantity], function (err, result) {
           if (err) {
-            console.log("3345", err);
             unavailableItems.push(req.body[i]);
-          } else console.log("ffgt", result);
+          } else console.log("result", result);
         });
       }
-    }
+    });
 
     // get the user_user_id
-    console.log("emailcc", userIdentitiy);
+    console.log("userID", userIdentitiy);
 
     const user_info = connection.query("SELECT user_id FROM  users WHERE email=?;", [userIdentitiy], function (err, results) {
       let user_id = results[0].user_id;
@@ -169,11 +163,6 @@ app.post("/api/invoice", (req, res) => {
 
       // we now got the correct users
       if (user_id && unavailableItems[0] == null) {
-        //1- delete the   quantitiy from the product info
-        // create users_Basket(by submitting email and userID ) and generate the inovice number for this Transaction
-        console.log("usrid2334", user_id);
-
-        // how exports. ? works
         function Invoice_No(callback) {
           connection.query(" INSERT INTO users_Basket  SET ? ", { users_user_id: user_id, users_email: user_email }, function (err, results) {});
           let latest_inoice_new;
@@ -190,9 +179,7 @@ app.post("/api/invoice", (req, res) => {
             function (err, results) {
               const products_summary1 = actaul_Bought_Items_names.toString();
               if (err) {
-                console.log("133", err);
               } else {
-                console.log("135", results); //RowDataPacket { invoiceNo: 1 },. ....
                 Invoice_No_latest = results[0].latest_Invoice;
                 let user_details = {
                   user_FirstName: results[0].first_name,
@@ -207,10 +194,7 @@ app.post("/api/invoice", (req, res) => {
                   .create(pdfTemplate(customer_dataand_Itemsbought), { type: "pdf" })
                   .toFile(`./${user_details.user_id}` + `_` + `${user_details.Invoice_No_latest}.pdf`, function (err, res) {
                     if (err) {
-                      console.log("5667", err);
                     } else {
-                      console.log("143rrt", res, typeof res);
-
                       pdfCreated = true;
                     }
                   });
@@ -227,22 +211,14 @@ app.post("/api/invoice", (req, res) => {
 
                             throw err;
                           } else {
-                            console.log("1578", results);
-                            //  let invoice_Object = json.stringify(results);
-
-                            //  results = [...results, { totalprice: `${totalAmountPaidPerInvoice}` }];
                             pdfCreated = false;
                             res.json(results);
                           }
                         });
-
-                        console.log("151ddf", results);
                       }
                     }
                   );
                 }
-
-                console.log("145", user_details.Invoice_No_latest);
               }
             }
           );
@@ -252,7 +228,7 @@ app.post("/api/invoice", (req, res) => {
   }
 });
 
-//// ! REGISTER
+//// ! New User Register
 
 app.post("/api/customers", (req, res) => {
   let x1 = req.body;
@@ -266,7 +242,6 @@ app.post("/api/customers", (req, res) => {
 
   connection.query("INSERT INTO users SET ?", person, function (err, results) {
     if (err) throw err;
-    console.log("46", results);
   });
 
   res.json("results");
@@ -286,15 +261,10 @@ app.post("/api/verifyifloginalready", (req, res) => {
 
   try {
     decodepayload = jwt.verify(token, "lllfasdgfdadsfasdfdasfcadsf");
-
-    console.log("gffd", decodepayload);
-    console.log(decodepayload.email);
-    console.log("w94", `${decodepayload.email}`);
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
       //?https://www.sohamkamani.com/blog/javascript/2019-03-29-node-jwt-authentication/
       // if invalid token
-      Console.log("22234");
       res.status(401).end();
     } else {
       res.status(400).end();
@@ -309,32 +279,21 @@ app.post("/api/verifyifloginalready", (req, res) => {
 
 app.post("/api/newuser", (req, res) => {
   let x1 = req.body;
-  console.log("144", x1);
 
   if (req.body.logout === false) {
     connection.query("SELECT * FROM  users WHERE email=?;", [x1.email], function (err, results) {
-      console.log(results);
-      console.log("150new", results[0].email);
-      console.log("151", results[0].email);
       if (err) console.log("13333", err);
       else {
         if (results[0].email && results[0].password) {
-          //  console.log("79", results[0].email);
-
-          //below if the user and paswword is correct == to do user is not already logedin
-          //TODO chage the default userloginStatus to false rather null & on logout change to flase flag
-
           if ((results[0].password == x1.password && results[0].userloginStatus == false) || (results[0].password == x1.password && results[0].userloginStatus == null)) {
-            //TODO: send user account details it like update the basket and user purchaee history
             const payload = { email: results[0].email };
-            console.log("payloods", payload);
-            //res.header("auth-token", token).send(token);
+
             const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");
             //below are the cookies sent to user first time when he logsin
             res.cookie("yogaoutlet_access_token", token, {
-              maxAge: 25 * 24 * 60 * 60 * 1000,
+              maxAge: 1 * 6 * 60 * 60 * 1000,
               httpOnly: true, // it will enable on frotend-javascript to not have access to cokkies
-              // secure:true ................. when in production
+              secure: true,
             });
 
             res.status(200).end();
@@ -346,7 +305,6 @@ app.post("/api/newuser", (req, res) => {
               ["1", results[0].email],
               function (err, results) {
                 if (err) throw err;
-                console.log("233er", results);
               }
             );
           } else {
@@ -364,15 +322,10 @@ app.post("/api/newuser", (req, res) => {
       ["0", x1.email],
       function (err, results) {
         if (err) throw err;
-        console.log("23x3er", results);
       }
     );
-    console.log("339d", req);
-
-    console.log("339f", req.body);
 
     const payload = { email: req.body.email };
-    console.log("339x", payload);
     const token = jwt.sign(payload, "lllfasdgfdadsfasdfdasfcadsf");
 
     res.clearCookie("yogaoutlet_access_token");
@@ -385,8 +338,6 @@ app.post("/api/newuser", (req, res) => {
   }
 });
 
-//connection.end();
 const port = process.env.PORT || 5000;
-//var http = require("http");
-//var server = http.server(app);
+
 app.listen(port, () => console.log("port number", `server started on port${port}`));

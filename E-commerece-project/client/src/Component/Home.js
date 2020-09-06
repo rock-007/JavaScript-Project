@@ -172,7 +172,7 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
           <hr />
         </h3>
       </div>
-      <Container style={{ justifyContent: "left", marginBottom: "8em", paddingRight: "7em" }}>
+      <Container style={{ justifyContent: "left", marginBottom: "8em", paddingRight: "7em", maxWidth: "1167px" }}>
         {showPage ? <HomeDisplay props={homePage} addBasketitems={addBasketitems} /> : <SwipeableHome />}
       </Container>
     </React.Fragment>
