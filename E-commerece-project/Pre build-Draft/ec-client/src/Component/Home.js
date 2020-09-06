@@ -5,6 +5,8 @@ import ProjectLogo from "../Img/logo.svg";
 import HomeDisplay from "./HomeDisplay";
 import SwipeableHome from "./SwipeableHome";
 
+// import Button from 'react-bootstrap/Button'; this will only  bring the button module and not whole library if bootstrap
+
 import { Button, ButtonGroup, Dropdown, MenuItem, Container } from "react-bootstrap";
 
 function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
@@ -16,6 +18,7 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
   const [showPage, setShowPage] = useState(undefined);
 
   const [homePage, setHomepage] = useState(undefined);
+  // useEffect here when after first time it redirect from ligin page to home page so need to have user data call too
   useEffect(() => {
     userDataRefresh();
   }, [userstatus]);
@@ -28,6 +31,8 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
   }
 
   function yogaMatSelected(e) {
+    // e.preventDefault(); uasing this will prenent to go to other links
+
     reset();
     setYogaMatState(e.currentTarget.textContent);
     console.log(e.currentTarget.textContent);
@@ -50,51 +55,66 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
   }
 
   function tabsearch(selection) {
-    const headers = new Headers();
-    headers.append("content-type", "application/json");
-    let datasent1 = { selection: selection };
-    let options = {
-      method: "POST",
-      headers,
-      crendtials: "include",
-      body: JSON.stringify(datasent1),
-    };
-
+    // const headers = new Headers();
+    // //  const userselection= // const datasent = { selectitem: selection };
+    // let options = {
+    //   method: "POST",
+    //   headers,
+    //   crendtials: "include",
+    //   body: JSON.stringify(datasent),
+    // }; let url = `http://localhost:5000/api/#/${selection}`;
     let selection1 = `/#/${selection}`;
     let customerSelection = encodeURIComponent(selection1);
-
-    let url = `/api/x1`;
-
+    console.log(customerSelection);
+    let url = `http://localhost:5000/api/${customerSelection}`;
+    // this request make the http request format
     let request = new Request(url);
 
     (async () => {
-      let tabsearchback = await fetch(request, options)
+      let tabsearchback = await fetch(request)
         .then((res) => {
-          return res.json(res);
+          console.log(res);
+
+          console.log("70bew");
+          // console.log(res.json());
+          // setHomepage(res.json());
+          let y = res.json();
+          console.log(y);
+          return y;
         })
         .then((data1) => {
+          console.log(data1); // array of object
+          //   console.log(data1.key1);
+          console.log(data1[0]); //object
+          console.log(data1[0].price); // value from the object
           setHomepage(data1);
-          setShowPage(1);
         })
-        .catch((err) => {
-          setHomepage(undefined);
-        }); // if not data comes then it will turn page to default
+        .catch((err) => setHomepage(undefined)); // if not data comes then it will turn page to default
+
+      setShowPage(1);
     })();
   }
   return (
+    // // TODO: <React.Fragment> its a wrapper and then we dont need to wrap around divs...
+    // //FIXME:
+    // //
+
     <React.Fragment>
-      <div className="homestyle" style={{}}>
+      <div className="homestyle">
         <h3>
           <hr />
-          <ul className="homebarstyle" style={{ textAlign: "center" }}>
+          <ul className="homebarstyle" size="lg">
             <li>
               {/* <Button variant="primary">Primary</Button> */}
-              <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ height: "3em", width: "22em" }}>
+              <Dropdown  >
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
                   {yogaMatState}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu className="dropdownMenuSubItems">
+                  {/* // whe delete the # it will not dispaly anything? why */}
+                  {/* // we dont use yogaMatSelected() here as it will fire right away and we
+                  dont want that we want when it get executed by onclick event */}
                   <Dropdown.Item href="#/Eco-YogaMats" onClick={yogaMatSelected}>
                     {/* //TODO: we can later take off the href as it doesnt seems to have any effect here */}
                     Eco-YogaMats
@@ -110,7 +130,7 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
             </li>
             <li>
               <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ height: "3em", width: "22em" }}>
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
                   {yogaEquipState}
                 </Dropdown.Toggle>
 
@@ -132,7 +152,7 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
             </li>
             <li>
               <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ height: "3em", width: "22em" }}>
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
                   {yogaClothsState}
                 </Dropdown.Toggle>
 
@@ -151,7 +171,7 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
             </li>
             <li>
               <Dropdown>
-                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ height: "3em", width: "22em" }}>
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic" size="lg" style={{ minWidth: "17rem" }}>
                   {accessoriesState}
                 </Dropdown.Toggle>
 
@@ -172,8 +192,12 @@ function Home({ userData, userstatus, addBasketitems, userDataRefresh }) {
           <hr />
         </h3>
       </div>
-      <Container style={{ justifyContent: "left", marginBottom: "8em", paddingRight: "7em" }}>
+      <Container>
+        {/* // in place of null we can set a slider window for default page */}
         {showPage ? <HomeDisplay props={homePage} addBasketitems={addBasketitems} /> : <SwipeableHome />}
+        {/* // this will be the body of
+        home page will display items that will be selected from the menue
+        {`The user is looged in ${userstatus}and the email is ${userData}`} */}
       </Container>
     </React.Fragment>
   );

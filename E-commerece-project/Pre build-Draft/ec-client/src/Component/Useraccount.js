@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import { makeStyle, Table, TableBody, TableCell, TableHead, TableRow, Paper, TableContainer } from "@material-ui/core";
 function Useraccount({ userinfo, userstatus, allInvoices }) {
+  console.log("6", typeof userinfo, userstatus);
+  console.log("6yy", userinfo);
+  console.log("7yy", allInvoices);
+
   let generateFile = (content, fileName) => {
+    console.log("contentbefore", content);
     let content1 = content.slice(28);
+    console.log("contentxx", content1);
     var decodedData = atob(content1);
     const length = decodedData.length;
     const arrayBuffer = new ArrayBuffer(length);
     const uintArray = new Uint8Array(arrayBuffer);
-
     for (let i = 0; i < length; i++) {
       uintArray[i] = decodedData.charCodeAt(i);
     }
@@ -35,40 +40,37 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
       credentials: "include",
       body: JSON.stringify(invoice_Object),
     };
-    const newRequest = new Request("https://yogaoutlet.herokuapp.com/api/invoice-only", options);
+    const newRequest = new Request("https:/yogaoutlet.herokuapp.com/api/invoice-only", options);
 
     (async () => {
       const invoice_Call = await fetch(newRequest)
         .then((res) => {
           var headers = res.headers;
+          console.log("headersxx", headers);
 
           const contentType = res.headers.get("Content-Type");
+          console.log("contenttype", contentType);
           var contentDisposition = res.headers.get("content-disposition");
+          console.log("contentDispositionxx", contentDisposition);
+          console.log("resxx", res);
+          // let byteCharacters = atob(res.data);
+          // console.log("byteCharacters", byteCharacters);
+          // console.log("resxx", typeof res);
 
+          //  const text1 = res.json({ data: decode });
           return res.text();
+          //  console.log("resxxy", text1);
+          // return res.blob();
         })
         .then((data) => {
+          console.log(typeof data);
+          console.log("textxx", data);
           generateFile(data, invoice_Name);
         });
     })();
   };
   let creatTime = userinfo[0].create_time || "0-0-0";
-
   console.log("ewr", creatTime);
-
-  const initails1 = (name1) => {
-    let firstNameOnly = name1[0].first_name;
-
-    let string1array = firstNameOnly.split("");
-
-    let newarray1 = [];
-    newarray1.push(string1array[0]);
-    newarray1.push(string1array[1]);
-
-    let new1 = newarray1.join("");
-
-    return new1;
-  };
   return (
     <>
       <div className="BasketSigninProducts" style={{ float: "left" }}>
@@ -101,7 +103,6 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
                 let date_of_purchase1 = eachInvoice.date_of_purchase;
                 let users_user_id = eachInvoice.users_user_id;
                 let invoice_Name = `${users_user_id}` + `_` + `${invoiceNo}`;
-                let products_summary = eachInvoice.products_summary;
                 console.log("fdsxg", invoice_Name);
 
                 return (
@@ -120,7 +121,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
                     <TableCell
                       style={{ fontSize: "200%", fontStyle: "oblique", textAlign: "center", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
                     >
-                      {products_summary}
+                      TBO
                     </TableCell>
                     <TableCell className="tex-lg-center font-weight-bold" style={{ fontFamily: "Myfont", fontSize: "200%", fontStyle: "oblique", textAlign: "center" }}>
                       <span
@@ -142,49 +143,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
           </Table>
         </TableContainer>
       </div>
-      <div class="col-md-2 pb-5" style={{ minWidth: "22em", float: "right", paddingRight: "5rem" }}>
-        {" "}
-        <div class="author-card pb-3">
-          <div
-            class="author-card-cover"
-            style={{
-              backgroundImage:
-                "url(https://res.cloudinary.com/umair007/image/upload/v1598715776/ecommerece%20project/dynamic_yoga_mat_grip_5mm_-_grey_domyos_by_decathlon_8500978_1411207_atozth.jpg)",
-            }}
-          ></div>
-          <div class="author-card-profile">
-            <div class="avatar">
-              <span
-                class="avatar-text avatar-text-primary rounded-circle"
-                style={{ backgroundColor: "#176BB5", border: "3px solid #191919", borderRadius: "18px", boxShadow: "0 0 2px #888", fontSize: "1.8em" }}
-              >
-                <span class="initial-wrap">
-                  <span>{initails1(userinfo)}</span>
-                </span>
-              </span>
-            </div>
-
-            <div class="author-card-details " style={{ paddingTop: "2em" }}>
-              <h5 class="author-card-name text-lg" style={{ fontSize: "142%", width: "2em" }}>
-                {userinfo[0].first_name}
-                {userinfo[0].last_name}
-              </h5>
-              <span class="author-card-position">Joined {creatTime.split("T", 1)[0]}</span>
-            </div>
-          </div>
-        </div>
-        <div class="wizard">
-          <nav class="list-group list-group-flush">
-            <div class="list-group-item" href="#" style={{ borderTop: "1px solid rgba(0,0,0,.125)", fontSize: "calc(5px + 0.3vw)", fontWeight: "bold" }}>
-              <i class="fe-icon-map-pin text-muted"></i>Account ID: &nbsp;{userinfo[0].user_id}
-            </div>{" "}
-            <div class="list-group-item" href="#" style={{ borderTop: "1px solid rgba(0,0,0,.125)", fontSize: "calc(5px + 0.3vw)", fontWeight: "bold" }}>
-              <i class="fe-icon-map-pin text-muted"></i>Email:&nbsp;{userinfo[0].email}
-            </div>
-          </nav>
-        </div>
-      </div>
-      {/* <div style={{ float: "right", paddingRight: "5rem" }}>
+      <div style={{ float: "right", paddingRight: "5rem" }}>
         <TableContainer
           className="signin-welcome"
           component={Paper}
@@ -225,7 +184,7 @@ function Useraccount({ userinfo, userstatus, allInvoices }) {
             </TableBody>
           </Table>
         </TableContainer>
-      </div> */}
+      </div>
     </>
   );
 }
