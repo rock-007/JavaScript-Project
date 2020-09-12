@@ -110,6 +110,7 @@ function Basket({ basketItems, updatedBasket, resetBasket }) {
                       {/* Item No:{producNumber} (InStock:{stockQuantity}) */}
                       {producNumber}
                     </TableCell>
+                    
                     <TableCell
                       style={{ fontSize: "150%", fontStyle: "italic", fontWeight: "550", borderRightStyle: "solid", borderRightColor: "#E2DBDB", borderRightWidth: "thin" }}
                     >
